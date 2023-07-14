@@ -20,12 +20,14 @@ final class SettingsViewController: UIViewController {
     private let logoImageView = UIImageView()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
     private let veganDeclarationButton = VeganDeclarationButton()
+    private let menuRecommendationButton = UIButton()
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureHierarchy()
+        addActionForButtonEvent()
     private func configureHierarchy() {
         view.backgroundColor = .systemBackground
         collectionView.delegate = self
@@ -35,9 +37,11 @@ final class SettingsViewController: UIViewController {
         logoImageView.configureUI(image: UIImage(systemName: "star.fill"))
         collectionView.configureUI()
         veganDeclarationButton.configureUI()
+        menuRecommendationButton.configureUI(title: "추천받기", backgroundColor: .systemOrange, cornerRadius: 15)
         setupLogoImageViewUI()
         setupCollectionViewUI()
         setupVeganDeclarationButtonUI()
+        setupMenuRecommendastionButtonUI()
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -64,6 +68,15 @@ final class SettingsViewController: UIViewController {
             veganDeclarationButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
+    private func setupMenuRecommendastionButtonUI() {
+        NSLayoutConstraint.activate([
+            menuRecommendationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 10),
+            menuRecommendationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor, multiplier: 1),
+            menuRecommendationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            menuRecommendationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
+        ])
+    }
+
     private func configureDataSource() {
         registerCell()
         registerHeaderView()
@@ -166,7 +179,12 @@ final class SettingsViewController: UIViewController {
 
         dataSource?.apply(snapshot)
     }
+
+    private func addActionForButtonEvent() {
         addActionForVeganDeclaration()
+        addActionForMenuRecommendation()
+    }
+
     private func addActionForVeganDeclaration() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapVeganDeclarationButton))
         veganDeclarationButton.addGestureRecognizer(gesture)
@@ -176,6 +194,28 @@ final class SettingsViewController: UIViewController {
         print("touched")
         veganDeclarationButton.toggleUI()
     }
+
+    private func addActionForMenuRecommendation() {
+        menuRecommendationButton.addAction(
+            UIAction { [weak self] _ in
+                self?.menuRecommendationButton.backgroundColor = .orange
+            },
+            for: .touchDown
+        )
+        menuRecommendationButton.addAction(
+            UIAction { [weak self] _ in
+                self?.menuRecommendationButton.backgroundColor = .systemOrange
+                self?.presentMenuRecommendationViewController()
+            },
+            for: [.touchUpOutside, .touchUpInside]
+        )
+    }
+
+    private func presentMenuRecommendationViewController() {
+        navigationController?.pushViewController(UIViewController(), animated: true)
+    }
+}
+
 // MARK: - Extensions
 
 extension SettingsViewController: UICollectionViewDelegate {

@@ -21,6 +21,7 @@ final class SettingsViewController: UIViewController {
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
     private let veganDeclarationButton = VeganDeclarationButton()
     private let menuRecommendationButton = UIButton()
+    private let copyrightLabel = UILabel()
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -38,10 +39,19 @@ final class SettingsViewController: UIViewController {
         collectionView.configureUI()
         veganDeclarationButton.configureUI()
         menuRecommendationButton.configureUI(title: "추천받기", backgroundColor: .systemOrange, cornerRadius: 15)
+        copyrightLabel.configureUI(
+            text: "Icon made by Freepik from www.flaticon.com",
+            textColor: .systemGray2,
+            textAlignment: .center,
+            font: UIFont.systemFont(ofSize: 10)
+        )
         setupLogoImageViewUI()
         setupCollectionViewUI()
         setupVeganDeclarationButtonUI()
         setupMenuRecommendastionButtonUI()
+        setupCopyrightLabelUI()
+    }
+
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -74,6 +84,14 @@ final class SettingsViewController: UIViewController {
             menuRecommendationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor, multiplier: 1),
             menuRecommendationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             menuRecommendationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
+        ])
+    }
+
+    private func setupCopyrightLabelUI() {
+        NSLayoutConstraint.activate([
+            copyrightLabel.topAnchor.constraint(equalTo: menuRecommendationButton.bottomAnchor, constant: 5),
+            copyrightLabel.leadingAnchor.constraint(equalTo: menuRecommendationButton.leadingAnchor),
+            copyrightLabel.trailingAnchor.constraint(equalTo: menuRecommendationButton.trailingAnchor)
         ])
     }
 

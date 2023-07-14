@@ -19,6 +19,7 @@ final class SettingsViewController: UIViewController {
 
     private let logoImageView = UIImageView()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
+    private let veganDeclarationButton = VeganDeclarationButton()
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -33,8 +34,10 @@ final class SettingsViewController: UIViewController {
     private func configureUI() {
         logoImageView.configureUI(image: UIImage(systemName: "star.fill"))
         collectionView.configureUI()
+        veganDeclarationButton.configureUI()
         setupLogoImageViewUI()
         setupCollectionViewUI()
+        setupVeganDeclarationButtonUI()
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -53,6 +56,14 @@ final class SettingsViewController: UIViewController {
         ])
     }
 
+    private func setupVeganDeclarationButtonUI() {
+        NSLayoutConstraint.activate([
+            veganDeclarationButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            veganDeclarationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            veganDeclarationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            veganDeclarationButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
     private func configureDataSource() {
         registerCell()
         registerHeaderView()
@@ -154,6 +165,16 @@ final class SettingsViewController: UIViewController {
         snapshot.appendItems(unpreferredFoodList.categories)
 
         dataSource?.apply(snapshot)
+    }
+        addActionForVeganDeclaration()
+    private func addActionForVeganDeclaration() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapVeganDeclarationButton))
+        veganDeclarationButton.addGestureRecognizer(gesture)
+    }
+
+    @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
+        print("touched")
+        veganDeclarationButton.toggleUI()
     }
 // MARK: - Extensions
 

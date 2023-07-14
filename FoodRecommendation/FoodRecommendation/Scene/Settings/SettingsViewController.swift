@@ -22,18 +22,27 @@ final class SettingsViewController: UIViewController {
     private let veganDeclarationButton = VeganDeclarationButton()
     private let menuRecommendationButton = UIButton()
     private let copyrightLabel = UILabel()
+    private var dataSource: DataSource?
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureHierarchy()
+        configureDataSource()
+        applySnapshot()
         addActionForButtonEvent()
+    }
+
+    // MARK: - Methods
+
     private func configureHierarchy() {
         view.backgroundColor = .systemBackground
         collectionView.delegate = self
         configureUI()
     }
+
     private func configureUI() {
         logoImageView.configureUI(image: UIImage(systemName: "star.fill"))
         collectionView.configureUI()
@@ -45,6 +54,9 @@ final class SettingsViewController: UIViewController {
             textAlignment: .center,
             font: UIFont.systemFont(ofSize: 10)
         )
+
+        [logoImageView, collectionView, veganDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
+
         setupLogoImageViewUI()
         setupCollectionViewUI()
         setupVeganDeclarationButtonUI()
@@ -78,6 +90,7 @@ final class SettingsViewController: UIViewController {
             veganDeclarationButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
+
     private func setupMenuRecommendastionButtonUI() {
         NSLayoutConstraint.activate([
             menuRecommendationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 10),

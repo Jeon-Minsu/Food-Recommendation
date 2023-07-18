@@ -12,6 +12,7 @@
 		208811142A612FB100ABD8C2 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208811132A612FB100ABD8C2 /* UIView+Extension.swift */; };
 		208811162A61347A00ABD8C2 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208811152A61347A00ABD8C2 /* UIStackView+Extension.swift */; };
 		208811182A61397B00ABD8C2 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208811172A61397B00ABD8C2 /* UIButton+Extension.swift */; };
+		209149D92A666D14006664F4 /* MenuRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209149D82A666D14006664F4 /* MenuRecommendationViewController.swift */; };
 		2096851F2A5F85D700AC1C68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096851E2A5F85D700AC1C68 /* AppDelegate.swift */; };
 		209685212A5F85D700AC1C68 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685202A5F85D700AC1C68 /* SceneDelegate.swift */; };
 		209685232A5F85D700AC1C68 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685222A5F85D700AC1C68 /* SettingsViewController.swift */; };
@@ -33,6 +34,7 @@
 		208811132A612FB100ABD8C2 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		208811152A61347A00ABD8C2 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		208811172A61397B00ABD8C2 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		209149D82A666D14006664F4 /* MenuRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationViewController.swift; sourceTree = "<group>"; };
 		2096851B2A5F85D700AC1C68 /* FoodRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodRecommendation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2096851E2A5F85D700AC1C68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		209685202A5F85D700AC1C68 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		209149D72A666CF0006664F4 /* MenuRecommendation */ = {
+			isa = PBXGroup;
+			children = (
+				209149D82A666D14006664F4 /* MenuRecommendationViewController.swift */,
+			);
+			path = MenuRecommendation;
+			sourceTree = "<group>";
+		};
 		209685122A5F85D700AC1C68 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				209685452A5FE90400AC1C68 /* Settings */,
+				209149D72A666CF0006664F4 /* MenuRecommendation */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -248,6 +259,7 @@
 				2096851F2A5F85D700AC1C68 /* AppDelegate.swift in Sources */,
 				208811162A61347A00ABD8C2 /* UIStackView+Extension.swift in Sources */,
 				209685402A5FE61C00AC1C68 /* ExceptionReasonSection.swift in Sources */,
+				209149D92A666D14006664F4 /* MenuRecommendationViewController.swift in Sources */,
 				208811102A612D0500ABD8C2 /* UILabel+Extension.swift in Sources */,
 				209685362A5F965800AC1C68 /* SettingsCell.swift in Sources */,
 				209685422A5FE70100AC1C68 /* ExceptionalFood.swift in Sources */,

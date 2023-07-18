@@ -7,21 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		208811102A612D0500ABD8C2 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2088110F2A612D0500ABD8C2 /* UILabel+Extension.swift */; };
+		208811122A612D6B00ABD8C2 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208811112A612D6B00ABD8C2 /* UIImageView+Extension.swift */; };
+		208811142A612FB100ABD8C2 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208811132A612FB100ABD8C2 /* UIView+Extension.swift */; };
+		208811162A61347A00ABD8C2 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208811152A61347A00ABD8C2 /* UIStackView+Extension.swift */; };
+		208811182A61397B00ABD8C2 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208811172A61397B00ABD8C2 /* UIButton+Extension.swift */; };
 		2096851F2A5F85D700AC1C68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096851E2A5F85D700AC1C68 /* AppDelegate.swift */; };
 		209685212A5F85D700AC1C68 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685202A5F85D700AC1C68 /* SceneDelegate.swift */; };
-		209685232A5F85D700AC1C68 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685222A5F85D700AC1C68 /* ViewController.swift */; };
+		209685232A5F85D700AC1C68 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685222A5F85D700AC1C68 /* SettingsViewController.swift */; };
 		209685282A5F85D800AC1C68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 209685272A5F85D800AC1C68 /* Assets.xcassets */; };
 		2096852B2A5F85D800AC1C68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209685292A5F85D800AC1C68 /* LaunchScreen.storyboard */; };
+		209685362A5F965800AC1C68 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685352A5F965800AC1C68 /* SettingsCell.swift */; };
+		209685382A5FA29E00AC1C68 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685372A5FA29E00AC1C68 /* ReuseIdentifiable.swift */; };
+		2096853B2A5FA2C500AC1C68 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096853A2A5FA2C500AC1C68 /* UICollectionView+Extension.swift */; };
+		2096853E2A5FDD1100AC1C68 /* SettingsCellButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096853D2A5FDD1100AC1C68 /* SettingsCellButton.swift */; };
+		209685402A5FE61C00AC1C68 /* ExceptionReasonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096853F2A5FE61C00AC1C68 /* ExceptionReasonSection.swift */; };
+		209685422A5FE70100AC1C68 /* ExceptionalFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685412A5FE70100AC1C68 /* ExceptionalFood.swift */; };
+		209685472A5FE98E00AC1C68 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */; };
+		209685492A5FEE4300AC1C68 /* VeganDeclarationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2088110F2A612D0500ABD8C2 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		208811112A612D6B00ABD8C2 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		208811132A612FB100ABD8C2 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		208811152A61347A00ABD8C2 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		208811172A61397B00ABD8C2 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		2096851B2A5F85D700AC1C68 /* FoodRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodRecommendation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2096851E2A5F85D700AC1C68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		209685202A5F85D700AC1C68 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		209685222A5F85D700AC1C68 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		209685222A5F85D700AC1C68 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		209685272A5F85D800AC1C68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2096852A2A5F85D800AC1C68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2096852C2A5F85D800AC1C68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		209685352A5F965800AC1C68 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		209685372A5FA29E00AC1C68 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
+		2096853A2A5FA2C500AC1C68 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		2096853D2A5FDD1100AC1C68 /* SettingsCellButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellButton.swift; sourceTree = "<group>"; };
+		2096853F2A5FE61C00AC1C68 /* ExceptionReasonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionReasonSection.swift; sourceTree = "<group>"; };
+		209685412A5FE70100AC1C68 /* ExceptionalFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionalFood.swift; sourceTree = "<group>"; };
+		209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
+		209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeganDeclarationButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +81,10 @@
 			isa = PBXGroup;
 			children = (
 				209685322A5F88C300AC1C68 /* Application */,
+				209685432A5FE8CA00AC1C68 /* Model */,
 				209685342A5F890000AC1C68 /* Scene */,
+				209685392A5FA2A200AC1C68 /* Protocol */,
+				2096853C2A5FA2C800AC1C68 /* Extension */,
 				209685332A5F88D600AC1C68 /* Resource */,
 			);
 			path = FoodRecommendation;
@@ -83,9 +112,59 @@
 		209685342A5F890000AC1C68 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				209685222A5F85D700AC1C68 /* ViewController.swift */,
+				209685452A5FE90400AC1C68 /* Settings */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		209685392A5FA2A200AC1C68 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				209685372A5FA29E00AC1C68 /* ReuseIdentifiable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		2096853C2A5FA2C800AC1C68 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2096853A2A5FA2C500AC1C68 /* UICollectionView+Extension.swift */,
+				2088110F2A612D0500ABD8C2 /* UILabel+Extension.swift */,
+				208811112A612D6B00ABD8C2 /* UIImageView+Extension.swift */,
+				208811132A612FB100ABD8C2 /* UIView+Extension.swift */,
+				208811152A61347A00ABD8C2 /* UIStackView+Extension.swift */,
+				208811172A61397B00ABD8C2 /* UIButton+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		209685432A5FE8CA00AC1C68 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				209685442A5FE8FD00AC1C68 /* Settings */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		209685442A5FE8FD00AC1C68 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2096853F2A5FE61C00AC1C68 /* ExceptionReasonSection.swift */,
+				209685412A5FE70100AC1C68 /* ExceptionalFood.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		209685452A5FE90400AC1C68 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				209685222A5F85D700AC1C68 /* SettingsViewController.swift */,
+				209685352A5F965800AC1C68 /* SettingsCell.swift */,
+				2096853D2A5FDD1100AC1C68 /* SettingsCellButton.swift */,
+				209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */,
+				209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,9 +237,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				209685232A5F85D700AC1C68 /* ViewController.swift in Sources */,
+				2096853B2A5FA2C500AC1C68 /* UICollectionView+Extension.swift in Sources */,
+				2096853E2A5FDD1100AC1C68 /* SettingsCellButton.swift in Sources */,
+				208811122A612D6B00ABD8C2 /* UIImageView+Extension.swift in Sources */,
+				209685492A5FEE4300AC1C68 /* VeganDeclarationButton.swift in Sources */,
+				209685472A5FE98E00AC1C68 /* SettingsHeaderView.swift in Sources */,
+				208811182A61397B00ABD8C2 /* UIButton+Extension.swift in Sources */,
+				209685232A5F85D700AC1C68 /* SettingsViewController.swift in Sources */,
+				209685382A5FA29E00AC1C68 /* ReuseIdentifiable.swift in Sources */,
 				2096851F2A5F85D700AC1C68 /* AppDelegate.swift in Sources */,
+				208811162A61347A00ABD8C2 /* UIStackView+Extension.swift in Sources */,
+				209685402A5FE61C00AC1C68 /* ExceptionReasonSection.swift in Sources */,
+				208811102A612D0500ABD8C2 /* UILabel+Extension.swift in Sources */,
+				209685362A5F965800AC1C68 /* SettingsCell.swift in Sources */,
+				209685422A5FE70100AC1C68 /* ExceptionalFood.swift in Sources */,
 				209685212A5F85D700AC1C68 /* SceneDelegate.swift in Sources */,
+				208811142A612FB100ABD8C2 /* UIView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +392,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FoodRecommendation/Info.plist;
+				INFOPLIST_FILE = FoodRecommendation/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -327,7 +419,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FoodRecommendation/Info.plist;
+				INFOPLIST_FILE = FoodRecommendation/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

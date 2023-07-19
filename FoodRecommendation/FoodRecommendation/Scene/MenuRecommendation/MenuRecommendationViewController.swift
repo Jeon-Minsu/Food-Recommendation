@@ -17,7 +17,7 @@ final class MenuRecommendationViewController: UIViewController {
     private let hateMenuButton = UIButton()
     private let descriptionLabel = UILabel()
     private let likeMenuButton = UIButton()
-    private let backButton = UIButton()
+    private let homeButton = UIButton()
 
     // MARK: - View Lifecycle
 
@@ -59,17 +59,17 @@ final class MenuRecommendationViewController: UIViewController {
         likeMenuButton.imageEdgeInsets.right = -10
         likeMenuButton.semanticContentAttribute = .forceRightToLeft
 
-        backButton.configureUI(title: "처음으로", titleColor: .white, backgroundColor: .systemGreen, cornerRadius: 10)
+        homeButton.configureUI(title: "처음으로", titleColor: .white, backgroundColor: .systemGreen, cornerRadius: 10)
 
-        [logoImageView, menuRecommendationView, soldOutImageView, hateMenuButton, descriptionLabel, likeMenuButton, backButton].forEach { view.addSubview($0) }
+        [logoImageView, menuRecommendationView, soldOutImageView, hateMenuButton, descriptionLabel, likeMenuButton, homeButton].forEach { view.addSubview($0) }
 
         setupLogoImageViewUI()
-        setupMenuRecommendationView()
-        setupSoldOutImageView()
-        setupHateMenuButton()
-        setupDescriptionLabel()
-        setupLikeMenuButton()
-        setupBackButton()
+        setupMenuRecommendationViewUI()
+        setupSoldOutImageViewUI()
+        setupHateMenuButtonUI()
+        setupDescriptionLabelUI()
+        setupLikeMenuButtonUI()
+        setupHomeButtonUI()
     }
 
     private func setupLogoImageViewUI() {
@@ -81,7 +81,7 @@ final class MenuRecommendationViewController: UIViewController {
         ])
     }
 
-    private func setupMenuRecommendationView() {
+    private func setupMenuRecommendationViewUI() {
         NSLayoutConstraint.activate([
             menuRecommendationView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 30),
             menuRecommendationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -89,7 +89,7 @@ final class MenuRecommendationViewController: UIViewController {
         ])
     }
 
-    private func setupSoldOutImageView() {
+    private func setupSoldOutImageViewUI() {
         NSLayoutConstraint.activate([
             soldOutImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 250),
             soldOutImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -350),
@@ -98,7 +98,7 @@ final class MenuRecommendationViewController: UIViewController {
         ])
     }
 
-    private func setupHateMenuButton() {
+    private func setupHateMenuButtonUI() {
         NSLayoutConstraint.activate([
             hateMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
             hateMenuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -107,14 +107,14 @@ final class MenuRecommendationViewController: UIViewController {
         hateMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 
-    private func setupDescriptionLabel() {
+    private func setupDescriptionLabelUI() {
         NSLayoutConstraint.activate([
             descriptionLabel.centerYAnchor.constraint(equalTo: hateMenuButton.centerYAnchor),
             descriptionLabel.leadingAnchor.constraint(equalTo: hateMenuButton.trailingAnchor, constant: 20)
         ])
     }
 
-    private func setupLikeMenuButton() {
+    private func setupLikeMenuButtonUI() {
         NSLayoutConstraint.activate([
             likeMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
             likeMenuButton.leadingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor, constant: 20),
@@ -124,12 +124,12 @@ final class MenuRecommendationViewController: UIViewController {
         likeMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 
-    private func setupBackButton() {
+    private func setupHomeButtonUI() {
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: hateMenuButton.bottomAnchor, constant: 40),
-            backButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 120),
-            backButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120)
+            homeButton.topAnchor.constraint(equalTo: hateMenuButton.bottomAnchor, constant: 40),
+            homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            homeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 120),
+            homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120)
         ])
     }
 
@@ -140,7 +140,7 @@ final class MenuRecommendationViewController: UIViewController {
     private func addActionForButtonEvent() {
         addActionForHateMenuButton()
         addActionForLikeMenuButton()
-        addActionForBackButton()
+        addActionForHomeButton()
     }
 
     private func addActionForHateMenuButton() {
@@ -161,16 +161,16 @@ final class MenuRecommendationViewController: UIViewController {
         )
     }
 
-    private func addActionForBackButton() {
-        backButton.addAction(
+    private func addActionForHomeButton() {
+        homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.backButton.backgroundColor = .green
+                self?.homeButton.backgroundColor = .green
             },
             for: .touchDown
         )
-        backButton.addAction(
+        homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.backButton.backgroundColor = .systemGreen
+                self?.homeButton.backgroundColor = .systemGreen
                 self?.navigationController?.popViewController(animated: true)
             },
             for: [.touchUpOutside, .touchUpInside]

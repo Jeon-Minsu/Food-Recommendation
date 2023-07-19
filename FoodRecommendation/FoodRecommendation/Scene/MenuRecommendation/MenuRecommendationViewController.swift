@@ -15,6 +15,7 @@ final class MenuRecommendationViewController: UIViewController {
     private let menuRecommendationView = KolodaView()
     private let soldOutImageView = UIImageView()
     private let hateMenuButton = UIButton()
+    private let descriptionLabel = UILabel()
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -44,10 +45,12 @@ final class MenuRecommendationViewController: UIViewController {
         hateMenuButton.configureUI(title: "싫어..", tintColor: .systemGreen)
         hateMenuButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         hateMenuButton.imageEdgeInsets.left = -10
+        descriptionLabel.configureUI(text: "옆으로 밀어서 넘기기", textAlignment: .center)
         setupLogoImageViewUI()
         setupMenuRecommendationView()
         setupSoldOutImageView()
         setupHateMenuButton()
+        setupDescriptionLabel()
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -80,6 +83,13 @@ final class MenuRecommendationViewController: UIViewController {
         ])
 
         hateMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    }
+
+    private func setupDescriptionLabel() {
+        NSLayoutConstraint.activate([
+            descriptionLabel.centerYAnchor.constraint(equalTo: hateMenuButton.centerYAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: hateMenuButton.trailingAnchor, constant: 20)
+        ])
     }
     private func addActionForButtonEvent() {
         addActionForHateMenuButton()

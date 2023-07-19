@@ -55,6 +55,29 @@ final class MenuRecommendationViewController: UIViewController {
 // MARK: - Extensions
 
 extension MenuRecommendationViewController: KolodaViewDataSource {
+    func koloda(_ koloda: Koloda.KolodaView, viewForCardAt index: Int) -> UIView {
+        let view = MenuRecommendationContentView()
+        view.backgroundColor = returnRainbowColor(index)
+        view.layer.cornerRadius = 10
+
+        if index == 0 {
+            view.performAnimation(false)
+        } else {
+            view.performAnimation(true)
+        }
+
+        return view
+    }
+
+    func kolodaNumberOfCards(_ koloda: Koloda.KolodaView) -> Int {
+        return 10
+    }
+
+    func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+        UIView.animate(withDuration: 0.8) { [weak self] in
+            self?.soldOutImageView.alpha = 1.0
+        }
+    }
 }
 extension MenuRecommendationViewController: KolodaViewDelegate {
 }

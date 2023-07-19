@@ -15,21 +15,41 @@ final class SelectedMenuViewController: UIViewController {
     private let firstDescriptionLabel = UILabel()
     private let menuLabel = UILabel()
     private let secondDescriptionLabel = UILabel()
+    private let homeButton = UIButton()
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         configureHierarchy()
+        addActionForButtonEvent()
+    }
+
+    // MARK: - Methods
+
     private func configureHierarchy() {
+        view.backgroundColor = .systemBackground
+        navigationItem.titleView = UIImageView(image: UIImage(systemName: "star.fill"))
+
         configureUI()
     }
+
     private func configureUI() {
         menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing)
         firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left)
         menuLabel.configureUI(text: "새우 초밥", textAlignment: .center, font: .preferredFont(forTextStyle: .largeTitle))
         secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right)
+        homeButton.configureUI(title: "처음으로", titleColor: .white, backgroundColor: .systemGreen, cornerRadius: 10)
+
+        [menuDescriptionStackView, homeButton].forEach { view.addSubview($0) }
+
         [firstDescriptionLabel, menuLabel, secondDescriptionLabel].forEach { menuDescriptionStackView.addArrangedSubview($0) }
+
         setupmenuDescriptionStackViewUI()
+        setupHomeButtonUI()
+    }
+
     private func getEatingTimePhrase() -> String {
         let date = Date()
         let calendar = Calendar.current
@@ -57,5 +77,38 @@ final class SelectedMenuViewController: UIViewController {
             menuDescriptionStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
     }
+
+    private func setupHomeButtonUI() {
+        NSLayoutConstraint.activate([
+            homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            homeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 120),
+            homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120)
+        ])
+    }
+
+    private func addActionForButtonEvent() {
+        addActionForHomeButton()
+    }
+
+    private func addActionForHomeButton() {
+        homeButton.addAction(
+            UIAction { [weak self] _ in
+                self?.homeButton.backgroundColor = .green
+            },
+            for: .touchDown
+        )
+        homeButton.addAction(
+            UIAction { [weak self] _ in
+                self?.homeButton.backgroundColor = .systemGreen
+                self?.popToFirstViewController()
+            },
+            for: [.touchUpOutside, .touchUpInside]
+        )
+    }
+
+    private func popToFirstViewController() {
+        if let firstViewController = navigationController?.viewControllers.first {
+            navigationController?.popToViewController(firstViewController, animated: true)
+        }
     }
 }

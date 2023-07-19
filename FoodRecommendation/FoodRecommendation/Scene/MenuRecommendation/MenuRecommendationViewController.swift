@@ -13,6 +13,7 @@ final class MenuRecommendationViewController: UIViewController {
 
     private let logoImageView = UIImageView()
     private let menuRecommendationView = KolodaView()
+    private let soldOutImageView = UIImageView()
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -34,8 +35,10 @@ final class MenuRecommendationViewController: UIViewController {
         menuRecommendationView.visibleCardsDirection = .top
         menuRecommendationView.backgroundCardsTopMargin = 10
         menuRecommendationView.configureUI()
+        soldOutImageView.configureUI(image: UIImage(systemName: "star.fill"), alpha: 0)
         setupLogoImageViewUI()
         setupMenuRecommendationView()
+        setupSoldOutImageView()
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -50,6 +53,15 @@ final class MenuRecommendationViewController: UIViewController {
             menuRecommendationView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 30),
             menuRecommendationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             menuRecommendationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+    }
+
+    private func setupSoldOutImageView() {
+        NSLayoutConstraint.activate([
+            soldOutImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 250),
+            soldOutImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -350),
+            soldOutImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
+            soldOutImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80)
         ])
     }
 // MARK: - Extensions

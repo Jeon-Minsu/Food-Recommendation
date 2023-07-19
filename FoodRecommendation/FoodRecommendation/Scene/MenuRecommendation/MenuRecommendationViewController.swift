@@ -17,6 +17,8 @@ final class MenuRecommendationViewController: UIViewController {
     private let hateMenuButton = UIButton()
     private let descriptionLabel = UILabel()
     private let likeMenuButton = UIButton()
+    private let backButton = UIButton()
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -56,12 +58,20 @@ final class MenuRecommendationViewController: UIViewController {
         likeMenuButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         likeMenuButton.imageEdgeInsets.right = -10
         likeMenuButton.semanticContentAttribute = .forceRightToLeft
+
+        backButton.configureUI(title: "처음으로", titleColor: .white, backgroundColor: .systemGreen, cornerRadius: 10)
+
+        [logoImageView, menuRecommendationView, soldOutImageView, hateMenuButton, descriptionLabel, likeMenuButton, backButton].forEach { view.addSubview($0) }
+
         setupLogoImageViewUI()
         setupMenuRecommendationView()
         setupSoldOutImageView()
         setupHateMenuButton()
         setupDescriptionLabel()
         setupLikeMenuButton()
+        setupBackButton()
+    }
+
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -111,9 +121,26 @@ final class MenuRecommendationViewController: UIViewController {
 
         likeMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
+
+    private func setupBackButton() {
+        NSLayoutConstraint.activate([
+            backButton.topAnchor.constraint(equalTo: hateMenuButton.bottomAnchor, constant: 40),
+            backButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 120),
+            backButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120)
+        ])
+    }
+
+    private func presentMenuResultViewController() {
+        navigationController?.pushViewController(UIViewController(), animated: false)
+    }
+
     private func addActionForButtonEvent() {
         addActionForHateMenuButton()
         addActionForLikeMenuButton()
+        addActionForBackButton()
+    }
+
     private func addActionForHateMenuButton() {
         hateMenuButton.addAction(
             UIAction { [weak self] _ in
@@ -131,6 +158,24 @@ final class MenuRecommendationViewController: UIViewController {
             for: .allEvents
         )
     }
+
+    private func addActionForBackButton() {
+        backButton.addAction(
+            UIAction { [weak self] _ in
+                self?.backButton.backgroundColor = .green
+            },
+            for: .touchDown
+        )
+        backButton.addAction(
+            UIAction { [weak self] _ in
+                self?.backButton.backgroundColor = .systemGreen
+                self?.navigationController?.popViewController(animated: true)
+            },
+            for: [.touchUpOutside, .touchUpInside]
+        )
+    }
+}
+
 // MARK: - Extensions
 
 extension MenuRecommendationViewController: KolodaViewDataSource {

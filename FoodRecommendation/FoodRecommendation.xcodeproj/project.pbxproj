@@ -26,6 +26,7 @@
 		209685422A5FE70100AC1C68 /* ExceptionalFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685412A5FE70100AC1C68 /* ExceptionalFood.swift */; };
 		209685472A5FE98E00AC1C68 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */; };
 		209685492A5FEE4300AC1C68 /* VeganDeclarationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */; };
+		20C23A8F2A668A2C002E2EE9 /* MenuRecommendationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C23A8E2A668A2C002E2EE9 /* MenuRecommendationContentView.swift */; };
 		AEDD9D386818EB6219F4E186 /* Pods_FoodRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F537B96E9DDA9DA9825FC6 /* Pods_FoodRecommendation.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		209685412A5FE70100AC1C68 /* ExceptionalFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionalFood.swift; sourceTree = "<group>"; };
 		209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeganDeclarationButton.swift; sourceTree = "<group>"; };
+		20C23A8E2A668A2C002E2EE9 /* MenuRecommendationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationContentView.swift; sourceTree = "<group>"; };
 		62F537B96E9DDA9DA9825FC6 /* Pods_FoodRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E0C11D3503C9929545DD94 /* Pods-FoodRecommendation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodRecommendation.debug.xcconfig"; path = "Target Support Files/Pods-FoodRecommendation/Pods-FoodRecommendation.debug.xcconfig"; sourceTree = "<group>"; };
 		F770BC86D3E1352CB348EE46 /* Pods-FoodRecommendation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodRecommendation.release.xcconfig"; path = "Target Support Files/Pods-FoodRecommendation/Pods-FoodRecommendation.release.xcconfig"; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				209149D82A666D14006664F4 /* MenuRecommendationViewController.swift */,
+				20C23A8E2A668A2C002E2EE9 /* MenuRecommendationContentView.swift */,
 			);
 			path = MenuRecommendation;
 			sourceTree = "<group>";
@@ -191,7 +194,6 @@
 				D2E0C11D3503C9929545DD94 /* Pods-FoodRecommendation.debug.xcconfig */,
 				F770BC86D3E1352CB348EE46 /* Pods-FoodRecommendation.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -331,6 +333,7 @@
 				209149D92A666D14006664F4 /* MenuRecommendationViewController.swift in Sources */,
 				208811102A612D0500ABD8C2 /* UILabel+Extension.swift in Sources */,
 				209685362A5F965800AC1C68 /* SettingsCell.swift in Sources */,
+				20C23A8F2A668A2C002E2EE9 /* MenuRecommendationContentView.swift in Sources */,
 				209685422A5FE70100AC1C68 /* ExceptionalFood.swift in Sources */,
 				209685212A5F85D700AC1C68 /* SceneDelegate.swift in Sources */,
 				208811142A612FB100ABD8C2 /* UIView+Extension.swift in Sources */,

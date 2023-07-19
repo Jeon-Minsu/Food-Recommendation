@@ -236,14 +236,14 @@ final class SettingsViewController: UIViewController {
         menuRecommendationButton.addAction(
             UIAction { [weak self] _ in
                 self?.menuRecommendationButton.backgroundColor = .systemOrange
-                self?.presentMenuRecommendationViewController()
+                self?.pushMenuRecommendationViewController()
             },
             for: [.touchUpOutside, .touchUpInside]
         )
     }
 
-    private func presentMenuRecommendationViewController() {
-        navigationController?.pushViewController(UIViewController(), animated: true)
+    private func pushMenuRecommendationViewController() {
+        navigationController?.pushViewController(MenuRecommendationViewController(), animated: true)
     }
 }
 

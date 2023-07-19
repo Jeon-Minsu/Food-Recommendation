@@ -97,6 +97,7 @@ final class MenuRecommendationViewController: UIViewController {
             soldOutImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80)
         ])
     }
+
     private func setupHateMenuButton() {
         NSLayoutConstraint.activate([
             hateMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
@@ -112,6 +113,7 @@ final class MenuRecommendationViewController: UIViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: hateMenuButton.trailingAnchor, constant: 20)
         ])
     }
+
     private func setupLikeMenuButton() {
         NSLayoutConstraint.activate([
             likeMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
@@ -211,5 +213,22 @@ extension MenuRecommendationViewController: KolodaViewDelegate {
         }
     }
 }
+
+extension MenuRecommendationViewController {
+    fileprivate func returnRainbowColor(_ index: Int) -> UIColor {
+        switch index % 5 {
+        case 0:
+            return .red
+        case 1:
+            return .orange
+        case 2:
+            return .yellow
+        case 3:
+            return .green
+        case 4:
+            return .blue
+        default:
+            return .clear
+        }
     }
 }

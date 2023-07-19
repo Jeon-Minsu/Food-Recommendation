@@ -16,6 +16,7 @@ final class MenuRecommendationViewController: UIViewController {
     private let soldOutImageView = UIImageView()
     private let hateMenuButton = UIButton()
     private let descriptionLabel = UILabel()
+    private let likeMenuButton = UIButton()
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -35,22 +36,32 @@ final class MenuRecommendationViewController: UIViewController {
         menuRecommendationView.dataSource = self
         configureUI()
     }
+
     private func configureUI() {
         logoImageView.configureUI(image: UIImage(systemName: "star.fill"))
+
         menuRecommendationView.visibleCardsDirection = .top
         menuRecommendationView.backgroundCardsTopMargin = 10
         menuRecommendationView.configureUI()
+
         soldOutImageView.configureUI(image: UIImage(systemName: "star.fill"), alpha: 0)
 
         hateMenuButton.configureUI(title: "싫어..", tintColor: .systemGreen)
         hateMenuButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         hateMenuButton.imageEdgeInsets.left = -10
+
         descriptionLabel.configureUI(text: "옆으로 밀어서 넘기기", textAlignment: .center)
+
+        likeMenuButton.configureUI(title: "좋아!", tintColor: .systemOrange)
+        likeMenuButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        likeMenuButton.imageEdgeInsets.right = -10
+        likeMenuButton.semanticContentAttribute = .forceRightToLeft
         setupLogoImageViewUI()
         setupMenuRecommendationView()
         setupSoldOutImageView()
         setupHateMenuButton()
         setupDescriptionLabel()
+        setupLikeMenuButton()
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -91,12 +102,31 @@ final class MenuRecommendationViewController: UIViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: hateMenuButton.trailingAnchor, constant: 20)
         ])
     }
+    private func setupLikeMenuButton() {
+        NSLayoutConstraint.activate([
+            likeMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
+            likeMenuButton.leadingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor, constant: 20),
+            likeMenuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+
+        likeMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    }
     private func addActionForButtonEvent() {
         addActionForHateMenuButton()
+        addActionForLikeMenuButton()
     private func addActionForHateMenuButton() {
         hateMenuButton.addAction(
             UIAction { [weak self] _ in
                 self?.menuRecommendationView.swipe(.left)
+            },
+            for: .allEvents
+        )
+    }
+
+    private func addActionForLikeMenuButton() {
+        likeMenuButton.addAction(
+            UIAction { [weak self] _ in
+                self?.menuRecommendationView.swipe(.right)
             },
             for: .allEvents
         )

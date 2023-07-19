@@ -14,11 +14,15 @@ final class MenuRecommendationViewController: UIViewController {
     private let logoImageView = UIImageView()
     private let menuRecommendationView = KolodaView()
     private let soldOutImageView = UIImageView()
+    private let hateMenuButton = UIButton()
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         configureHierarchy()
+        addActionForButtonEvent()
+    }
 
     // MARK: - Methods
 
@@ -36,9 +40,14 @@ final class MenuRecommendationViewController: UIViewController {
         menuRecommendationView.backgroundCardsTopMargin = 10
         menuRecommendationView.configureUI()
         soldOutImageView.configureUI(image: UIImage(systemName: "star.fill"), alpha: 0)
+
+        hateMenuButton.configureUI(title: "싫어..", tintColor: .systemGreen)
+        hateMenuButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        hateMenuButton.imageEdgeInsets.left = -10
         setupLogoImageViewUI()
         setupMenuRecommendationView()
         setupSoldOutImageView()
+        setupHateMenuButton()
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -63,6 +72,24 @@ final class MenuRecommendationViewController: UIViewController {
             soldOutImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
             soldOutImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80)
         ])
+    }
+    private func setupHateMenuButton() {
+        NSLayoutConstraint.activate([
+            hateMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
+            hateMenuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+        ])
+
+        hateMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    }
+    private func addActionForButtonEvent() {
+        addActionForHateMenuButton()
+    private func addActionForHateMenuButton() {
+        hateMenuButton.addAction(
+            UIAction { [weak self] _ in
+                self?.menuRecommendationView.swipe(.left)
+            },
+            for: .allEvents
+        )
     }
 // MARK: - Extensions
 

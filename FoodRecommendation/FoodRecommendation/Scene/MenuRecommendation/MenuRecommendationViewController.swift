@@ -203,7 +203,13 @@ extension MenuRecommendationViewController: KolodaViewDataSource {
         }
     }
 }
+
 extension MenuRecommendationViewController: KolodaViewDelegate {
+    func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        if direction == .right {
+            presentMenuResultViewController()
+        }
+    }
 }
     }
 }

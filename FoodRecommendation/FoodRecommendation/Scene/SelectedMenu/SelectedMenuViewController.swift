@@ -10,6 +10,8 @@ import UIKit
 final class SelectedMenuViewController: UIViewController {
 
     // MARK: Properties
+
+    private let menuDescriptionStackView = UIStackView()
     private let firstDescriptionLabel = UILabel()
     private let menuLabel = UILabel()
     private let secondDescriptionLabel = UILabel()
@@ -22,9 +24,12 @@ final class SelectedMenuViewController: UIViewController {
         configureUI()
     }
     private func configureUI() {
+        menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing)
         firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left)
         menuLabel.configureUI(text: "새우 초밥", textAlignment: .center, font: .preferredFont(forTextStyle: .largeTitle))
         secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right)
+        [firstDescriptionLabel, menuLabel, secondDescriptionLabel].forEach { menuDescriptionStackView.addArrangedSubview($0) }
+        setupmenuDescriptionStackViewUI()
     private func getEatingTimePhrase() -> String {
         let date = Date()
         let calendar = Calendar.current
@@ -42,6 +47,15 @@ final class SelectedMenuViewController: UIViewController {
         default:
             return "간식"
         }
+    }
+
+    private func setupmenuDescriptionStackViewUI() {
+        NSLayoutConstraint.activate([
+            menuDescriptionStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
+            menuDescriptionStackView.heightAnchor.constraint(equalToConstant: 150),
+            menuDescriptionStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            menuDescriptionStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+        ])
     }
     }
 }

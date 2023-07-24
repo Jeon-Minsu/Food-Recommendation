@@ -63,6 +63,7 @@ final class SelectedMenuViewController: UIViewController {
         setupmenuDescriptionStackViewUI()
         setupHomeButtonUI()
         speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
+        menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         characterImageView.configureUI(image: UIImage(named: "wasabisanImage"), contentMode: .scaleAspectFill)
         homeButton.configureUI(title: "처음으로", font: .systemFont(ofSize: 23, weight: .bold),  titleColor: .white, backgroundColor: UIColor(named: "mainGreenColor"), cornerRadius: 10)
     }
@@ -88,6 +89,7 @@ final class SelectedMenuViewController: UIViewController {
 
     private func setupmenuDescriptionStackViewUI() {
         setupSpeechBubbleImageViewUI()
+        setupMenuDescriptionStackViewUI()
         setupCharacterImageViewUI()
         setupHomeButtonUI()
     private func setupSpeechBubbleImageViewUI() {
@@ -98,9 +100,11 @@ final class SelectedMenuViewController: UIViewController {
             speechBubbleImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
     }
+
+    private func setupMenuDescriptionStackViewUI() {
         NSLayoutConstraint.activate([
-            menuDescriptionStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
-            menuDescriptionStackView.heightAnchor.constraint(equalToConstant: 150),
+            menuDescriptionStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height * 0.16),
+            menuDescriptionStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15),
             menuDescriptionStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             menuDescriptionStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])

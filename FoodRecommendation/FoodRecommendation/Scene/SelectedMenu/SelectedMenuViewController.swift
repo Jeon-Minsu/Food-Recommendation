@@ -31,19 +31,15 @@ final class SelectedMenuViewController: UIViewController {
     // MARK: - Methods
 
     private func configureHierarchy() {
-        view.backgroundColor = .systemBackground
-        navigationItem.titleView = UIImageView(image: UIImage(systemName: "star.fill"))
+        configureOverallUI()
+        configureDetailUI()
+    }
 
-        configureUI()
+    private func configureOverallUI() {
+        setupNavigationBackButtonUI()
         setupBackgroundUI()
     }
 
-    private func configureUI() {
-        menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing)
-        firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left)
-        menuLabel.configureUI(text: "새우 초밥", textAlignment: .center, font: .preferredFont(forTextStyle: .largeTitle))
-        secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right)
-        homeButton.configureUI(title: "처음으로", titleColor: .white, backgroundColor: .systemGreen, cornerRadius: 10)
     private func setupNavigationBackButtonUI() {
         let backButtonImage = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold))
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
@@ -51,18 +47,14 @@ final class SelectedMenuViewController: UIViewController {
         navigationItem.leftBarButtonItem = backButton
     }
 
-        [menuDescriptionStackView, homeButton].forEach { view.addSubview($0) }
     @objc private func backButtonTapped(_ gesture: UITapGestureRecognizer) {
         popToPreviousViewController()
     }
 
-        [firstDescriptionLabel, menuLabel, secondDescriptionLabel].forEach { menuDescriptionStackView.addArrangedSubview($0) }
     private func popToPreviousViewController() {
         navigationController?.popViewController(animated: true)
     }
 
-        setupmenuDescriptionStackViewUI()
-        setupHomeButtonUI()
     private func setupBackgroundUI() {
         let gradientStartColor = UIColor(named: "gradientStartColor")
         let gradientEndColor = UIColor(named: "gradientEndColor")
@@ -70,6 +62,14 @@ final class SelectedMenuViewController: UIViewController {
 
         view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
     }
+
+    private func configureDetailUI() {
+        createDetailViews()
+        addDetailViews()
+        setupDetailViews()
+    }
+
+    private func createDetailViews() {
         speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
         menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left, font: UIFont(name: "Makgeolli", size: 20))
@@ -98,11 +98,18 @@ final class SelectedMenuViewController: UIViewController {
         }
     }
 
-    private func setupmenuDescriptionStackViewUI() {
+    private func addDetailViews() {
+        [speechBubbleImageView, menuDescriptionStackView, characterImageView, homeButton].forEach { view.addSubview($0) }
+        [firstDescriptionLabel, menuLabel, secondDescriptionLabel].forEach { menuDescriptionStackView.addArrangedSubview($0) }
+    }
+
+    private func setupDetailViews() {
         setupSpeechBubbleImageViewUI()
         setupMenuDescriptionStackViewUI()
         setupCharacterImageViewUI()
         setupHomeButtonUI()
+    }
+
     private func setupSpeechBubbleImageViewUI() {
         NSLayoutConstraint.activate([
             speechBubbleImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height * 0.125),

@@ -16,6 +16,7 @@ final class SelectedMenuViewController: UIViewController {
     private let firstDescriptionLabel = UILabel()
     private let menuLabel = UILabel()
     private let secondDescriptionLabel = UILabel()
+    private let characterImageView = UIImageView()
     private let homeButton = UIButton()
 
     // MARK: - View Lifecycle
@@ -50,6 +51,7 @@ final class SelectedMenuViewController: UIViewController {
         setupmenuDescriptionStackViewUI()
         setupHomeButtonUI()
         speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
+        characterImageView.configureUI(image: UIImage(named: "wasabisanImage"), contentMode: .scaleAspectFill)
     }
 
     private func getEatingTimePhrase() -> String {
@@ -73,6 +75,7 @@ final class SelectedMenuViewController: UIViewController {
 
     private func setupmenuDescriptionStackViewUI() {
         setupSpeechBubbleImageViewUI()
+        setupCharacterImageViewUI()
     private func setupSpeechBubbleImageViewUI() {
         NSLayoutConstraint.activate([
             speechBubbleImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height * 0.125),
@@ -89,6 +92,12 @@ final class SelectedMenuViewController: UIViewController {
         ])
     }
 
+    private func setupCharacterImageViewUI() {
+        NSLayoutConstraint.activate([
+            characterImageView.topAnchor.constraint(equalTo: speechBubbleImageView.bottomAnchor, constant: 15),
+            characterImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
+        ])
+    }
     private func setupHomeButtonUI() {
         NSLayoutConstraint.activate([
             homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),

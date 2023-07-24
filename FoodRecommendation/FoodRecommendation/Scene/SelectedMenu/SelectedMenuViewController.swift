@@ -11,6 +11,7 @@ final class SelectedMenuViewController: UIViewController {
 
     // MARK: Properties
 
+    private let speechBubbleImageView = UIImageView()
     private let menuDescriptionStackView = UIStackView()
     private let firstDescriptionLabel = UILabel()
     private let menuLabel = UILabel()
@@ -48,6 +49,7 @@ final class SelectedMenuViewController: UIViewController {
 
         setupmenuDescriptionStackViewUI()
         setupHomeButtonUI()
+        speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
     }
 
     private func getEatingTimePhrase() -> String {
@@ -70,6 +72,15 @@ final class SelectedMenuViewController: UIViewController {
     }
 
     private func setupmenuDescriptionStackViewUI() {
+        setupSpeechBubbleImageViewUI()
+    private func setupSpeechBubbleImageViewUI() {
+        NSLayoutConstraint.activate([
+            speechBubbleImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height * 0.125),
+            speechBubbleImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+            speechBubbleImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            speechBubbleImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+        ])
+    }
         NSLayoutConstraint.activate([
             menuDescriptionStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
             menuDescriptionStackView.heightAnchor.constraint(equalToConstant: 150),

@@ -52,6 +52,7 @@ final class SelectedMenuViewController: UIViewController {
         setupHomeButtonUI()
         speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
         characterImageView.configureUI(image: UIImage(named: "wasabisanImage"), contentMode: .scaleAspectFill)
+        homeButton.configureUI(title: "처음으로", font: .systemFont(ofSize: 23, weight: .bold),  titleColor: .white, backgroundColor: UIColor(named: "mainGreenColor"), cornerRadius: 10)
     }
 
     private func getEatingTimePhrase() -> String {
@@ -76,6 +77,7 @@ final class SelectedMenuViewController: UIViewController {
     private func setupmenuDescriptionStackViewUI() {
         setupSpeechBubbleImageViewUI()
         setupCharacterImageViewUI()
+        setupHomeButtonUI()
     private func setupSpeechBubbleImageViewUI() {
         NSLayoutConstraint.activate([
             speechBubbleImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height * 0.125),
@@ -98,11 +100,12 @@ final class SelectedMenuViewController: UIViewController {
             characterImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
         ])
     }
+
     private func setupHomeButtonUI() {
         NSLayoutConstraint.activate([
-            homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            homeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 120),
-            homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120)
+            homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height * 0.075),
+            homeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            homeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4)
         ])
     }
 

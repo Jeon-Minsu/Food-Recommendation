@@ -52,6 +52,7 @@ final class SelectedMenuViewController: UIViewController {
     }
 
     private func popToPreviousViewController() {
+        view.subviews.forEach { $0.removeFromSuperview() }
         navigationController?.popViewController(animated: true)
     }
 
@@ -165,6 +166,7 @@ final class SelectedMenuViewController: UIViewController {
 
     private func popToFirstViewController() {
         if let firstViewController = navigationController?.viewControllers.first {
+            view.subviews.forEach { $0.removeFromSuperview() }
             navigationController?.popToViewController(firstViewController, animated: true)
         }
     }

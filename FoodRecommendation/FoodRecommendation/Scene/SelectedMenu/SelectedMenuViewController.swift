@@ -64,6 +64,8 @@ final class SelectedMenuViewController: UIViewController {
         setupHomeButtonUI()
         speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
         menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left, font: UIFont(name: "Makgeolli", size: 20))
+        secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right, font: UIFont(name: "Makgeolli", size: 20))
         characterImageView.configureUI(image: UIImage(named: "wasabisanImage"), contentMode: .scaleAspectFill)
         homeButton.configureUI(title: "처음으로", font: .systemFont(ofSize: 23, weight: .bold),  titleColor: .white, backgroundColor: UIColor(named: "mainGreenColor"), cornerRadius: 10)
     }

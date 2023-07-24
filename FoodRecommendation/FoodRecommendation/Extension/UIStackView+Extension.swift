@@ -8,7 +8,12 @@
 import UIKit
 
 extension UIStackView {
-    func configureUI(axis: NSLayoutConstraint.Axis, alignment: UIStackView.Alignment, distribution: UIStackView.Distribution, spacing: CGFloat = 0) {
+    func configureUI(axis: NSLayoutConstraint.Axis, alignment: UIStackView.Alignment, distribution: UIStackView.Distribution, spacing: CGFloat = 0, layoutMargins: UIEdgeInsets? = nil) {
+        if let layoutMargins = layoutMargins {
+            self.layoutMargins = layoutMargins
+            self.isLayoutMarginsRelativeArrangement = true
+        }
+
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = axis
         self.alignment = alignment

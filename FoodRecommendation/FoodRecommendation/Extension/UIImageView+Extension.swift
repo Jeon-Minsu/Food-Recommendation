@@ -8,10 +8,11 @@
 import UIKit
 
 extension UIImageView {
-    func configureUI(image: UIImage? = nil, alpha: CGFloat = 1, isSizeNeedToFit: Bool = false) {
+    func configureUI(image: UIImage? = nil, alpha: CGFloat = 1, isSizeNeedToFit: Bool = false, contentMode: UIView.ContentMode = .scaleAspectFit) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.alpha = alpha
         self.image = image
+        self.contentMode = contentMode
 
         if isSizeNeedToFit {
             self.sizeToFit()

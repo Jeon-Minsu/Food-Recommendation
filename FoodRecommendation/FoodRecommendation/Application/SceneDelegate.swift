@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // MARK: Properties
 
@@ -21,6 +21,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UINavigationController(rootViewController: SettingsViewController())
         window?.makeKeyAndVisible()
+        setLaunchScreenImage()
+    }
+
+    // MARK: - Methods
+
+    private func setLaunchScreenImage() {
+        let launchScreenImageName = getLaunchScreenImageName()
+        let launchScreenImageView = UIImageView(image: UIImage(named: launchScreenImageName))
+        launchScreenImageView.contentMode = .scaleAspectFill
+        launchScreenImageView.frame = UIScreen.main.bounds
+
+        if let window = window {
+            window.addSubview(launchScreenImageView)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                UIView.animate(withDuration: 0.3, animations: {
+                    launchScreenImageView.alpha = 0
+                }) { _ in
+                    launchScreenImageView.removeFromSuperview()
+                }
+            }
+        }
+    }
+
+    private func getLaunchScreenImageName() -> String {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return "iPhoneLaunchScreen"
+        } else {
+            return "iPadLaunchScreen"
+        }
     }
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 extension UILabel {
-    func configureUI(text: String = "", textColor: UIColor = .black, textAlignment: NSTextAlignment = .left, font: UIFont = .preferredFont(forTextStyle: .body)) {
+    func configureUI(text: String = "", textColor: UIColor? = .black, textAlignment: NSTextAlignment = .left, font: UIFont? = .preferredFont(forTextStyle: .body)) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.text = text
         self.textColor = textColor

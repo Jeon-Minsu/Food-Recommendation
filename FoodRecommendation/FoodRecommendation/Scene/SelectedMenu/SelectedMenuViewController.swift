@@ -43,10 +43,22 @@ final class SelectedMenuViewController: UIViewController {
         menuLabel.configureUI(text: "새우 초밥", textAlignment: .center, font: .preferredFont(forTextStyle: .largeTitle))
         secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right)
         homeButton.configureUI(title: "처음으로", titleColor: .white, backgroundColor: .systemGreen, cornerRadius: 10)
+    private func setupNavigationBackButtonUI() {
+        let backButtonImage = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold))
+        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = UIColor(named: "mainGreenColor")
+        navigationItem.leftBarButtonItem = backButton
+    }
 
         [menuDescriptionStackView, homeButton].forEach { view.addSubview($0) }
+    @objc private func backButtonTapped(_ gesture: UITapGestureRecognizer) {
+        popToPreviousViewController()
+    }
 
         [firstDescriptionLabel, menuLabel, secondDescriptionLabel].forEach { menuDescriptionStackView.addArrangedSubview($0) }
+    private func popToPreviousViewController() {
+        navigationController?.popViewController(animated: true)
+    }
 
         setupmenuDescriptionStackViewUI()
         setupHomeButtonUI()

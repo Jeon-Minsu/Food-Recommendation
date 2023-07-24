@@ -35,6 +35,7 @@ final class SelectedMenuViewController: UIViewController {
         navigationItem.titleView = UIImageView(image: UIImage(systemName: "star.fill"))
 
         configureUI()
+        setupBackgroundUI()
     }
 
     private func configureUI() {
@@ -62,6 +63,13 @@ final class SelectedMenuViewController: UIViewController {
 
         setupmenuDescriptionStackViewUI()
         setupHomeButtonUI()
+    private func setupBackgroundUI() {
+        let gradientStartColor = UIColor(named: "gradientStartColor")
+        let gradientEndColor = UIColor(named: "gradientEndColor")
+        let backgroundPatternImage = UIImage(named: "backgroundPatternImage")
+
+        view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
+    }
         speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
         menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left, font: UIFont(name: "Makgeolli", size: 20))

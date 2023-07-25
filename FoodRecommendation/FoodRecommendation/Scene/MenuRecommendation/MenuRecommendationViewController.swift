@@ -28,6 +28,12 @@ final class MenuRecommendationViewController: UIViewController {
         addActionForButtonEvent()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        setCardGradientBackground()
+    }
+
     // MARK: - Methods
 
     private func configureHierarchy() {
@@ -176,6 +182,19 @@ final class MenuRecommendationViewController: UIViewController {
             for: [.touchUpOutside, .touchUpInside]
         )
     }
+    private func setCardGradientBackground() {
+        guard menuRecommendationView.currentCardIndex == .zero else {
+            return
+        }
+
+        for index in 0..<menuRecommendationView.countOfVisibleCards {
+            guard let card = menuRecommendationView.viewForCard(at: index) as? MenuRecommendationContentView else {
+                return
+            }
+
+            card.setGradientBackground()
+        }
+    }
 }
 
 // MARK: - Extensions
@@ -202,6 +221,10 @@ extension MenuRecommendationViewController: KolodaViewDataSource {
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         UIView.animate(withDuration: 0.8) { [weak self] in
             self?.soldOutImageView.alpha = 1.0
+    func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
+        if let nextCard = koloda.viewForCard(at: index + 1) as? MenuRecommendationContentView {
+            nextCard.setGradientBackground()
+        }
         }
     }
 }

@@ -35,6 +35,8 @@ final class MenuRecommendationContentView: UIView {
 
     private func configureUI() {
         contentView.configureUI(backgroundColor: .white)
+        contentView.layer.borderColor = UIColor(named: "mainTangerineColor")?.cgColor
+        contentView.layer.borderWidth = 2
     private func createSpeechBubbleImageView() {
         speechBubbleImageView.configureUI(image: UIImage(named: "momoziSpeechBubble"), contentMode: .scaleAspectFill)
     }
@@ -99,6 +101,11 @@ final class MenuRecommendationContentView: UIView {
 
     func performAnimation(_ isAnimationNeeded: Bool) {
         if isAnimationNeeded {
+    func setGradientBackground() {
+        let gradientStartColor = UIColor(named: "menuRecommendationGradientEndColor")
+        let gradientEndColor = UIColor(named: "menuRecommendationGradientStartColor")
+        contentView.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor)
+    }
             alpha = 0.0
             UIView.animate(withDuration: 0.8) { [weak self] in
                 self?.alpha = 1.0

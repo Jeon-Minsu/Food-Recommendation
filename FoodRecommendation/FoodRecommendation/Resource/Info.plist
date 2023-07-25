@@ -5,6 +5,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Makgeolli.otf</string>
+		<string>MaplestoryOTFBold.otf</string>
+		<string>MaplestoryOTFLight.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

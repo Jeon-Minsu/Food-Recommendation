@@ -38,16 +38,22 @@ final class MenuRecommendationViewController: UIViewController {
     // MARK: - Methods
 
     private func configureHierarchy() {
-        view.backgroundColor = .systemBackground
+        configureOverallUI()
+        configureDetailUI()
+        configureDataSource()
+        configureDelegate()
+    }
+
+    private func configureOverallUI() {
+        setupNavigationBarUI()
+        setupBackgroundUI()
+    }
+
     private func setupNavigationBarUI() {
         let image = UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.3)
         let logoImageView = UIImageView(image: image)
         navigationItem.titleView = logoImageView
         navigationItem.hidesBackButton = true
-        // delegate 함수로 빼기 + SettingsViewController도!
-        menuRecommendationView.delegate = self
-        menuRecommendationView.dataSource = self
-        configureUI()
     }
 
     private func setupBackgroundUI() {
@@ -55,11 +61,32 @@ final class MenuRecommendationViewController: UIViewController {
         let gradientEndColor = UIColor(named: "menuRecommendationGradientEndColor")
         let backgroundPatternImage = UIImage(named: "backgroundPatternImage")
 
-        menuRecommendationView.visibleCardsDirection = .top
         view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
     }
+
+    private func configureDetailUI() {
+        createDetailViews()
+        addDetailViews()
+        setupDetailViews()
+    }
+
+    private func createDetailViews() {
+        createMenuRecommendationView()
+        createSoldOutPanelImageView()
+        createSoldOutCharacterImageView()
+        createSoldOutDescriptionLabel()
+        createHateMenuButton()
+        createDescriptionlabel()
+        createLikeMenuButton()
+        createHomeButton()
+    }
+
+    private func createMenuRecommendationView() {
         menuRecommendationView.configureUI()
+        menuRecommendationView.visibleCardsDirection = .top
         menuRecommendationView.backgroundCardsTopMargin = 5.5
+    }
+
     private func createSoldOutPanelImageView() {
         soldOutPanelImageView.configureUI(image: UIImage(named: "soldOutPanel"), alpha: 0, contentMode: .scaleAspectFit)
     }
@@ -85,7 +112,9 @@ final class MenuRecommendationViewController: UIViewController {
         )
     }
 
+    private func createDescriptionlabel() {
         descriptionLabel.configureUI(text: "옆으로 밀어서 넘기기", textAlignment: .center)
+    }
 
     private func createLikeMenuButton() {
         likeMenuButton.configureUI(
@@ -110,10 +139,15 @@ final class MenuRecommendationViewController: UIViewController {
         )
     }
 
-        [logoImageView, menuRecommendationView, soldOutImageView, hateMenuButton, descriptionLabel, likeMenuButton, homeButton].forEach { view.addSubview($0) }
+    private func addDetailViews() {
+        [menuRecommendationView, soldOutPanelImageView, soldOutCharacterImageView, soldOutDescriptionLabel, hateMenuButton, descriptionLabel, likeMenuButton, homeButton].forEach { view.addSubview($0) }
+    }
 
+    private func setupDetailViews() {
         setupMenuRecommendationViewUI()
-        setupSoldOutImageViewUI()
+        setupSoldOutPanelImageViewUI()
+        setupSoldOutCharacterImageViewUI()
+        setupSoldOutDescriptionLabelUI()
         setupHateMenuButtonUI()
         setupDescriptionLabelUI()
         setupLikeMenuButtonUI()
@@ -188,8 +222,12 @@ final class MenuRecommendationViewController: UIViewController {
         ])
     }
 
-    private func presentMenuResultViewController() {
-        navigationController?.pushViewController(UIViewController(), animated: false)
+    private func configureDataSource() {
+        menuRecommendationView.dataSource = self
+    }
+
+    private func configureDelegate() {
+        menuRecommendationView.delegate = self
     }
 
     private func addActionForButtonEvent() {
@@ -245,6 +283,10 @@ final class MenuRecommendationViewController: UIViewController {
 
             card.setGradientBackground()
         }
+    }
+
+    private func presentMenuResultViewController() {
+        navigationController?.pushViewController(SelectedMenuViewController(), animated: false)
     }
 }
 

@@ -11,7 +11,6 @@ final class MenuRecommendationViewController: UIViewController {
 
     // MARK: Properties
 
-    private let logoImageView = UIImageView()
     private let menuRecommendationView = KolodaView()
     private let soldOutImageView = UIImageView()
     private let hateMenuButton = UIButton()
@@ -38,6 +37,10 @@ final class MenuRecommendationViewController: UIViewController {
 
     private func configureHierarchy() {
         view.backgroundColor = .systemBackground
+    private func setupNavigationBarUI() {
+        let image = UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.3)
+        let logoImageView = UIImageView(image: image)
+        navigationItem.titleView = logoImageView
         navigationItem.hidesBackButton = true
         // delegate 함수로 빼기 + SettingsViewController도!
         menuRecommendationView.delegate = self
@@ -45,8 +48,6 @@ final class MenuRecommendationViewController: UIViewController {
         configureUI()
     }
 
-    private func configureUI() {
-        logoImageView.configureUI(image: UIImage(systemName: "star.fill"))
 
         menuRecommendationView.visibleCardsDirection = .top
         menuRecommendationView.backgroundCardsTopMargin = 10
@@ -69,7 +70,6 @@ final class MenuRecommendationViewController: UIViewController {
 
         [logoImageView, menuRecommendationView, soldOutImageView, hateMenuButton, descriptionLabel, likeMenuButton, homeButton].forEach { view.addSubview($0) }
 
-        setupLogoImageViewUI()
         setupMenuRecommendationViewUI()
         setupSoldOutImageViewUI()
         setupHateMenuButtonUI()
@@ -78,12 +78,7 @@ final class MenuRecommendationViewController: UIViewController {
         setupHomeButtonUI()
     }
 
-    private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            logoImageView.heightAnchor.constraint(equalToConstant: 40),
-            logoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            logoImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 

@@ -74,7 +74,7 @@ final class SelectedMenuViewController: UIViewController {
         speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
         menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left, font: UIFont(name: "Makgeolli", size: 20))
-        menuLabel.configureUI(text: "새우 초밥", textColor: UIColor(named: "selectedMenuTextColor"), textAlignment: .center, font: .systemFont(ofSize: 25, weight: .bold))
+        menuLabel.configureUI(text: "새우 초밥", textColor: UIColor(named: "mainTangerineColor"), textAlignment: .center, font: .systemFont(ofSize: 25, weight: .bold))
         secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right, font: UIFont(name: "Makgeolli", size: 20))
         characterImageView.configureUI(image: UIImage(named: "wasabisanImage"), contentMode: .scaleAspectFill)
         homeButton.configureUI(title: "처음으로", font: .systemFont(ofSize: 23, weight: .bold),  titleColor: .white, backgroundColor: UIColor(named: "mainGreenColor"), cornerRadius: 10)
@@ -151,13 +151,13 @@ final class SelectedMenuViewController: UIViewController {
     private func addActionForHomeButton() {
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = .green
+                self?.homeButton.backgroundColor = UIColor(named: "darkGreenColor")
             },
             for: .touchDown
         )
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = .systemGreen
+                self?.homeButton.backgroundColor = UIColor(named: "mainGreenColor")
                 self?.popToFirstViewController()
             },
             for: [.touchUpOutside, .touchUpInside]

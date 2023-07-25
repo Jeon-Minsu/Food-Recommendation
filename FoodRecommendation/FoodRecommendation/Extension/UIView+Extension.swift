@@ -17,7 +17,7 @@ extension UIView {
         self.backgroundColor = backgroundColor
     }
 
-    func setGradientBackground(startColor: UIColor?, endColor: UIColor?, patternImage: UIImage?) {
+    func setGradientBackground(startColor: UIColor?, endColor: UIColor?, patternImage: UIImage? = nil) {
         guard let startColor = startColor, let endColor = endColor else {
             backgroundColor = .systemBackground
             return
@@ -34,7 +34,11 @@ extension UIView {
         gradientLayer.endPoint = endPoint
         gradientLayer.frame = bounds
 
-        layer.addSublayer(gradientLayer)
+        layer.insertSublayer(gradientLayer, at: 0)
+
+        guard let patternImage = patternImage else {
+            return
+        }
 
         let patternImageView = UIImageView(image: patternImage)
         patternImageView.contentMode = .scaleAspectFill

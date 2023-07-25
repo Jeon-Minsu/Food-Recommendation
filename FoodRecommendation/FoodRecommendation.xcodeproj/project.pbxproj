@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		206889A32A6FB7AA001427B7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */; };
 		20760C412A6817570068766C /* SelectedMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20760C402A6817570068766C /* SelectedMenuViewController.swift */; };
 		208811102A612D0500ABD8C2 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2088110F2A612D0500ABD8C2 /* UILabel+Extension.swift */; };
 		208811122A612D6B00ABD8C2 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208811112A612D6B00ABD8C2 /* UIImageView+Extension.swift */; };
@@ -29,10 +30,14 @@
 		209685492A5FEE4300AC1C68 /* VeganDeclarationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */; };
 		20A339CC2A6E959E00D61924 /* Makgeolli.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20A339CB2A6E959E00D61924 /* Makgeolli.otf */; };
 		20C23A8F2A668A2C002E2EE9 /* MenuRecommendationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C23A8E2A668A2C002E2EE9 /* MenuRecommendationContentView.swift */; };
+		20F6080D2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20F6080B2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf */; };
+		20F6080E2A6FF4BF0028F0DB /* MaplestoryOTFLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20F6080C2A6FF4BF0028F0DB /* MaplestoryOTFLight.otf */; };
+		20F608102A7019860028F0DB /* KolodaView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F6080F2A7019860028F0DB /* KolodaView+Extension.swift */; };
 		AEDD9D386818EB6219F4E186 /* Pods_FoodRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F537B96E9DDA9DA9825FC6 /* Pods_FoodRecommendation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		20760C402A6817570068766C /* SelectedMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMenuViewController.swift; sourceTree = "<group>"; };
 		2088110F2A612D0500ABD8C2 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		208811112A612D6B00ABD8C2 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -57,6 +62,9 @@
 		209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeganDeclarationButton.swift; sourceTree = "<group>"; };
 		20A339CB2A6E959E00D61924 /* Makgeolli.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Makgeolli.otf; sourceTree = "<group>"; };
 		20C23A8E2A668A2C002E2EE9 /* MenuRecommendationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationContentView.swift; sourceTree = "<group>"; };
+		20F6080B2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaplestoryOTFBold.otf; sourceTree = "<group>"; };
+		20F6080C2A6FF4BF0028F0DB /* MaplestoryOTFLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaplestoryOTFLight.otf; sourceTree = "<group>"; };
+		20F6080F2A7019860028F0DB /* KolodaView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KolodaView+Extension.swift"; sourceTree = "<group>"; };
 		62F537B96E9DDA9DA9825FC6 /* Pods_FoodRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E0C11D3503C9929545DD94 /* Pods-FoodRecommendation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodRecommendation.debug.xcconfig"; path = "Target Support Files/Pods-FoodRecommendation/Pods-FoodRecommendation.debug.xcconfig"; sourceTree = "<group>"; };
 		F770BC86D3E1352CB348EE46 /* Pods-FoodRecommendation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodRecommendation.release.xcconfig"; path = "Target Support Files/Pods-FoodRecommendation/Pods-FoodRecommendation.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,9 +174,11 @@
 				2096853A2A5FA2C500AC1C68 /* UICollectionView+Extension.swift */,
 				2088110F2A612D0500ABD8C2 /* UILabel+Extension.swift */,
 				208811112A612D6B00ABD8C2 /* UIImageView+Extension.swift */,
+				206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */,
 				208811132A612FB100ABD8C2 /* UIView+Extension.swift */,
 				208811152A61347A00ABD8C2 /* UIStackView+Extension.swift */,
 				208811172A61397B00ABD8C2 /* UIButton+Extension.swift */,
+				20F6080F2A7019860028F0DB /* KolodaView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -206,6 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				20A339CB2A6E959E00D61924 /* Makgeolli.otf */,
+				20F6080B2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf */,
+				20F6080C2A6FF4BF0028F0DB /* MaplestoryOTFLight.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -289,7 +301,9 @@
 			files = (
 				2096852B2A5F85D800AC1C68 /* LaunchScreen.storyboard in Resources */,
 				209685282A5F85D800AC1C68 /* Assets.xcassets in Resources */,
+				20F6080D2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf in Resources */,
 				20A339CC2A6E959E00D61924 /* Makgeolli.otf in Resources */,
+				20F6080E2A6FF4BF0028F0DB /* MaplestoryOTFLight.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +362,9 @@
 				209685492A5FEE4300AC1C68 /* VeganDeclarationButton.swift in Sources */,
 				209685472A5FE98E00AC1C68 /* SettingsHeaderView.swift in Sources */,
 				208811182A61397B00ABD8C2 /* UIButton+Extension.swift in Sources */,
+				20F608102A7019860028F0DB /* KolodaView+Extension.swift in Sources */,
 				209685232A5F85D700AC1C68 /* SettingsViewController.swift in Sources */,
+				206889A32A6FB7AA001427B7 /* UIImage+Extension.swift in Sources */,
 				209685382A5FA29E00AC1C68 /* ReuseIdentifiable.swift in Sources */,
 				2096851F2A5F85D700AC1C68 /* AppDelegate.swift in Sources */,
 				208811162A61347A00ABD8C2 /* UIStackView+Extension.swift in Sources */,

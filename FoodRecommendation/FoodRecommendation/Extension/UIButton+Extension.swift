@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIButton {
-    func configureUI(title: String = "", state: UIControl.State = .normal, font: UIFont? = .preferredFont(forTextStyle: .body), titleColor: UIColor = .black, tintColor: UIColor? = .black, backgroundColor: UIColor? = .clear, cornerRadius: CGFloat = 0, image: UIImage? = nil) {
+    func configureUI(title: String = "", state: UIControl.State = .normal, font: UIFont? = .preferredFont(forTextStyle: .body), titleColor: UIColor = .black, tintColor: UIColor? = .black, backgroundColor: UIColor? = .clear, cornerRadius: CGFloat = 0, image: UIImage? = nil, imageEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), semanticContentAttribute: UISemanticContentAttribute = .forceLeftToRight) {
         guard let backgroundColor = backgroundColor, let tintColor = tintColor else {
             return
         }
@@ -21,5 +21,7 @@ extension UIButton {
         self.backgroundColor = backgroundColor
         self.layer.cornerRadius = cornerRadius
         self.setImage(image, for: .normal)
+        self.imageEdgeInsets = imageEdgeInsets
+        self.semanticContentAttribute = semanticContentAttribute
     }
 }

@@ -15,6 +15,7 @@ final class MenuRecommendationContentView: UIView {
     private let descriptionLabel = UILabel()
     private let menuLabel = UILabel()
     private let speechBubbleImageView = UIImageView()
+    private let characterImageView = UIImageView()
 
     // MARK: - Initializers
 
@@ -36,6 +37,10 @@ final class MenuRecommendationContentView: UIView {
         contentView.configureUI(backgroundColor: .white)
     private func createSpeechBubbleImageView() {
         speechBubbleImageView.configureUI(image: UIImage(named: "momoziSpeechBubble"), contentMode: .scaleAspectFill)
+    }
+
+    private func createCharacterImageView() {
+        characterImageView.configureUI(image: UIImage(named: "momoziImage"), contentMode: .scaleAspectFill)
     }
         descriptionLabel.configureUI(text: "모모찌가 딱 정했어!", textAlignment: .center)
         menuLabel.configureUI(text: "음식 이름", textAlignment: .center, font: .preferredFont(forTextStyle: .largeTitle))
@@ -64,6 +69,13 @@ final class MenuRecommendationContentView: UIView {
             speechBubbleImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
+
+    private func setupCharacterImageViewUI() {
+        NSLayoutConstraint.activate([
+            characterImageView.topAnchor.constraint(equalTo: speechBubbleImageView.bottomAnchor),
+            characterImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.85),
+            characterImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+        ])
     }
 
     private func setupDescriptionLabelUI() {

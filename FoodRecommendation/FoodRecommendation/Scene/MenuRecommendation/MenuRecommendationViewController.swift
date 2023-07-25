@@ -195,18 +195,20 @@ final class MenuRecommendationViewController: UIViewController {
     private func addActionForHomeButton() {
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = .green
+                self?.homeButton.backgroundColor = UIColor(named: "darkGreenColor")
             },
             for: .touchDown
         )
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = .systemGreen
+                self?.homeButton.backgroundColor = UIColor(named: "mainGreenColor")
+                self?.view.subviews.forEach { $0.removeFromSuperview() }
                 self?.navigationController?.popViewController(animated: true)
             },
             for: [.touchUpOutside, .touchUpInside]
         )
     }
+
     private func setCardGradientBackground() {
         guard menuRecommendationView.currentCardIndex == .zero else {
             return

@@ -13,6 +13,7 @@ final class MenuRecommendationViewController: UIViewController {
 
     private let menuRecommendationView = KolodaView()
     private let soldOutPanelImageView = UIImageView()
+    private let soldOutCharacterImageView = UIImageView()
     private let hateMenuButton = UIButton()
     private let descriptionLabel = UILabel()
     private let likeMenuButton = UIButton()
@@ -62,6 +63,9 @@ final class MenuRecommendationViewController: UIViewController {
         soldOutPanelImageView.configureUI(image: UIImage(named: "soldOutPanel"), alpha: 0, contentMode: .scaleAspectFit)
     }
 
+    private func createSoldOutCharacterImageView() {
+        soldOutCharacterImageView.configureUI(image: UIImage(named: "sadMomoziImage"), alpha: 0, contentMode: .scaleAspectFill)
+    }
 
     private func createHateMenuButton() {
         hateMenuButton.configureUI(
@@ -128,7 +132,14 @@ final class MenuRecommendationViewController: UIViewController {
         ])
     }
 
+    private func setupSoldOutCharacterImageViewUI() {
         NSLayoutConstraint.activate([
+            soldOutCharacterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.41),
+            soldOutCharacterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -40),
+            soldOutCharacterImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.625),
+            soldOutCharacterImageView.heightAnchor.constraint(equalTo: soldOutCharacterImageView.widthAnchor)
+        ])
+    }
         ])
     }
 

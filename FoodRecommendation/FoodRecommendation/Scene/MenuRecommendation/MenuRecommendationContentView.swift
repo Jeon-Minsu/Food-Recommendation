@@ -55,6 +55,7 @@ final class MenuRecommendationContentView: UIView {
             contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
+        contentView.clipsToBounds = true
     private func setupSpeechBubbleImageViewUI() {
         NSLayoutConstraint.activate([
             speechBubbleImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -10),

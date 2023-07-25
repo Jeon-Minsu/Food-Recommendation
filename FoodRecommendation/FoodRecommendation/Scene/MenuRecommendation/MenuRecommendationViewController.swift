@@ -48,9 +48,15 @@ final class MenuRecommendationViewController: UIViewController {
         configureUI()
     }
 
+    private func setupBackgroundUI() {
+        let gradientStartColor = UIColor(named: "menuRecommendationGradientStartColor")
+        let gradientEndColor = UIColor(named: "menuRecommendationGradientEndColor")
+        let backgroundPatternImage = UIImage(named: "backgroundPatternImage")
 
         menuRecommendationView.visibleCardsDirection = .top
         menuRecommendationView.backgroundCardsTopMargin = 10
+        view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
+    }
         menuRecommendationView.configureUI()
 
         soldOutImageView.configureUI(image: UIImage(systemName: "star.fill"), alpha: 0)

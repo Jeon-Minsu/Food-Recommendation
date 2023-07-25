@@ -34,9 +34,25 @@ final class MenuRecommendationContentView: UIView {
     // MARK: - Methods
 
     private func configureUI() {
-        contentView.configureUI(backgroundColor: .white)
+        createDetailViews()
+        addDetailViews()
+        setupDetailViews()
+    }
+
+    private func createDetailViews() {
+        createContentView()
+        createSpeechBubbleImageView()
+        createCharacterImageView()
+        createDescriptionLabel()
+        createMenuLabel()
+    }
+
+    private func createContentView() {
+        contentView.configureUI()
         contentView.layer.borderColor = UIColor(named: "mainTangerineColor")?.cgColor
         contentView.layer.borderWidth = 2
+    }
+
     private func createSpeechBubbleImageView() {
         speechBubbleImageView.configureUI(image: UIImage(named: "momoziSpeechBubble"), contentMode: .scaleAspectFill)
     }
@@ -44,16 +60,24 @@ final class MenuRecommendationContentView: UIView {
     private func createCharacterImageView() {
         characterImageView.configureUI(image: UIImage(named: "momoziImage"), contentMode: .scaleAspectFill)
     }
+
+    private func createDescriptionLabel() {
         descriptionLabel.configureUI(text: "모모찌가 딱 정했어!", textAlignment: .center)
-        menuLabel.configureUI(text: "음식 이름", textAlignment: .center, font: .preferredFont(forTextStyle: .largeTitle))
+    }
 
     private func createMenuLabel() {
         menuLabel.configureUI(text: "음식 이름", textAlignment: .center, font: UIFont(name: "MaplestoryOTFLight", size: 25))
     }
-        addSubview(contentView)
-        [descriptionLabel, menuLabel].forEach { contentView.addSubview($0)}
 
+    private func addDetailViews() {
+        addSubview(contentView)
+        [speechBubbleImageView, characterImageView, descriptionLabel, menuLabel].forEach { contentView.addSubview($0) }
+    }
+
+    private func setupDetailViews() {
         setupContentViewUI()
+        setupSpeechBubbleImageViewUI()
+        setupCharacterImageViewUI()
         setupDescriptionLabelUI()
         setupMenuLabelUI()
     }
@@ -65,7 +89,10 @@ final class MenuRecommendationContentView: UIView {
             contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
+
         contentView.clipsToBounds = true
+    }
+
     private func setupSpeechBubbleImageViewUI() {
         NSLayoutConstraint.activate([
             speechBubbleImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -10),
@@ -85,17 +112,15 @@ final class MenuRecommendationContentView: UIView {
 
     private func setupDescriptionLabelUI() {
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
+            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            descriptionLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
 
     private func setupMenuLabelUI() {
         NSLayoutConstraint.activate([
             menuLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30),
-            menuLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            menuLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
+            menuLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
 

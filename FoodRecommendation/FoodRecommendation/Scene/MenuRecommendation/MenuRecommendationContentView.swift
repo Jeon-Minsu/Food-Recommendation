@@ -99,13 +99,14 @@ final class MenuRecommendationContentView: UIView {
         ])
     }
 
-    func performAnimation(_ isAnimationNeeded: Bool) {
-        if isAnimationNeeded {
     func setGradientBackground() {
         let gradientStartColor = UIColor(named: "menuRecommendationGradientEndColor")
         let gradientEndColor = UIColor(named: "menuRecommendationGradientStartColor")
         contentView.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor)
     }
+
+    func performAnimation(upon index: Int) {
+        if index != 0 {
             alpha = 0.0
             UIView.animate(withDuration: 0.8) { [weak self] in
                 self?.alpha = 1.0

@@ -12,7 +12,7 @@ final class MenuRecommendationViewController: UIViewController {
     // MARK: Properties
 
     private let menuRecommendationView = KolodaView()
-    private let soldOutImageView = UIImageView()
+    private let soldOutPanelImageView = UIImageView()
     private let hateMenuButton = UIButton()
     private let descriptionLabel = UILabel()
     private let likeMenuButton = UIButton()
@@ -58,8 +58,10 @@ final class MenuRecommendationViewController: UIViewController {
         view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
     }
         menuRecommendationView.configureUI()
+    private func createSoldOutPanelImageView() {
+        soldOutPanelImageView.configureUI(image: UIImage(named: "soldOutPanel"), alpha: 0, contentMode: .scaleAspectFit)
+    }
 
-        soldOutImageView.configureUI(image: UIImage(systemName: "star.fill"), alpha: 0)
 
     private func createHateMenuButton() {
         hateMenuButton.configureUI(
@@ -114,19 +116,19 @@ final class MenuRecommendationViewController: UIViewController {
     }
 
     private func setupMenuRecommendationViewUI() {
+    private func setupSoldOutPanelImageViewUI() {
         NSLayoutConstraint.activate([
             menuRecommendationView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 30),
             menuRecommendationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             menuRecommendationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            soldOutPanelImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.185),
+            soldOutPanelImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.27),
+            soldOutPanelImageView.widthAnchor.constraint(equalTo: soldOutPanelImageView.heightAnchor, multiplier: 1.05),
+            soldOutPanelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
-    private func setupSoldOutImageViewUI() {
         NSLayoutConstraint.activate([
-            soldOutImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 250),
-            soldOutImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -350),
-            soldOutImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
-            soldOutImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80)
         ])
     }
 

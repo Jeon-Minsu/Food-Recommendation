@@ -14,6 +14,7 @@ final class MenuRecommendationViewController: UIViewController {
     private let menuRecommendationView = KolodaView()
     private let soldOutPanelImageView = UIImageView()
     private let soldOutCharacterImageView = UIImageView()
+    private let soldOutDescriptionLabel = UILabel()
     private let hateMenuButton = UIButton()
     private let descriptionLabel = UILabel()
     private let likeMenuButton = UIButton()
@@ -65,6 +66,10 @@ final class MenuRecommendationViewController: UIViewController {
 
     private func createSoldOutCharacterImageView() {
         soldOutCharacterImageView.configureUI(image: UIImage(named: "sadMomoziImage"), alpha: 0, contentMode: .scaleAspectFill)
+    }
+
+    private func createSoldOutDescriptionLabel() {
+        soldOutDescriptionLabel.configureUI(text: "추천 메뉴가 다 떨어졌어요...", textColor: UIColor(named: "soldOutTextColor"), textAlignment: .center, font: UIFont(name: "MaplestoryOTFLight", size: 23), alpha: 0)
     }
 
     private func createHateMenuButton() {
@@ -140,6 +145,11 @@ final class MenuRecommendationViewController: UIViewController {
             soldOutCharacterImageView.heightAnchor.constraint(equalTo: soldOutCharacterImageView.widthAnchor)
         ])
     }
+
+    private func setupSoldOutDescriptionLabelUI() {
+        NSLayoutConstraint.activate([
+            soldOutDescriptionLabel.topAnchor.constraint(equalTo: soldOutCharacterImageView.bottomAnchor),
+            soldOutDescriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 

@@ -61,18 +61,43 @@ final class MenuRecommendationViewController: UIViewController {
 
         soldOutImageView.configureUI(image: UIImage(systemName: "star.fill"), alpha: 0)
 
-        hateMenuButton.configureUI(title: "싫어..", tintColor: .systemGreen)
-        hateMenuButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        hateMenuButton.imageEdgeInsets.left = -10
+    private func createHateMenuButton() {
+        hateMenuButton.configureUI(
+            title: "싫어..",
+            font: .preferredFont(forTextStyle: .title3),
+            tintColor: UIColor(named: "mainGreenColor"),
+            image: UIImage(
+                systemName: "chevron.left",
+                withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+            ),
+            imageEdgeInsets: UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+        )
+    }
 
         descriptionLabel.configureUI(text: "옆으로 밀어서 넘기기", textAlignment: .center)
 
-        likeMenuButton.configureUI(title: "좋아!", tintColor: .systemOrange)
-        likeMenuButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        likeMenuButton.imageEdgeInsets.right = -10
-        likeMenuButton.semanticContentAttribute = .forceRightToLeft
+    private func createLikeMenuButton() {
+        likeMenuButton.configureUI(
+            title: "좋아!",
+            font: .preferredFont(forTextStyle: .title3),
+            tintColor: UIColor(named: "mainTangerineColor"),
+            image: UIImage(
+                systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+            ),
+            imageEdgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -10),
+            semanticContentAttribute: .forceRightToLeft
+        )
+    }
 
-        homeButton.configureUI(title: "처음으로", titleColor: .white, backgroundColor: .systemGreen, cornerRadius: 10)
+    private func createHomeButton() {
+        homeButton.configureUI(
+            title: "처음으로",
+            font: .systemFont(ofSize: 23, weight: .bold),
+            titleColor: .white,
+            backgroundColor: UIColor(named: "mainGreenColor"),
+            cornerRadius: 10
+        )
+    }
 
         [logoImageView, menuRecommendationView, soldOutImageView, hateMenuButton, descriptionLabel, likeMenuButton, homeButton].forEach { view.addSubview($0) }
 
@@ -133,10 +158,9 @@ final class MenuRecommendationViewController: UIViewController {
 
     private func setupHomeButtonUI() {
         NSLayoutConstraint.activate([
-            homeButton.topAnchor.constraint(equalTo: hateMenuButton.bottomAnchor, constant: 40),
-            homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            homeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 120),
-            homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120)
+            homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height * 0.075),
+            homeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            homeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4)
         ])
     }
 

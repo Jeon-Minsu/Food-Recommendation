@@ -56,10 +56,10 @@ final class MenuRecommendationViewController: UIViewController {
         let backgroundPatternImage = UIImage(named: "backgroundPatternImage")
 
         menuRecommendationView.visibleCardsDirection = .top
-        menuRecommendationView.backgroundCardsTopMargin = 10
         view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
     }
         menuRecommendationView.configureUI()
+        menuRecommendationView.backgroundCardsTopMargin = 5.5
     private func createSoldOutPanelImageView() {
         soldOutPanelImageView.configureUI(image: UIImage(named: "soldOutPanel"), alpha: 0, contentMode: .scaleAspectFit)
     }
@@ -120,16 +120,17 @@ final class MenuRecommendationViewController: UIViewController {
         setupHomeButtonUI()
     }
 
+    private func setupMenuRecommendationViewUI() {
         NSLayoutConstraint.activate([
+            menuRecommendationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height * 0.0675),
+            menuRecommendationView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.575),
+            menuRecommendationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            menuRecommendationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }
 
-    private func setupMenuRecommendationViewUI() {
     private func setupSoldOutPanelImageViewUI() {
         NSLayoutConstraint.activate([
-            menuRecommendationView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 30),
-            menuRecommendationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            menuRecommendationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
             soldOutPanelImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.185),
             soldOutPanelImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.27),
             soldOutPanelImageView.widthAnchor.constraint(equalTo: soldOutPanelImageView.heightAnchor, multiplier: 1.05),
@@ -252,14 +253,9 @@ final class MenuRecommendationViewController: UIViewController {
 extension MenuRecommendationViewController: KolodaViewDataSource {
     func koloda(_ koloda: Koloda.KolodaView, viewForCardAt index: Int) -> UIView {
         let view = MenuRecommendationContentView()
-        view.backgroundColor = returnRainbowColor(index)
-        view.layer.cornerRadius = 10
-
-        if index == 0 {
-            view.performAnimation(false)
-        } else {
-            view.performAnimation(true)
-        }
+        view.backgroundColor = koloda.returnCardBackgroundColor(index)
+        view.layer.cornerRadius = 20
+        view.performAnimation(upon: index)
 
         return view
     }
@@ -270,11 +266,23 @@ extension MenuRecommendationViewController: KolodaViewDataSource {
 
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         UIView.animate(withDuration: 0.8) { [weak self] in
-            self?.soldOutImageView.alpha = 1.0
+            self?.soldOutPanelImageView.alpha = 1.0
+            self?.soldOutCharacterImageView.alpha = 1.0
+            self?.soldOutDescriptionLabel.alpha = 1.0
+        }
+    }
+
     func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
         if let nextCard = koloda.viewForCard(at: index + 1) as? MenuRecommendationContentView {
             nextCard.setGradientBackground()
         }
+
+        if koloda.currentCardIndex == index {
+            UIView.animate(withDuration: 0.25) {
+                koloda.viewForCard(at: index)?.backgroundColor = .white
+                koloda.viewForCard(at: index + 1)?.backgroundColor = UIColor(named: "mainGoldenrodColor")
+                koloda.viewForCard(at: index + 2)?.backgroundColor = UIColor(named: "mainTangerineColor")
+            }
         }
     }
 }
@@ -283,25 +291,6 @@ extension MenuRecommendationViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
         if direction == .right {
             presentMenuResultViewController()
-        }
-    }
-}
-
-extension MenuRecommendationViewController {
-    fileprivate func returnRainbowColor(_ index: Int) -> UIColor {
-        switch index % 5 {
-        case 0:
-            return .red
-        case 1:
-            return .orange
-        case 2:
-            return .yellow
-        case 3:
-            return .green
-        case 4:
-            return .blue
-        default:
-            return .clear
         }
     }
 }

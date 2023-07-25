@@ -45,6 +45,9 @@ final class MenuRecommendationContentView: UIView {
         descriptionLabel.configureUI(text: "모모찌가 딱 정했어!", textAlignment: .center)
         menuLabel.configureUI(text: "음식 이름", textAlignment: .center, font: .preferredFont(forTextStyle: .largeTitle))
 
+    private func createMenuLabel() {
+        menuLabel.configureUI(text: "음식 이름", textAlignment: .center, font: UIFont(name: "MaplestoryOTFLight", size: 25))
+    }
         addSubview(contentView)
         [descriptionLabel, menuLabel].forEach { contentView.addSubview($0)}
 

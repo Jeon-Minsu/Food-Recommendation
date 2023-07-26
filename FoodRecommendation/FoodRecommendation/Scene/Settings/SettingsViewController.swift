@@ -141,11 +141,13 @@ final class SettingsViewController: UIViewController {
 
     private func registerHeaderView() {
         let headerRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderView>(elementKind: SectionHeaderView.elementKind) { supplementaryView, _, indexPath in
-            let title = indexPath.section == 0
-            ? ExceptionReasonSection.allergy.rawValue
-            : ExceptionReasonSection.unpreferredFood.rawValue
-
-            supplementaryView.set(title: title)
+            if indexPath.section == 0 {
+                supplementaryView.set(title: ExceptionReasonSection.allergy.rawValue)
+                supplementaryView.showCautionMessageIfNeeded(shouldShow: true)
+            } else {
+                supplementaryView.set(title: ExceptionReasonSection.unpreferredFood.rawValue)
+                supplementaryView.showCautionMessageIfNeeded(shouldShow: false)
+            }
         }
 
         dataSource?.supplementaryViewProvider = { _, _, index in
@@ -220,7 +222,7 @@ final class SettingsViewController: UIViewController {
     private func setupSectionHeaderLayout(_ section: NSCollectionLayoutSection) {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44)
+            heightDimension: .absolute(44)
         )
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,

@@ -12,14 +12,15 @@ final class SectionHeaderView: UICollectionReusableView {
     // MARK: Properties
     
     static let elementKind = "SectionHeaderView"
-    private let label = UILabel()
+    private let titleLabel = UILabel()
+    private let cautionImageView = UIImageView()
+    private let cautionLabel = UILabel()
 
     // MARK: - Initializers
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        label.configureUI(textColor: .black, font: .preferredFont(forTextStyle: .title3))
         configureHierarchy()
     }
 
@@ -27,24 +28,50 @@ final class SectionHeaderView: UICollectionReusableView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
-        label.configureUI(textColor: .black, font: .preferredFont(forTextStyle: .title3))
         configureHierarchy()
     }
 
     // MARK: - Methods
 
     private func configureHierarchy() {
-        addSubview(label)
+        configureUI()
+    }
+
+    private func configureUI() {
+        titleLabel.configureUI(textColor: .black, font: .systemFont(ofSize: 24, weight: .bold))
+        cautionImageView.configureUI(image: UIImage(named: "cautionImage"), contentMode: .scaleAspectFill)
+        cautionLabel.configureUI(text: "실제와 다를 수 있으니 알러지 음식 섭취는 주의해주세요!", textColor: UIColor(named: "cautionTextColor"), font: .systemFont(ofSize: 10))
+
+        [titleLabel, cautionImageView, cautionLabel].forEach { addSubview($0) }
 
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 2),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            cautionImageView.topAnchor.constraint(equalTo: cautionLabel.topAnchor),
+            cautionImageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 15),
+            cautionImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3)
+        ])
+
+        NSLayoutConstraint.activate([
+            cautionLabel.leadingAnchor.constraint(equalTo: cautionImageView.trailingAnchor, constant: 5),
+            cautionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3)
         ])
     }
 
-    func set(title: String) {
-        label.text = title
+    func set(title: String, cautionImage: UIImage? = nil, cautionText: String? = nil) {
+        titleLabel.text = title
+    }
+
+    func showCautionMessageIfNeeded(shouldShow: Bool) {
+        if shouldShow {
+            cautionImageView.isHidden = false
+            cautionLabel.isHidden = false
+        } else {
+            cautionImageView.isHidden = true
+            cautionLabel.isHidden = true
+        }
     }
 }

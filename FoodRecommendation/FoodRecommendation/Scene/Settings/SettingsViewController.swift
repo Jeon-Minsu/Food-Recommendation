@@ -31,7 +31,6 @@ final class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
         configureHierarchy()
-        configureDataSource()
         applySnapshot()
         addActionForButtonEvent()
     }
@@ -39,9 +38,16 @@ final class SettingsViewController: UIViewController {
     // MARK: - Methods
 
     private func configureHierarchy() {
-        view.backgroundColor = .systemBackground
-        collectionView.delegate = self
-        configureUI()
+        configureOverallUI()
+        configureDetailUI()
+        configureDataSource()
+        configureDelegate()
+    }
+
+    private func configureOverallUI() {
+        setupBackgroundUI()
+    }
+
     private func setupBackgroundUI() {
         let gradientStartColor = UIColor(named: "menuRecommendationGradientStartColor")
         let gradientEndColor = UIColor(named: "menuRecommendationGradientEndColor")
@@ -160,9 +166,39 @@ final class SettingsViewController: UIViewController {
         }
     }
 
+    private func configureDelegate() {
+        collectionView.delegate = self
+    }
+
+    private func applySnapshot() {
+        let allergyList = ExceptionalFood(categories: ExceptionalFood.testData1)
         let dummyList = ExceptionalFood(categories: ExceptionalFood.dummy)
+        let unpreferredFoodList = ExceptionalFood(categories: ExceptionalFood.testData2)
+        var snapshot = Snapshot()
+        snapshot.appendSections([.allergy])
+        snapshot.appendItems(allergyList.categories)
         snapshot.appendSections([.dummy])
         snapshot.appendItems(dummyList.categories)
+        snapshot.appendSections([.unpreferredFood])
+        snapshot.appendItems(unpreferredFoodList.categories)
+
+        dataSource?.apply(snapshot)
+    }
+
+    private func addActionForButtonEvent() {
+        addActionForVeganDeclaration()
+        addActionForMenuRecommendation()
+    }
+
+    private func addActionForVeganDeclaration() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapVeganDeclarationButton))
+        veganDeclarationButton.addGestureRecognizer(gesture)
+    }
+
+    @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
+        veganDeclarationButton.toggleUI()
+    }
+
     private func addActionForMenuRecommendation() {
         menuRecommendationButton.addAction(
             UIAction { [weak self] _ in
@@ -178,15 +214,19 @@ final class SettingsViewController: UIViewController {
             for: [.touchUpOutside, .touchUpInside]
         )
     }
+
+    private func pushMenuRecommendationViewController() {
+        navigationController?.pushViewController(MenuRecommendationViewController(), animated: true)
+    }
+
     private func configureLayout() -> UICollectionViewCompositionalLayout {
         let item = setupItemLayout()
         let group = setupGroupLayout(using: item)
         let section = setupSectionLayout(using: group)
-        setupSectionHeaderLayout(section)
-        let layout = UICollectionViewCompositionalLayout(section: section)
         let layout = UICollectionViewCompositionalLayout { [weak self] (index, _) -> NSCollectionLayoutSection? in
             self?.setupLayoutForSectionIndex(section: section, sectionIndex: index)
         }
+
         layout.register(SectionCharacterDecorationView.self, forDecorationViewOfKind: "SectionCharacterDecorationView")
         layout.register(SectionBackgroundDecorationView.self, forDecorationViewOfKind: "SectionBackgroundDecorationView")
 
@@ -248,6 +288,7 @@ final class SettingsViewController: UIViewController {
             return setupDummySection()
         }
     }
+
     private func setupSectionHeaderLayout(_ section: NSCollectionLayoutSection) {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -261,25 +302,13 @@ final class SettingsViewController: UIViewController {
         section.boundarySupplementaryItems = [sectionHeader]
     }
 
-    private func applySnapshot() {
-        let allergyList = ExceptionalFood(categories: ExceptionalFood.testData1)
-        let unpreferredFoodList = ExceptionalFood(categories: ExceptionalFood.testData2)
-        var snapshot = Snapshot()
-        snapshot.appendSections([.allergy])
-        snapshot.appendItems(allergyList.categories)
-        snapshot.appendSections([.unpreferredFood])
-        snapshot.appendItems(unpreferredFoodList.categories)
     private func setupSectionBackgroundDecorationLayout() -> NSCollectionLayoutDecorationItem {
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SectionBackgroundDecorationView.elementKind)
         sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
 
-        dataSource?.apply(snapshot)
         return sectionBackgroundDecoration
     }
 
-    private func addActionForButtonEvent() {
-        addActionForVeganDeclaration()
-        addActionForMenuRecommendation()
     private func setupSectionCharacterDecorationLayout() -> NSCollectionLayoutDecorationItem {
         let sectionCharacterDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SectionCharacterDecorationView.elementKind)
         sectionCharacterDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
@@ -287,9 +316,6 @@ final class SettingsViewController: UIViewController {
         return sectionCharacterDecoration
     }
 
-    private func addActionForVeganDeclaration() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapVeganDeclarationButton))
-        veganDeclarationButton.addGestureRecognizer(gesture)
     private func setupSectionDecorationLayout(section: NSCollectionLayoutSection, backgroundDecoration: NSCollectionLayoutDecorationItem? = nil, characterDecoration: NSCollectionLayoutDecorationItem? = nil) {
         if let backgroundDecoration = backgroundDecoration,
            let characterDecoration = characterDecoration {
@@ -301,9 +327,6 @@ final class SettingsViewController: UIViewController {
         }
     }
 
-    @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
-        print("touched")
-        veganDeclarationButton.toggleUI()
     private func setupDummySection() -> NSCollectionLayoutSection {
         let dummyItem = setupDummyItemLayout()
         let dummyGroup = setupDummyGroupLayout(using: dummyItem)
@@ -336,8 +359,6 @@ final class SettingsViewController: UIViewController {
         return dummyGroup
     }
 
-    private func pushMenuRecommendationViewController() {
-        navigationController?.pushViewController(MenuRecommendationViewController(), animated: true)
     private func setupDummySectionLayout(using dummyGroup: NSCollectionLayoutGroup) -> NSCollectionLayoutSection {
         let dummySection = NSCollectionLayoutSection(group: dummyGroup)
         dummySection.contentInsets = NSDirectionalEdgeInsets(

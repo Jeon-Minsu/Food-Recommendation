@@ -17,6 +17,7 @@ final class SettingsViewController: UIViewController {
 
     // MARK: - Properties
 
+    private let characterImageView = UIImageView()
     private let logoImageView = UIImageView()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
     private let veganDeclarationButton = VeganDeclarationButton()
@@ -45,6 +46,7 @@ final class SettingsViewController: UIViewController {
 
     private func configureUI() {
         logoImageView.configureUI(image: UIImage(systemName: "star.fill"))
+        characterImageView.configureUI(image: UIImage(named: "momoziImage")?.resize(newWidth: view.frame.width * 0.09))
         collectionView.configureUI()
         veganDeclarationButton.configureUI()
         menuRecommendationButton.configureUI(title: "추천받기", backgroundColor: .systemOrange, cornerRadius: 15)
@@ -55,8 +57,9 @@ final class SettingsViewController: UIViewController {
             font: UIFont.systemFont(ofSize: 10)
         )
 
-        [logoImageView, collectionView, veganDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
+        [characterImageView, logoImageView, collectionView, veganDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
 
+        setupCharacterImageViewUI()
         setupLogoImageViewUI()
         setupCollectionViewUI()
         setupVeganDeclarationButtonUI()
@@ -64,6 +67,12 @@ final class SettingsViewController: UIViewController {
         setupCopyrightLabelUI()
     }
 
+    private func setupCharacterImageViewUI() {
+        NSLayoutConstraint.activate([
+            characterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.07),
+            characterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width * 0.065)
+        ])
+    }
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

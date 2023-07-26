@@ -221,6 +221,19 @@ final class SettingsViewController: UIViewController {
         return section
     }
 
+    private func setupLayoutForSectionIndex(section: NSCollectionLayoutSection, sectionIndex: Int) -> NSCollectionLayoutSection? {
+        switch sectionIndex {
+        case 0:
+            setupSectionHeaderLayout(section)
+            setupSectionDecorationLayout(section: section, backgroundDecoration: setupSectionBackgroundDecorationLayout())
+
+            return section
+        case 2:
+            setupSectionHeaderLayout(section)
+            setupSectionDecorationLayout(section: section, backgroundDecoration: setupSectionBackgroundDecorationLayout(), characterDecoration: setupSectionCharacterDecorationLayout())
+
+            return section
+    }
     private func setupSectionHeaderLayout(_ section: NSCollectionLayoutSection) {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -263,6 +276,15 @@ final class SettingsViewController: UIViewController {
     private func addActionForVeganDeclaration() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapVeganDeclarationButton))
         veganDeclarationButton.addGestureRecognizer(gesture)
+    private func setupSectionDecorationLayout(section: NSCollectionLayoutSection, backgroundDecoration: NSCollectionLayoutDecorationItem? = nil, characterDecoration: NSCollectionLayoutDecorationItem? = nil) {
+        if let backgroundDecoration = backgroundDecoration,
+           let characterDecoration = characterDecoration {
+            backgroundDecoration.zIndex = -1
+            characterDecoration.zIndex = 0
+            section.decorationItems = [backgroundDecoration, characterDecoration]
+        } else if let backgroundDecoration = backgroundDecoration {
+            section.decorationItems = [backgroundDecoration]
+        }
     }
 
     @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {

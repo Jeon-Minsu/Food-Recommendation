@@ -49,7 +49,13 @@ final class SettingsViewController: UIViewController {
         logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.35))
         collectionView.configureUI()
         veganDeclarationButton.configureUI()
-        menuRecommendationButton.configureUI(title: "추천받기", backgroundColor: .systemOrange, cornerRadius: 15)
+        menuRecommendationButton.configureUI(
+            title: "추천 받기!",
+            font: .systemFont(ofSize: 24, weight: .heavy),
+            titleColor: .white,
+            backgroundColor: UIColor(named: "mainOrangeColor"),
+            cornerRadius: 20
+        )
         copyrightLabel.configureUI(
             text: "Icon made by Freepik from www.flaticon.com",
             textColor: .systemGray2,
@@ -103,10 +109,10 @@ final class SettingsViewController: UIViewController {
 
     private func setupMenuRecommendastionButtonUI() {
         NSLayoutConstraint.activate([
-            menuRecommendationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 10),
-            menuRecommendationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor, multiplier: 1),
-            menuRecommendationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            menuRecommendationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
+            menuRecommendationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 13),
+            menuRecommendationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor),
+            menuRecommendationButton.leadingAnchor.constraint(equalTo: veganDeclarationButton.leadingAnchor),
+            menuRecommendationButton.trailingAnchor.constraint(equalTo: veganDeclarationButton.trailingAnchor)
         ])
     }
 
@@ -147,6 +153,21 @@ final class SettingsViewController: UIViewController {
         }
     }
 
+    private func addActionForMenuRecommendation() {
+        menuRecommendationButton.addAction(
+            UIAction { [weak self] _ in
+                self?.menuRecommendationButton.backgroundColor = UIColor(named: "mainTangerineColor")
+            },
+            for: .touchDown
+        )
+        menuRecommendationButton.addAction(
+            UIAction { [weak self] _ in
+                self?.menuRecommendationButton.backgroundColor = UIColor(named: "mainOrangeColor")
+                self?.pushMenuRecommendationViewController()
+            },
+            for: [.touchUpOutside, .touchUpInside]
+        )
+    }
     private func configureLayout() -> UICollectionViewCompositionalLayout {
         let item = setupItemLayout()
         let group = setupGroupLayout(using: item)
@@ -236,19 +257,7 @@ final class SettingsViewController: UIViewController {
         veganDeclarationButton.toggleUI()
     }
 
-    private func addActionForMenuRecommendation() {
-        menuRecommendationButton.addAction(
-            UIAction { [weak self] _ in
-                self?.menuRecommendationButton.backgroundColor = .orange
-            },
-            for: .touchDown
         )
-        menuRecommendationButton.addAction(
-            UIAction { [weak self] _ in
-                self?.menuRecommendationButton.backgroundColor = .systemOrange
-                self?.pushMenuRecommendationViewController()
-            },
-            for: [.touchUpOutside, .touchUpInside]
         )
     }
 

@@ -35,6 +35,7 @@ final class SettingsCellButton: UIView {
 
     private func configureUI() {
         imageView.configureUI(isSizeNeedToFit: true)
+        imageView.configureUI(contentMode: .scaleAspectFit)
         label.configureUI(
             textColor: .black,
             textAlignment: .center,

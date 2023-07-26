@@ -48,7 +48,7 @@ final class SettingsViewController: UIViewController {
         characterImageView.configureUI(image: UIImage(named: "momoziImage")?.resize(newWidth: view.frame.width * 0.09))
         logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.35))
         collectionView.configureUI()
-        veganDeclarationButton.configureUI()
+        veganDeclarationButton.configureUI(cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
         menuRecommendationButton.configureUI(
             title: "추천 받기!",
             font: .systemFont(ofSize: 24, weight: .heavy),
@@ -101,9 +101,9 @@ final class SettingsViewController: UIViewController {
     private func setupVeganDeclarationButtonUI() {
         NSLayoutConstraint.activate([
             veganDeclarationButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            veganDeclarationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            veganDeclarationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            veganDeclarationButton.heightAnchor.constraint(equalToConstant: 50)
+            veganDeclarationButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.06),
+            veganDeclarationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            veganDeclarationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
         ])
     }
 

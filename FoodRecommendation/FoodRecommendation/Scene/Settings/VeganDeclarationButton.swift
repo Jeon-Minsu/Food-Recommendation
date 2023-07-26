@@ -12,8 +12,9 @@ final class VeganDeclarationButton: UIView {
     // MARK: Properties
 
     private let stackView = UIStackView()
-    private let imageView = UIImageView()
-    private let label = UILabel()
+    private let checkBoxImageView = UIImageView()
+    private let veganImageView = UIImageView()
+    private let descriptionLabel = UILabel()
     private var isSelected: Bool = false
 
     // MARK: - Initializers
@@ -21,7 +22,6 @@ final class VeganDeclarationButton: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        configureUI()
         configureHierarchy()
     }
 
@@ -29,52 +29,73 @@ final class VeganDeclarationButton: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
-        configureUI()
         configureHierarchy()
     }
 
     // MARK: - Methods
 
-    private func configureUI() {
-        stackView.configureUI(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 8)
-        imageView.configureUI(image: UIImage(systemName: "eraser"), isSizeNeedToFit: true)
-        label.configureUI(text: "비건이에요", textAlignment: .center)
+    private func configureHierarchy() {
+        configureDetailUI()
     }
 
-    private func configureHierarchy() {
-        addSubview(stackView)
+    private func configureDetailUI() {
+        createDetailViews()
+        addDetailViews()
+        setupDetailViews()
+    }
 
-        [imageView, label].forEach {
+    private func createDetailViews() {
+        stackView.configureUI(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 8)
+        checkBoxImageView.configureUI(image: UIImage(systemName: "circle.fill"), isSizeNeedToFit: true)
+        checkBoxImageView.tintColor = UIColor(named: "mainBorderColor")
+        veganImageView.configureUI(image: UIImage(named: "vegetableImage"), isSizeNeedToFit: true)
+        descriptionLabel.configureUI(text: "비건이에요!", textAlignment: .left, font: .systemFont(ofSize: 15))
+    }
+
+    private func addDetailViews() {
+        addSubview(stackView)
+        [checkBoxImageView, veganImageView, descriptionLabel].forEach {
             stackView.addArrangedSubview($0)
         }
+    }
 
+    private func setupDetailViews() {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.heightAnchor.constraint(equalTo: heightAnchor),
+            stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
 
-            imageView.heightAnchor.constraint(equalTo: label.heightAnchor),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
+            checkBoxImageView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.5),
+            checkBoxImageView.widthAnchor.constraint(equalTo: checkBoxImageView.heightAnchor),
+
+            veganImageView.heightAnchor.constraint(equalTo: checkBoxImageView.heightAnchor),
+            veganImageView.widthAnchor.constraint(equalTo: checkBoxImageView.heightAnchor)
         ])
     }
 
     func setTitle(_ title: String?) {
-        label.text = title
-    }
-
-    func setImage(_ image: UIImage?) {
-        imageView.image = image
+        descriptionLabel.text = title
     }
 
     func toggleUI() {
         isSelected.toggle()
-        print(isSelected)
 
         switch isSelected {
         case true:
-            setImage(UIImage(systemName: "pencil"))
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.backgroundColor = .white
+                self?.setCheckBoxImage(UIImage(systemName: "circle.fill"))
+            }
         case false:
-            setImage(UIImage(systemName: "eraser"))
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.backgroundColor = UIColor(named: "mainGoldenrodColor")
+                self?.setCheckBoxImage(UIImage(named: "checkedBox"))
+            }
         }
+    }
+
+    private func setCheckBoxImage(_ image: UIImage?) {
+        checkBoxImageView.image = image
     }
 }

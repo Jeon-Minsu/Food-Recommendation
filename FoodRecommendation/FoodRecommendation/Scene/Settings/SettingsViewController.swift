@@ -155,6 +155,9 @@ final class SettingsViewController: UIViewController {
         }
     }
 
+        let dummyList = ExceptionalFood(categories: ExceptionalFood.dummy)
+        snapshot.appendSections([.dummy])
+        snapshot.appendItems(dummyList.categories)
     private func addActionForMenuRecommendation() {
         menuRecommendationButton.addAction(
             UIAction { [weak self] _ in
@@ -176,6 +179,9 @@ final class SettingsViewController: UIViewController {
         let section = setupSectionLayout(using: group)
         setupSectionHeaderLayout(section)
         let layout = UICollectionViewCompositionalLayout(section: section)
+        let layout = UICollectionViewCompositionalLayout { [weak self] (index, _) -> NSCollectionLayoutSection? in
+            self?.setupLayoutForSectionIndex(section: section, sectionIndex: index)
+        }
         layout.register(SectionCharacterDecorationView.self, forDecorationViewOfKind: "SectionCharacterDecorationView")
         layout.register(SectionBackgroundDecorationView.self, forDecorationViewOfKind: "SectionBackgroundDecorationView")
 
@@ -233,6 +239,9 @@ final class SettingsViewController: UIViewController {
             setupSectionDecorationLayout(section: section, backgroundDecoration: setupSectionBackgroundDecorationLayout(), characterDecoration: setupSectionCharacterDecorationLayout())
 
             return section
+        default:
+            return setupDummySection()
+        }
     }
     private func setupSectionHeaderLayout(_ section: NSCollectionLayoutSection) {
         let headerSize = NSCollectionLayoutSize(
@@ -290,14 +299,49 @@ final class SettingsViewController: UIViewController {
     @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
         print("touched")
         veganDeclarationButton.toggleUI()
+    private func setupDummySection() -> NSCollectionLayoutSection {
+        let dummyItem = setupDummyItemLayout()
+        let dummyGroup = setupDummyGroupLayout(using: dummyItem)
+        let dummySection = setupDummySectionLayout(using: dummyGroup)
+
+        return dummySection
     }
 
+    private func setupDummyItemLayout() -> NSCollectionLayoutItem {
+        let dummyItemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.1)
         )
+        let dummyItem = NSCollectionLayoutItem(layoutSize: dummyItemSize)
+
+        return dummyItem
+    }
+
+    private func setupDummyGroupLayout(using dummyItem: NSCollectionLayoutItem) -> NSCollectionLayoutGroup {
+        let dummyGroupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(1.0)
         )
+        let dummyGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: dummyGroupSize,
+            subitem: dummyItem,
+            count: 1
+        )
+
+        return dummyGroup
     }
 
     private func pushMenuRecommendationViewController() {
         navigationController?.pushViewController(MenuRecommendationViewController(), animated: true)
+    private func setupDummySectionLayout(using dummyGroup: NSCollectionLayoutGroup) -> NSCollectionLayoutSection {
+        let dummySection = NSCollectionLayoutSection(group: dummyGroup)
+        dummySection.contentInsets = NSDirectionalEdgeInsets(
+            top: 10,
+            leading: 0,
+            bottom: 0,
+            trailing: 0
+        )
+        return dummySection
     }
 }
 

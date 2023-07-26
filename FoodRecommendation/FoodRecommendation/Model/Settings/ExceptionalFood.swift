@@ -36,5 +36,8 @@ extension ExceptionalFood {
         Category(title: "짠 맛", image: UIImage(named: "saltyTasteImage")),
         Category(title: "느끼함", image: UIImage(named: "greasyTasteImage")),
     ]
+
+    static let dummy = [
+        Category(title: "dummy", image: nil)
     ]
 }

@@ -42,12 +42,17 @@ final class SettingsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         collectionView.delegate = self
         configureUI()
+    private func setupBackgroundUI() {
+        let gradientStartColor = UIColor(named: "menuRecommendationGradientStartColor")
+        let gradientEndColor = UIColor(named: "menuRecommendationGradientEndColor")
+
+        view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor)
     }
 
-    private func configureUI() {
-        characterImageView.configureUI(image: UIImage(named: "momoziImage")?.resize(newWidth: view.frame.width * 0.09))
-        logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.35))
-        collectionView.configureUI()
+    private func configureDetailUI() {
+        characterImageView.configureUI(image: UIImage(named: "momoziImage")?.resize(newWidth: view.frame.width * 0.08))
+        logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.32))
+        collectionView.configureUI(backgroundColor: .clear)
         veganDeclarationButton.configureUI(cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
         menuRecommendationButton.configureUI(
             title: "추천 받기!",
@@ -75,8 +80,8 @@ final class SettingsViewController: UIViewController {
 
     private func setupCharacterImageViewUI() {
         NSLayoutConstraint.activate([
-            characterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.07),
-            characterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width * 0.065)
+            characterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.0775),
+            characterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width * 0.05)
         ])
     }
 
@@ -91,10 +96,10 @@ final class SettingsViewController: UIViewController {
 
     private func setupCollectionViewUI() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 10),
+            collectionView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65)
+            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.665)
         ])
     }
 
@@ -118,7 +123,7 @@ final class SettingsViewController: UIViewController {
 
     private func setupCopyrightLabelUI() {
         NSLayoutConstraint.activate([
-            copyrightLabel.topAnchor.constraint(equalTo: menuRecommendationButton.bottomAnchor, constant: 5),
+            copyrightLabel.topAnchor.constraint(equalTo: menuRecommendationButton.bottomAnchor, constant: 10),
             copyrightLabel.leadingAnchor.constraint(equalTo: menuRecommendationButton.leadingAnchor),
             copyrightLabel.trailingAnchor.constraint(equalTo: menuRecommendationButton.trailingAnchor)
         ])
@@ -202,21 +207,21 @@ final class SettingsViewController: UIViewController {
     private func setupGroupLayout(using item: NSCollectionLayoutItem) -> NSCollectionLayoutGroup {
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(0.22)
+            heightDimension: .fractionalWidth(0.225)
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
             subitem: item,
             count: 4
         )
-        group.interItemSpacing = NSCollectionLayoutSpacing.fixed(10)
+
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
 
         return group
     }
 
     private func setupSectionLayout(using group: NSCollectionLayoutGroup) -> NSCollectionLayoutSection {
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = CGFloat(10)
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 10,
             leading: 10,

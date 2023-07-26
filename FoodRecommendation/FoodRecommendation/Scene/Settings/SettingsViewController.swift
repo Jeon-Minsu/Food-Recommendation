@@ -176,6 +176,7 @@ final class SettingsViewController: UIViewController {
         let section = setupSectionLayout(using: group)
         setupSectionHeaderLayout(section)
         let layout = UICollectionViewCompositionalLayout(section: section)
+        layout.register(SectionCharacterDecorationView.self, forDecorationViewOfKind: "SectionCharacterDecorationView")
         layout.register(SectionBackgroundDecorationView.self, forDecorationViewOfKind: "SectionBackgroundDecorationView")
 
         return layout
@@ -252,6 +253,11 @@ final class SettingsViewController: UIViewController {
     private func addActionForButtonEvent() {
         addActionForVeganDeclaration()
         addActionForMenuRecommendation()
+    private func setupSectionCharacterDecorationLayout() -> NSCollectionLayoutDecorationItem {
+        let sectionCharacterDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SectionCharacterDecorationView.elementKind)
+        sectionCharacterDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+
+        return sectionCharacterDecoration
     }
 
     private func addActionForVeganDeclaration() {

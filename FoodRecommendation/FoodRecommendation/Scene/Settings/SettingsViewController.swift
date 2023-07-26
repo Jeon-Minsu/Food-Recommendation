@@ -176,6 +176,7 @@ final class SettingsViewController: UIViewController {
         let section = setupSectionLayout(using: group)
         setupSectionHeaderLayout(section)
         let layout = UICollectionViewCompositionalLayout(section: section)
+        layout.register(SectionBackgroundDecorationView.self, forDecorationViewOfKind: "SectionBackgroundDecorationView")
 
         return layout
     }
@@ -240,8 +241,12 @@ final class SettingsViewController: UIViewController {
         snapshot.appendItems(allergyList.categories)
         snapshot.appendSections([.unpreferredFood])
         snapshot.appendItems(unpreferredFoodList.categories)
+    private func setupSectionBackgroundDecorationLayout() -> NSCollectionLayoutDecorationItem {
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SectionBackgroundDecorationView.elementKind)
+        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
 
         dataSource?.apply(snapshot)
+        return sectionBackgroundDecoration
     }
 
     private func addActionForButtonEvent() {

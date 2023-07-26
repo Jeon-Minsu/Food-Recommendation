@@ -23,10 +23,11 @@ extension UICollectionView {
         return cell
     }
 
-    func configureUI(isScrollEnabled: Bool = false, showsHorizontalScrollIndicator: Bool = false, showsVerticalScrollIndicator: Bool = false) {
+    func configureUI(isScrollEnabled: Bool = false, showsHorizontalScrollIndicator: Bool = false, showsVerticalScrollIndicator: Bool = false, backgroundColor: UIColor? = nil) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.isScrollEnabled = isScrollEnabled
         self.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator
         self.showsVerticalScrollIndicator = showsVerticalScrollIndicator
+        self.backgroundColor = backgroundColor
     }
 }

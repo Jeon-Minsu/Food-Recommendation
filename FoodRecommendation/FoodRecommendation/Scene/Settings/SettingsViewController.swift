@@ -17,6 +17,7 @@ final class SettingsViewController: UIViewController {
 
     // MARK: - Properties
 
+    private let characterImageView = UIImageView()
     private let logoImageView = UIImageView()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
     private let veganDeclarationButton = VeganDeclarationButton()
@@ -30,7 +31,6 @@ final class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
         configureHierarchy()
-        configureDataSource()
         applySnapshot()
         addActionForButtonEvent()
     }
@@ -38,16 +38,35 @@ final class SettingsViewController: UIViewController {
     // MARK: - Methods
 
     private func configureHierarchy() {
-        view.backgroundColor = .systemBackground
-        collectionView.delegate = self
-        configureUI()
+        configureOverallUI()
+        configureDetailUI()
+        configureDataSource()
+        configureDelegate()
     }
 
-    private func configureUI() {
-        logoImageView.configureUI(image: UIImage(systemName: "star.fill"))
-        collectionView.configureUI()
-        veganDeclarationButton.configureUI()
-        menuRecommendationButton.configureUI(title: "추천받기", backgroundColor: .systemOrange, cornerRadius: 15)
+    private func configureOverallUI() {
+        setupBackgroundUI()
+    }
+
+    private func setupBackgroundUI() {
+        let gradientStartColor = UIColor(named: "menuRecommendationGradientStartColor")
+        let gradientEndColor = UIColor(named: "menuRecommendationGradientEndColor")
+
+        view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor)
+    }
+
+    private func configureDetailUI() {
+        characterImageView.configureUI(image: UIImage(named: "momoziImage")?.resize(newWidth: view.frame.width * 0.08))
+        logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.32))
+        collectionView.configureUI(backgroundColor: .clear)
+        veganDeclarationButton.configureUI(cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
+        menuRecommendationButton.configureUI(
+            title: "추천 받기!",
+            font: .systemFont(ofSize: 24, weight: .heavy),
+            titleColor: .white,
+            backgroundColor: UIColor(named: "mainOrangeColor"),
+            cornerRadius: 20
+        )
         copyrightLabel.configureUI(
             text: "Icon made by Freepik from www.flaticon.com",
             textColor: .systemGray2,
@@ -55,8 +74,9 @@ final class SettingsViewController: UIViewController {
             font: UIFont.systemFont(ofSize: 10)
         )
 
-        [logoImageView, collectionView, veganDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
+        [characterImageView, logoImageView, collectionView, veganDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
 
+        setupCharacterImageViewUI()
         setupLogoImageViewUI()
         setupCollectionViewUI()
         setupVeganDeclarationButtonUI()
@@ -64,45 +84,52 @@ final class SettingsViewController: UIViewController {
         setupCopyrightLabelUI()
     }
 
+    private func setupCharacterImageViewUI() {
+        NSLayoutConstraint.activate([
+            characterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.0775),
+            characterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width * 0.05)
+        ])
+    }
+
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            logoImageView.heightAnchor.constraint(equalToConstant: 40),
-            logoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            logoImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            logoImageView.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: -15),
+            logoImageView.centerYAnchor.constraint(equalTo: characterImageView.centerYAnchor)
         ])
+
+        logoImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 
     private func setupCollectionViewUI() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 10),
+            collectionView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65)
+            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.665)
         ])
     }
 
     private func setupVeganDeclarationButtonUI() {
         NSLayoutConstraint.activate([
             veganDeclarationButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            veganDeclarationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            veganDeclarationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            veganDeclarationButton.heightAnchor.constraint(equalToConstant: 50)
+            veganDeclarationButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.06),
+            veganDeclarationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            veganDeclarationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
         ])
     }
 
     private func setupMenuRecommendastionButtonUI() {
         NSLayoutConstraint.activate([
-            menuRecommendationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 10),
-            menuRecommendationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor, multiplier: 1),
-            menuRecommendationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            menuRecommendationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
+            menuRecommendationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 13),
+            menuRecommendationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor),
+            menuRecommendationButton.leadingAnchor.constraint(equalTo: veganDeclarationButton.leadingAnchor),
+            menuRecommendationButton.trailingAnchor.constraint(equalTo: veganDeclarationButton.trailingAnchor)
         ])
     }
 
     private func setupCopyrightLabelUI() {
         NSLayoutConstraint.activate([
-            copyrightLabel.topAnchor.constraint(equalTo: menuRecommendationButton.bottomAnchor, constant: 5),
+            copyrightLabel.topAnchor.constraint(equalTo: menuRecommendationButton.bottomAnchor, constant: 10),
             copyrightLabel.leadingAnchor.constraint(equalTo: menuRecommendationButton.leadingAnchor),
             copyrightLabel.trailingAnchor.constraint(equalTo: menuRecommendationButton.trailingAnchor)
         ])
@@ -125,11 +152,13 @@ final class SettingsViewController: UIViewController {
 
     private func registerHeaderView() {
         let headerRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderView>(elementKind: SectionHeaderView.elementKind) { supplementaryView, _, indexPath in
-            let title = indexPath.section == 0
-            ? ExceptionReasonSection.allergy.rawValue
-            : ExceptionReasonSection.unpreferredFood.rawValue
-
-            supplementaryView.set(title: title)
+            if indexPath.section == 0 {
+                supplementaryView.set(title: ExceptionReasonSection.allergy.rawValue)
+                supplementaryView.showCautionMessageIfNeeded(shouldShow: true)
+            } else {
+                supplementaryView.set(title: ExceptionReasonSection.unpreferredFood.rawValue)
+                supplementaryView.showCautionMessageIfNeeded(shouldShow: false)
+            }
         }
 
         dataSource?.supplementaryViewProvider = { _, _, index in
@@ -137,12 +166,69 @@ final class SettingsViewController: UIViewController {
         }
     }
 
+    private func configureDelegate() {
+        collectionView.delegate = self
+    }
+
+    private func applySnapshot() {
+        let allergyList = ExceptionalFood(categories: ExceptionalFood.testData1)
+        let dummyList = ExceptionalFood(categories: ExceptionalFood.dummy)
+        let unpreferredFoodList = ExceptionalFood(categories: ExceptionalFood.testData2)
+        var snapshot = Snapshot()
+        snapshot.appendSections([.allergy])
+        snapshot.appendItems(allergyList.categories)
+        snapshot.appendSections([.dummy])
+        snapshot.appendItems(dummyList.categories)
+        snapshot.appendSections([.unpreferredFood])
+        snapshot.appendItems(unpreferredFoodList.categories)
+
+        dataSource?.apply(snapshot)
+    }
+
+    private func addActionForButtonEvent() {
+        addActionForVeganDeclaration()
+        addActionForMenuRecommendation()
+    }
+
+    private func addActionForVeganDeclaration() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapVeganDeclarationButton))
+        veganDeclarationButton.addGestureRecognizer(gesture)
+    }
+
+    @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
+        veganDeclarationButton.toggleUI()
+    }
+
+    private func addActionForMenuRecommendation() {
+        menuRecommendationButton.addAction(
+            UIAction { [weak self] _ in
+                self?.menuRecommendationButton.backgroundColor = UIColor(named: "mainTangerineColor")
+            },
+            for: .touchDown
+        )
+        menuRecommendationButton.addAction(
+            UIAction { [weak self] _ in
+                self?.menuRecommendationButton.backgroundColor = UIColor(named: "mainOrangeColor")
+                self?.pushMenuRecommendationViewController()
+            },
+            for: [.touchUpOutside, .touchUpInside]
+        )
+    }
+
+    private func pushMenuRecommendationViewController() {
+        navigationController?.pushViewController(MenuRecommendationViewController(), animated: true)
+    }
+
     private func configureLayout() -> UICollectionViewCompositionalLayout {
         let item = setupItemLayout()
         let group = setupGroupLayout(using: item)
         let section = setupSectionLayout(using: group)
-        setupSectionHeaderLayout(section)
-        let layout = UICollectionViewCompositionalLayout(section: section)
+        let layout = UICollectionViewCompositionalLayout { [weak self] (index, _) -> NSCollectionLayoutSection? in
+            self?.setupLayoutForSectionIndex(section: section, sectionIndex: index)
+        }
+
+        layout.register(SectionCharacterDecorationView.self, forDecorationViewOfKind: "SectionCharacterDecorationView")
+        layout.register(SectionBackgroundDecorationView.self, forDecorationViewOfKind: "SectionBackgroundDecorationView")
 
         return layout
     }
@@ -161,21 +247,21 @@ final class SettingsViewController: UIViewController {
     private func setupGroupLayout(using item: NSCollectionLayoutItem) -> NSCollectionLayoutGroup {
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(0.22)
+            heightDimension: .fractionalWidth(0.225)
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
             subitem: item,
             count: 4
         )
-        group.interItemSpacing = NSCollectionLayoutSpacing.fixed(10)
+
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
 
         return group
     }
 
     private func setupSectionLayout(using group: NSCollectionLayoutGroup) -> NSCollectionLayoutSection {
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = CGFloat(10)
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 10,
             leading: 10,
@@ -186,10 +272,27 @@ final class SettingsViewController: UIViewController {
         return section
     }
 
+    private func setupLayoutForSectionIndex(section: NSCollectionLayoutSection, sectionIndex: Int) -> NSCollectionLayoutSection? {
+        switch sectionIndex {
+        case 0:
+            setupSectionHeaderLayout(section)
+            setupSectionDecorationLayout(section: section, backgroundDecoration: setupSectionBackgroundDecorationLayout())
+
+            return section
+        case 2:
+            setupSectionHeaderLayout(section)
+            setupSectionDecorationLayout(section: section, backgroundDecoration: setupSectionBackgroundDecorationLayout(), characterDecoration: setupSectionCharacterDecorationLayout())
+
+            return section
+        default:
+            return setupDummySection()
+        }
+    }
+
     private func setupSectionHeaderLayout(_ section: NSCollectionLayoutSection) {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44)
+            heightDimension: .absolute(44)
         )
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -199,51 +302,72 @@ final class SettingsViewController: UIViewController {
         section.boundarySupplementaryItems = [sectionHeader]
     }
 
-    private func applySnapshot() {
-        let allergyList = ExceptionalFood(categories: ExceptionalFood.testData1)
-        let unpreferredFoodList = ExceptionalFood(categories: ExceptionalFood.testData2)
-        var snapshot = Snapshot()
-        snapshot.appendSections([.allergy])
-        snapshot.appendItems(allergyList.categories)
-        snapshot.appendSections([.unpreferredFood])
-        snapshot.appendItems(unpreferredFoodList.categories)
+    private func setupSectionBackgroundDecorationLayout() -> NSCollectionLayoutDecorationItem {
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SectionBackgroundDecorationView.elementKind)
+        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
 
-        dataSource?.apply(snapshot)
+        return sectionBackgroundDecoration
     }
 
-    private func addActionForButtonEvent() {
-        addActionForVeganDeclaration()
-        addActionForMenuRecommendation()
+    private func setupSectionCharacterDecorationLayout() -> NSCollectionLayoutDecorationItem {
+        let sectionCharacterDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SectionCharacterDecorationView.elementKind)
+        sectionCharacterDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+
+        return sectionCharacterDecoration
     }
 
-    private func addActionForVeganDeclaration() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapVeganDeclarationButton))
-        veganDeclarationButton.addGestureRecognizer(gesture)
+    private func setupSectionDecorationLayout(section: NSCollectionLayoutSection, backgroundDecoration: NSCollectionLayoutDecorationItem? = nil, characterDecoration: NSCollectionLayoutDecorationItem? = nil) {
+        if let backgroundDecoration = backgroundDecoration,
+           let characterDecoration = characterDecoration {
+            backgroundDecoration.zIndex = -1
+            characterDecoration.zIndex = 0
+            section.decorationItems = [backgroundDecoration, characterDecoration]
+        } else if let backgroundDecoration = backgroundDecoration {
+            section.decorationItems = [backgroundDecoration]
+        }
     }
 
-    @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
-        print("touched")
-        veganDeclarationButton.toggleUI()
+    private func setupDummySection() -> NSCollectionLayoutSection {
+        let dummyItem = setupDummyItemLayout()
+        let dummyGroup = setupDummyGroupLayout(using: dummyItem)
+        let dummySection = setupDummySectionLayout(using: dummyGroup)
+
+        return dummySection
     }
 
-    private func addActionForMenuRecommendation() {
-        menuRecommendationButton.addAction(
-            UIAction { [weak self] _ in
-                self?.menuRecommendationButton.backgroundColor = .orange
-            },
-            for: .touchDown
+    private func setupDummyItemLayout() -> NSCollectionLayoutItem {
+        let dummyItemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.1)
         )
-        menuRecommendationButton.addAction(
-            UIAction { [weak self] _ in
-                self?.menuRecommendationButton.backgroundColor = .systemOrange
-                self?.pushMenuRecommendationViewController()
-            },
-            for: [.touchUpOutside, .touchUpInside]
-        )
+        let dummyItem = NSCollectionLayoutItem(layoutSize: dummyItemSize)
+
+        return dummyItem
     }
 
-    private func pushMenuRecommendationViewController() {
-        navigationController?.pushViewController(MenuRecommendationViewController(), animated: true)
+    private func setupDummyGroupLayout(using dummyItem: NSCollectionLayoutItem) -> NSCollectionLayoutGroup {
+        let dummyGroupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(1.0)
+        )
+        let dummyGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: dummyGroupSize,
+            subitem: dummyItem,
+            count: 1
+        )
+
+        return dummyGroup
+    }
+
+    private func setupDummySectionLayout(using dummyGroup: NSCollectionLayoutGroup) -> NSCollectionLayoutSection {
+        let dummySection = NSCollectionLayoutSection(group: dummyGroup)
+        dummySection.contentInsets = NSDirectionalEdgeInsets(
+            top: 10,
+            leading: 0,
+            bottom: 0,
+            trailing: 0
+        )
+        return dummySection
     }
 }
 

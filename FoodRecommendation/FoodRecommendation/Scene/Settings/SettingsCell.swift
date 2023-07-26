@@ -21,13 +21,6 @@ final class SettingsCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        button.configureUI(
-            tintColor: .black,
-            cornerRadius: 10,
-            borderWidth: 2,
-            borderColor: UIColor.green.cgColor,
-            backgroundColor: .systemBlue
-        )
         configureHierarchy()
     }
 
@@ -39,6 +32,14 @@ final class SettingsCell: UICollectionViewCell {
     // MARK: - Methods
 
     private func configureHierarchy() {
+        button.configureUI(
+            tintColor: .black,
+            cornerRadius: 10,
+            borderWidth: 2,
+            borderColor: UIColor(named: "mainBorderColor")?.cgColor,
+            backgroundColor: UIColor(named: "cellColor")
+        )
+
         contentView.addSubview(button)
 
         NSLayoutConstraint.activate([
@@ -49,9 +50,9 @@ final class SettingsCell: UICollectionViewCell {
         ])
     }
 
-    func set(title: String, image: UIImage) {
+    func set(title: String, image: UIImage?) {
         button.setTitle(title)
-        button.setImage(image)
+        button.setImage(image?.resize(newWidth: frame.width * 0.5))
     }
 
     func toggleUI() {
@@ -59,13 +60,17 @@ final class SettingsCell: UICollectionViewCell {
 
         switch isTouchedUpInside {
         case true:
-            button.layer.borderColor = UIColor.red.cgColor
-            button.backgroundColor = .brown
-            button.changeLabelColor(.white)
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.button.layer.borderColor = UIColor(named: "mainGoldenrodColor")?.cgColor
+                self?.button.backgroundColor = UIColor(named: "mainOrangeColor")
+                self?.button.changeLabelColor(.white)
+            }
         case false:
-            button.layer.borderColor = UIColor.green.cgColor
-            button.backgroundColor = .systemBlue
-            button.changeLabelColor(.black)
+            UIView.animate(withDuration: 0.3) { [weak self] in
+                self?.button.layer.borderColor = UIColor(named: "mainBorderColor")?.cgColor
+                self?.button.backgroundColor = UIColor(named: "cellColor")
+                self?.button.changeLabelColor(UIColor(named: "soldOutTextColor"))
+            }
         }
     }
 }

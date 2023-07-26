@@ -11,6 +11,7 @@ final class SettingsCellButton: UIView {
 
     // MARK: Properties
 
+    private let stackView = UIStackView()
     private let imageView = UIImageView()
     private let label = UILabel()
 
@@ -34,29 +35,29 @@ final class SettingsCellButton: UIView {
     // MARK: - Methods
 
     private func configureUI() {
-        imageView.configureUI(isSizeNeedToFit: true)
+        stackView.configureUI(axis: .vertical, alignment: .center, distribution: .fillProportionally)
+        imageView.configureUI(contentMode: .scaleAspectFit)
         label.configureUI(
-            textColor: .black,
+            textColor: UIColor(named: "soldOutTextColor"),
             textAlignment: .center,
-            font: UIFont.preferredFont(forTextStyle: .caption1)
+            font: .systemFont(ofSize: 13)
         )
-    }
 
-    private func configureHierarchy() {
+        addSubview(stackView)
         [imageView, label].forEach {
-            addSubview($0)
+            stackView.addArrangedSubview($0)
         }
 
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -5),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 3),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 3),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -3)
         ])
+    }
+
+    private func configureHierarchy() {
+        configureUI()
     }
 
     func setTitle(_ title: String?) {
@@ -67,7 +68,7 @@ final class SettingsCellButton: UIView {
         imageView.image = image
     }
 
-    func changeLabelColor(_ color: UIColor) {
+    func changeLabelColor(_ color: UIColor?) {
         label.textColor = color
     }
 }

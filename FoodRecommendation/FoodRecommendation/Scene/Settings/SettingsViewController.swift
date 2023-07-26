@@ -45,8 +45,8 @@ final class SettingsViewController: UIViewController {
     }
 
     private func configureUI() {
-        logoImageView.configureUI(image: UIImage(systemName: "star.fill"))
         characterImageView.configureUI(image: UIImage(named: "momoziImage")?.resize(newWidth: view.frame.width * 0.09))
+        logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.35))
         collectionView.configureUI()
         veganDeclarationButton.configureUI()
         menuRecommendationButton.configureUI(title: "추천받기", backgroundColor: .systemOrange, cornerRadius: 15)
@@ -73,13 +73,14 @@ final class SettingsViewController: UIViewController {
             characterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width * 0.065)
         ])
     }
+
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            logoImageView.heightAnchor.constraint(equalToConstant: 40),
-            logoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            logoImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            logoImageView.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: -15),
+            logoImageView.centerYAnchor.constraint(equalTo: characterImageView.centerYAnchor)
         ])
+
+        logoImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 
     private func setupCollectionViewUI() {

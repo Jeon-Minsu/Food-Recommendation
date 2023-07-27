@@ -1,6 +1,0 @@
-framework module Pods_FoodRecommendation {
-  umbrella header "Pods-FoodRecommendation-umbrella.h"
-
-  export *
-  module * { export * }
-}

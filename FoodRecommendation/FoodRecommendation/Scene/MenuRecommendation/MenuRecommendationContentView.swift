@@ -125,7 +125,7 @@ final class MenuRecommendationContentView: UIView {
     }
 
     func setGradientBackground() {
-        let gradientStartColor = UIColor(named: "menuRecommendationGradientEndColor")
+        let gradientStartColor = UIColor(named: "mainGoldenrodColor")
         let gradientEndColor = UIColor(named: "menuRecommendationGradientStartColor")
         contentView.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor)
     }

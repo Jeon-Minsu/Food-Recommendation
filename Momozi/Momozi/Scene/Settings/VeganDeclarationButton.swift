@@ -98,4 +98,8 @@ final class VeganDeclarationButton: UIView {
     private func setCheckBoxImage(_ image: UIImage?) {
         checkBoxImageView.image = image
     }
+
+    func buttonDidToggle() -> Bool {
+        return isSelected
+    }
 }

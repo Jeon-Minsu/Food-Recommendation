@@ -14,6 +14,7 @@ final class SettingsCell: UICollectionViewCell {
     // MARK: Properties
 
     private let button = SettingsCellButton()
+    private var menuCategory: MenuCategory?
     private var isTouchedUpInside: Bool = false
 
     // MARK: - Initializers
@@ -50,9 +51,10 @@ final class SettingsCell: UICollectionViewCell {
         ])
     }
 
-    func set(title: String, image: UIImage?) {
+    func set(title: String, image: UIImage?, category: MenuCategory) {
         button.setTitle(title)
         button.setImage(image?.resize(newWidth: frame.width * 0.5))
+        menuCategory = category
     }
 
     func toggleUI() {
@@ -72,5 +74,13 @@ final class SettingsCell: UICollectionViewCell {
                 self?.button.changeLabelColor(UIColor(named: "soldOutTextColor"))
             }
         }
+    }
+
+    func settingsCellDidToggle() -> Bool {
+        return isTouchedUpInside
+    }
+
+    func extractCategoryOfCell() -> MenuCategory {
+        return menuCategory ?? .dummy
     }
 }

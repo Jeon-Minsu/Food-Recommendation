@@ -25,7 +25,7 @@ final class MenuDataManager {
 
     // MARK: - Methods
 
-    func getFilteredMenus(excludedCategories: [MenuCategory]) -> [String]? {
+    func getFilteredMenus(excludedCategories: [MenuCategory]) -> [String] {
         if menuData.isEmpty {
             loadMenuDataFromCSV()
         }
@@ -38,7 +38,7 @@ final class MenuDataManager {
             return !excludedCategories.contains { content in
                 menu.categories[content] ?? false
             }
-        }.compactMap { $0.name }
+        }.compactMap { $0.name }.shuffled()
 
         return filteredMenus
     }

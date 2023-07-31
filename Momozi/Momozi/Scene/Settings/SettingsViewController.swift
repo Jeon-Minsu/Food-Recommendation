@@ -11,9 +11,8 @@ final class SettingsViewController: UIViewController {
 
     // MARK: Typealias
 
-    private typealias Category = ExceptionalFood.Category
-    private typealias DataSource = UICollectionViewDiffableDataSource<ExceptionReasonSection, Category>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<ExceptionReasonSection, Category>
+    private typealias DataSource = UICollectionViewDiffableDataSource<ExceptionReasonSection, MenuCategory>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<ExceptionReasonSection, MenuCategory>
 
     // MARK: - Properties
 
@@ -24,6 +23,7 @@ final class SettingsViewController: UIViewController {
     private let menuRecommendationButton = UIButton()
     private let copyrightLabel = UILabel()
     private var dataSource: DataSource?
+    private var excludedCategories: [MenuCategory] = []
 
     // MARK: - View Lifecycle
 
@@ -141,11 +141,11 @@ final class SettingsViewController: UIViewController {
     }
 
     private func registerCell() {
-        let cellRegistration = UICollectionView.CellRegistration<SettingsCell, Category> { cell, _, item in
-            cell.set(title: item.title, image: item.image)
+        let cellRegistration = UICollectionView.CellRegistration<SettingsCell, MenuCategory> { cell, _, item in
+            cell.set(title: item.getTitle(), image: item.getImage(), category: item)
         }
-        
-        dataSource = UICollectionViewDiffableDataSource<ExceptionReasonSection, Category>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+
+        dataSource = UICollectionViewDiffableDataSource<ExceptionReasonSection, MenuCategory>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         })
     }
@@ -171,17 +171,13 @@ final class SettingsViewController: UIViewController {
     }
 
     private func applySnapshot() {
-        let allergyList = ExceptionalFood(categories: ExceptionalFood.testData1)
-        let dummyList = ExceptionalFood(categories: ExceptionalFood.dummy)
-        let unpreferredFoodList = ExceptionalFood(categories: ExceptionalFood.testData2)
         var snapshot = Snapshot()
-        snapshot.appendSections([.allergy])
-        snapshot.appendItems(allergyList.categories)
-        snapshot.appendSections([.dummy])
-        snapshot.appendItems(dummyList.categories)
-        snapshot.appendSections([.unpreferredFood])
-        snapshot.appendItems(unpreferredFoodList.categories)
-
+        snapshot.appendSections([ExceptionReasonSection.allergy])
+        snapshot.appendItems(ExceptionReasonSection.allergy.loadContents())
+        snapshot.appendSections([ExceptionReasonSection.dummy])
+        snapshot.appendItems(ExceptionReasonSection.dummy.loadContents())
+        snapshot.appendSections([ExceptionReasonSection.unpreferredFood])
+        snapshot.appendItems(ExceptionReasonSection.unpreferredFood.loadContents())
         dataSource?.apply(snapshot)
     }
 
@@ -197,6 +193,17 @@ final class SettingsViewController: UIViewController {
 
     @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
         veganDeclarationButton.toggleUI()
+        manageExcludedCategoriesFrom(veganDeclarationButton)
+    }
+
+    private func manageExcludedCategoriesFrom(_ button: VeganDeclarationButton) {
+        if button.buttonDidToggle() {
+            excludedCategories.append(.vegan)
+        } else {
+            if let index = excludedCategories.firstIndex(of: .vegan) {
+                excludedCategories.remove(at: index)
+            }
+        }
     }
 
     private func addActionForMenuRecommendation() {
@@ -216,7 +223,10 @@ final class SettingsViewController: UIViewController {
     }
 
     private func pushMenuRecommendationViewController() {
-        navigationController?.pushViewController(MenuRecommendationViewController(), animated: true)
+        let filteredMenu = MenuDataManager.shared.getFilteredMenus(excludedCategories: excludedCategories)
+        let nextViewController = MenuRecommendationViewController()
+        nextViewController.update(filteredMenu)
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
 
     private func configureLayout() -> UICollectionViewCompositionalLayout {
@@ -380,5 +390,18 @@ extension SettingsViewController: UICollectionViewDelegate {
         }
 
         cell.toggleUI()
+        manageExcludedCategoriesFrom(cell)
+    }
+
+    private func manageExcludedCategoriesFrom(_ cell: SettingsCell) {
+        let categoryOfCurrentCell = cell.extractCategoryOfCell()
+
+        if cell.settingsCellDidToggle() {
+            excludedCategories.append(categoryOfCurrentCell)
+        } else {
+            if let index = excludedCategories.firstIndex(of: categoryOfCurrentCell) {
+                excludedCategories.remove(at: index)
+            }
+        }
     }
 }

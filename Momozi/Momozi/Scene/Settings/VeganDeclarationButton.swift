@@ -84,18 +84,22 @@ final class VeganDeclarationButton: UIView {
         switch isSelected {
         case true:
             UIView.animate(withDuration: 0.3) { [weak self] in
-                self?.backgroundColor = .white
-                self?.setCheckBoxImage(UIImage(systemName: "circle.fill"))
+                self?.backgroundColor = UIColor(named: "mainGoldenrodColor")
+                self?.setCheckBoxImage(UIImage(named: "checkedBox"))
             }
         case false:
             UIView.animate(withDuration: 0.3) { [weak self] in
-                self?.backgroundColor = UIColor(named: "mainGoldenrodColor")
-                self?.setCheckBoxImage(UIImage(named: "checkedBox"))
+                self?.backgroundColor = .white
+                self?.setCheckBoxImage(UIImage(systemName: "circle.fill"))
             }
         }
     }
 
     private func setCheckBoxImage(_ image: UIImage?) {
         checkBoxImageView.image = image
+    }
+
+    func buttonDidToggle() -> Bool {
+        return isSelected
     }
 }

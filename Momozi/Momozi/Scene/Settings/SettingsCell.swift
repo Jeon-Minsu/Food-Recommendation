@@ -14,6 +14,7 @@ final class SettingsCell: UICollectionViewCell {
     // MARK: Properties
 
     private let button = SettingsCellButton()
+    private var menuCategory: MenuCategory?
     private var isTouchedUpInside: Bool = false
 
     // MARK: - Initializers

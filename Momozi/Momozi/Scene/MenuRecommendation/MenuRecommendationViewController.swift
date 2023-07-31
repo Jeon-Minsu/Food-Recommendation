@@ -19,6 +19,7 @@ final class MenuRecommendationViewController: UIViewController {
     private let descriptionLabel = UILabel()
     private let likeMenuButton = UIButton()
     private let homeButton = UIButton()
+    private var filteredMenu = [String]()
 
     // MARK: - View Lifecycle
 
@@ -285,8 +286,14 @@ final class MenuRecommendationViewController: UIViewController {
         }
     }
 
-    private func presentMenuResultViewController() {
-        navigationController?.pushViewController(SelectedMenuViewController(), animated: false)
+    private func presentMenuResultViewController(with menu: String) {
+        let nextViewController = SelectedMenuViewController()
+        nextViewController.updateMenu(menu)
+        navigationController?.pushViewController(nextViewController, animated: true)
+    }
+
+    func update(_ menu: [String]) {
+        filteredMenu = menu
     }
 }
 
@@ -298,12 +305,13 @@ extension MenuRecommendationViewController: KolodaViewDataSource {
         view.backgroundColor = koloda.returnCardBackgroundColor(index)
         view.layer.cornerRadius = 20
         view.performAnimation(upon: index)
+        view.setMenuTitle(filteredMenu[index])
 
         return view
     }
 
     func kolodaNumberOfCards(_ koloda: Koloda.KolodaView) -> Int {
-        return 10
+        return filteredMenu.count
     }
 
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
@@ -332,7 +340,7 @@ extension MenuRecommendationViewController: KolodaViewDataSource {
 extension MenuRecommendationViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
         if direction == .right {
-            presentMenuResultViewController()
+            presentMenuResultViewController(with: filteredMenu[index])
         }
     }
 }

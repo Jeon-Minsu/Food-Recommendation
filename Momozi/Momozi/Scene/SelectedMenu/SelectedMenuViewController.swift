@@ -170,4 +170,7 @@ final class SelectedMenuViewController: UIViewController {
             navigationController?.popToViewController(firstViewController, animated: true)
         }
     }
+    func updateMenu(_ name: String) {
+        menu = name
+    }
 }

@@ -75,4 +75,12 @@ final class SettingsCell: UICollectionViewCell {
             }
         }
     }
+
+    func settingsCellDidToggle() -> Bool {
+        return isTouchedUpInside
+    }
+
+    func extractCategoryOfCell() -> MenuCategory {
+        return menuCategory ?? .dummy
+    }
 }

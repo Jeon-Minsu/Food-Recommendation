@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		031875DB4A4A0D835E6EA721 /* Pods_Momozi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA613B0243B716090E9BD24 /* Pods_Momozi.framework */; };
+		20558F532A77A52F00600FC5 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20558F522A77A52F00600FC5 /* Menu.swift */; };
+		20558F552A77A53B00600FC5 /* MenuDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20558F542A77A53B00600FC5 /* MenuDataManager.swift */; };
+		20558F572A77AA0500600FC5 /* MenuData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20558F562A77AA0500600FC5 /* MenuData.csv */; };
+		20558F592A77C49A00600FC5 /* MenuCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20558F582A77C49A00600FC5 /* MenuCategory.swift */; };
 		206889A32A6FB7AA001427B7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */; };
 		20760C412A6817570068766C /* SelectedMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20760C402A6817570068766C /* SelectedMenuViewController.swift */; };
 		208026DA2A71123400EB30B0 /* SectionBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208026D92A71123400EB30B0 /* SectionBackgroundDecorationView.swift */; };
@@ -28,7 +32,6 @@
 		2096853B2A5FA2C500AC1C68 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096853A2A5FA2C500AC1C68 /* UICollectionView+Extension.swift */; };
 		2096853E2A5FDD1100AC1C68 /* SettingsCellButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096853D2A5FDD1100AC1C68 /* SettingsCellButton.swift */; };
 		209685402A5FE61C00AC1C68 /* ExceptionReasonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096853F2A5FE61C00AC1C68 /* ExceptionReasonSection.swift */; };
-		209685422A5FE70100AC1C68 /* ExceptionalFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685412A5FE70100AC1C68 /* ExceptionalFood.swift */; };
 		209685472A5FE98E00AC1C68 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */; };
 		209685492A5FEE4300AC1C68 /* VeganDeclarationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */; };
 		20A339CC2A6E959E00D61924 /* Makgeolli.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20A339CB2A6E959E00D61924 /* Makgeolli.otf */; };
@@ -39,6 +42,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20558F522A77A52F00600FC5 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		20558F542A77A53B00600FC5 /* MenuDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDataManager.swift; sourceTree = "<group>"; };
+		20558F562A77AA0500600FC5 /* MenuData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MenuData.csv; sourceTree = "<group>"; };
+		20558F582A77C49A00600FC5 /* MenuCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategory.swift; sourceTree = "<group>"; };
 		206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		20760C402A6817570068766C /* SelectedMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMenuViewController.swift; sourceTree = "<group>"; };
 		208026D92A71123400EB30B0 /* SectionBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionBackgroundDecorationView.swift; sourceTree = "<group>"; };
@@ -61,7 +68,6 @@
 		2096853A2A5FA2C500AC1C68 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		2096853D2A5FDD1100AC1C68 /* SettingsCellButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellButton.swift; sourceTree = "<group>"; };
 		2096853F2A5FE61C00AC1C68 /* ExceptionReasonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionReasonSection.swift; sourceTree = "<group>"; };
-		209685412A5FE70100AC1C68 /* ExceptionalFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionalFood.swift; sourceTree = "<group>"; };
 		209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeganDeclarationButton.swift; sourceTree = "<group>"; };
 		20A339CB2A6E959E00D61924 /* Makgeolli.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Makgeolli.otf; sourceTree = "<group>"; };
@@ -88,6 +94,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20558F5A2A77CDD500600FC5 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				20558F522A77A52F00600FC5 /* Menu.swift */,
+				20558F542A77A53B00600FC5 /* MenuDataManager.swift */,
+				20558F582A77C49A00600FC5 /* MenuCategory.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		20760C3D2A6817290068766C /* SelectedMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +166,7 @@
 			children = (
 				20A339CA2A6E956D00D61924 /* Fonts */,
 				209685272A5F85D800AC1C68 /* Assets.xcassets */,
+				20558F562A77AA0500600FC5 /* MenuData.csv */,
 				209685292A5F85D800AC1C68 /* LaunchScreen.storyboard */,
 				2096852C2A5F85D800AC1C68 /* Info.plist */,
 			);
@@ -192,6 +209,7 @@
 		209685432A5FE8CA00AC1C68 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				20558F5A2A77CDD500600FC5 /* Menu */,
 				209685442A5FE8FD00AC1C68 /* Settings */,
 			);
 			path = Model;
@@ -201,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				2096853F2A5FE61C00AC1C68 /* ExceptionReasonSection.swift */,
-				209685412A5FE70100AC1C68 /* ExceptionalFood.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -310,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2096852B2A5F85D800AC1C68 /* LaunchScreen.storyboard in Resources */,
+				20558F572A77AA0500600FC5 /* MenuData.csv in Resources */,
 				209685282A5F85D800AC1C68 /* Assets.xcassets in Resources */,
 				20F6080D2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf in Resources */,
 				20A339CC2A6E959E00D61924 /* Makgeolli.otf in Resources */,
@@ -378,15 +396,17 @@
 				206889A32A6FB7AA001427B7 /* UIImage+Extension.swift in Sources */,
 				209685382A5FA29E00AC1C68 /* ReuseIdentifiable.swift in Sources */,
 				2096851F2A5F85D700AC1C68 /* AppDelegate.swift in Sources */,
+				20558F592A77C49A00600FC5 /* MenuCategory.swift in Sources */,
 				208811162A61347A00ABD8C2 /* UIStackView+Extension.swift in Sources */,
 				209685402A5FE61C00AC1C68 /* ExceptionReasonSection.swift in Sources */,
 				209149D92A666D14006664F4 /* MenuRecommendationViewController.swift in Sources */,
+				20558F552A77A53B00600FC5 /* MenuDataManager.swift in Sources */,
 				208811102A612D0500ABD8C2 /* UILabel+Extension.swift in Sources */,
 				208026DA2A71123400EB30B0 /* SectionBackgroundDecorationView.swift in Sources */,
 				20760C412A6817570068766C /* SelectedMenuViewController.swift in Sources */,
+				20558F532A77A52F00600FC5 /* Menu.swift in Sources */,
 				209685362A5F965800AC1C68 /* SettingsCell.swift in Sources */,
 				20C23A8F2A668A2C002E2EE9 /* MenuRecommendationContentView.swift in Sources */,
-				209685422A5FE70100AC1C68 /* ExceptionalFood.swift in Sources */,
 				209685212A5F85D700AC1C68 /* SceneDelegate.swift in Sources */,
 				208811142A612FB100ABD8C2 /* UIView+Extension.swift in Sources */,
 			);

@@ -51,9 +51,10 @@ final class SettingsCell: UICollectionViewCell {
         ])
     }
 
-    func set(title: String, image: UIImage?) {
+    func set(title: String, image: UIImage?, category: MenuCategory) {
         button.setTitle(title)
         button.setImage(image?.resize(newWidth: frame.width * 0.5))
+        menuCategory = category
     }
 
     func toggleUI() {

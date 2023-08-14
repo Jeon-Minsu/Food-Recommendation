@@ -25,19 +25,20 @@ final class MenuDataManager {
 
     // MARK: - Methods
 
-    func getFilteredMenus(excludedCategories: [MenuCategory]) -> [String] {
+    func getFilteredMenus(by checkedCategories: [MenuCategory]) -> [String] {
         if menuData.isEmpty {
             loadMenuDataFromCSV()
         }
 
-        guard !excludedCategories.isEmpty else {
-            return menuData.compactMap { $0.name }.shuffled()
-        }
+        let excludedCategories = checkedCategories.filter { MenuCategory.spicyTaste.rawValue...MenuCategory.greasyTaste.rawValue ~= $0.rawValue }
+
+        let includedCategories = excludedCategories.isEmpty
+            ? checkedCategories
+            : checkedCategories.filter { !excludedCategories.contains($0) }
 
         let filteredMenus = menuData.filter { menu in
-            return !excludedCategories.contains { content in
-                menu.categories[content] ?? false
-            }
+            !excludedCategories.contains { menu.categories[$0] ?? false } &&
+            includedCategories.allSatisfy { menu.categories[$0] ?? false }
         }.compactMap { $0.name }.shuffled()
 
         return filteredMenus
@@ -71,7 +72,9 @@ final class MenuDataManager {
             let csvLines = csvString.components(separatedBy: .newlines).filter { !$0.isEmpty }
 
             var menuData: [Menu] = []
-            let columnHeaders: [MenuCategory] = Array(MenuCategory.allCases).dropLast()
+            let columnHeaders: [MenuCategory] = Array(MenuCategory.allCases).filter { category in
+                return category != .dummy && category != .all
+            }
 
             for (index, line) in csvLines.enumerated() {
                 if index == 0 {

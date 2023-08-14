@@ -7,47 +7,39 @@
 
 import UIKit
 
-enum MenuCategory: CaseIterable {
-    case egg
-    case milk
-    case peanut
-    case nuts
-    case wheat
-    case sesame
-    case soybean
-    case fruitsAndVegetables
-    case seafood
-    case shellfish
+enum MenuCategory: Int, CaseIterable {
+    case korean
+    case chinese
+    case japanese
+    case western
+    case asian
+    case mexican
+    case all
     case spicyTaste
     case sweetTaste
     case sourTaste
     case saltyTaste
     case greasyTaste
     case vegan
+    case soloDining
     case dummy
 
     func getTitle() -> String {
         switch self {
-        case .egg:
-            return "알류(egg)"
-        case .milk:
-            return "우유"
-        case .peanut:
-            return "땅콩"
-        case .nuts:
-            return "견과류"
-        case .wheat:
-            return "밀"
-        case .sesame:
-            return "참깨"
-        case .soybean:
-            return "콩(대두)"
-        case .fruitsAndVegetables:
-            return "과일, 채소"
-        case .seafood:
-            return "해산물"
-        case .shellfish:
-            return "조개류"
+        case .korean:
+            return "한식"
+        case .chinese:
+            return "중식"
+        case .japanese:
+            return "일식"
+        case .western:
+            return "양식"
+        case .asian:
+            return "아시안"
+        case .mexican:
+            return "멕시칸"
+        case .all:
+            return "아무거나!"
         case .spicyTaste:
             return "매운 맛"
         case .sweetTaste:
@@ -60,6 +52,8 @@ enum MenuCategory: CaseIterable {
             return "느끼함"
         case .vegan:
             return "비건"
+        case .soloDining:
+            return "혼밥"
         case .dummy:
             return ""
         }
@@ -67,26 +61,20 @@ enum MenuCategory: CaseIterable {
 
     func getImage() -> UIImage? {
         switch self {
-        case .egg:
+        case .korean:
             return UIImage(named: "eggImage")
-        case .milk:
+        case .chinese:
             return UIImage(named: "milkImage")
-        case .peanut:
+        case .japanese:
             return UIImage(named: "peanutImage")
-        case .nuts:
+        case .western:
             return UIImage(named: "nutsImage")
-        case .wheat:
+        case .asian:
             return UIImage(named: "wheatImage")
-        case .sesame:
+        case .mexican:
             return UIImage(named: "sesameImage")
-        case .soybean:
+        case .all:
             return UIImage(named: "soybeanImage")
-        case .fruitsAndVegetables:
-            return UIImage(named: "fruitsAndVegetablesImage")
-        case .seafood:
-            return UIImage(named: "seafoodImage")
-        case .shellfish:
-            return UIImage(named: "shellfishImage")
         case .spicyTaste:
             return UIImage(named: "spicyTasteImage")
         case .sweetTaste:
@@ -99,9 +87,10 @@ enum MenuCategory: CaseIterable {
             return UIImage(named: "greasyTasteImage")
         case .vegan:
             return nil
+        case .soloDining:
+            return nil
         case .dummy:
             return nil
         }
     }
 }
-

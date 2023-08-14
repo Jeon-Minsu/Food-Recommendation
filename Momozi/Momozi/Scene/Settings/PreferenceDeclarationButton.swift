@@ -78,6 +78,12 @@ final class PreferenceDeclarationButton: UIView {
         titleLabel.text = title
     }
 
+    func setImage(_ image: UIImage?) {
+        imageView.image = image
+    }
+
+    func showImageIfNeeded(shouldShow: Bool) {
+        imageView.isHidden = !shouldShow
     }
 
     func toggleUI() {

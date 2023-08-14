@@ -20,6 +20,7 @@ final class SettingsViewController: UIViewController {
     private let logoImageView = UIImageView()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
     private let veganDeclarationButton = PreferenceDeclarationButton()
+    private let soloDiningDeclarationButton = PreferenceDeclarationButton()
     private let menuRecommendationButton = UIButton()
     private let copyrightLabel = UILabel()
     private var dataSource: DataSource?
@@ -60,6 +61,7 @@ final class SettingsViewController: UIViewController {
         logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.32))
         collectionView.configureUI(backgroundColor: .clear)
         veganDeclarationButton.configureUI(text: "비건이에요!", image: UIImage(named: "vegetableImage"), cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
+        soloDiningDeclarationButton.configureUI(text: "혼밥이에요!", cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
         menuRecommendationButton.configureUI(
             title: "추천 받기!",
             font: .systemFont(ofSize: 24, weight: .heavy),
@@ -74,12 +76,13 @@ final class SettingsViewController: UIViewController {
             font: UIFont.systemFont(ofSize: 10)
         )
 
-        [characterImageView, logoImageView, collectionView, veganDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
+        [characterImageView, logoImageView, collectionView, veganDeclarationButton, soloDiningDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
 
         setupCharacterImageViewUI()
         setupLogoImageViewUI()
         setupCollectionViewUI()
         setupVeganDeclarationButtonUI()
+        setupSoloDiningDeclarationButtonUI()
         setupMenuRecommendastionButtonUI()
         setupCopyrightLabelUI()
     }
@@ -118,12 +121,21 @@ final class SettingsViewController: UIViewController {
         ])
     }
 
+    private func setupSoloDiningDeclarationButtonUI() {
+        NSLayoutConstraint.activate([
+            soloDiningDeclarationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 13),
+            soloDiningDeclarationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor),
+            soloDiningDeclarationButton.leadingAnchor.constraint(equalTo: veganDeclarationButton.leadingAnchor),
+            soloDiningDeclarationButton.trailingAnchor.constraint(equalTo: veganDeclarationButton.trailingAnchor)
+        ])
+    }
+
     private func setupMenuRecommendastionButtonUI() {
         NSLayoutConstraint.activate([
-            menuRecommendationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 13),
-            menuRecommendationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor),
-            menuRecommendationButton.leadingAnchor.constraint(equalTo: veganDeclarationButton.leadingAnchor),
-            menuRecommendationButton.trailingAnchor.constraint(equalTo: veganDeclarationButton.trailingAnchor)
+            menuRecommendationButton.topAnchor.constraint(equalTo: soloDiningDeclarationButton.bottomAnchor, constant: 13),
+            menuRecommendationButton.heightAnchor.constraint(equalTo: soloDiningDeclarationButton.heightAnchor),
+            menuRecommendationButton.leadingAnchor.constraint(equalTo: soloDiningDeclarationButton.leadingAnchor),
+            menuRecommendationButton.trailingAnchor.constraint(equalTo: soloDiningDeclarationButton.trailingAnchor)
         ])
     }
 
@@ -183,6 +195,7 @@ final class SettingsViewController: UIViewController {
 
     private func addActionForButtonEvent() {
         addActionForVeganDeclaration()
+        addActionForSoloDiningDeclaration()
         addActionForMenuRecommendation()
     }
 
@@ -202,6 +215,22 @@ final class SettingsViewController: UIViewController {
         } else {
             if let index = excludedCategories.firstIndex(of: .vegan) {
                 excludedCategories.remove(at: index)
+    private func addActionForSoloDiningDeclaration() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapSoloDiningDeclarationButton))
+        soloDiningDeclarationButton.addGestureRecognizer(gesture)
+    }
+
+    @objc private func didTapSoloDiningDeclarationButton(_ gesture: UITapGestureRecognizer) {
+        soloDiningDeclarationButton.toggleUI()
+        manageSoloDiningCategoriesFrom(soloDiningDeclarationButton)
+    }
+
+    private func manageSoloDiningCategoriesFrom(_ button: PreferenceDeclarationButton) {
+        if button.buttonDidToggle() {
+            checkedCategories.append(.soloDining)
+        } else {
+            if let index = checkedCategories.firstIndex(of: .soloDining) {
+                checkedCategories.remove(at: index)
             }
         }
     }

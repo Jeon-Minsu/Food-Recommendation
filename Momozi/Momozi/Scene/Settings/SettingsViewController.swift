@@ -19,7 +19,7 @@ final class SettingsViewController: UIViewController {
     private let characterImageView = UIImageView()
     private let logoImageView = UIImageView()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
-    private let veganDeclarationButton = VeganDeclarationButton()
+    private let veganDeclarationButton = PreferenceDeclarationButton()
     private let menuRecommendationButton = UIButton()
     private let copyrightLabel = UILabel()
     private var dataSource: DataSource?
@@ -59,7 +59,7 @@ final class SettingsViewController: UIViewController {
         characterImageView.configureUI(image: UIImage(named: "momoziImage")?.resize(newWidth: view.frame.width * 0.08))
         logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.32))
         collectionView.configureUI(backgroundColor: .clear)
-        veganDeclarationButton.configureUI(cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
+        veganDeclarationButton.configureUI(text: "비건이에요!", image: UIImage(named: "vegetableImage"), cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
         menuRecommendationButton.configureUI(
             title: "추천 받기!",
             font: .systemFont(ofSize: 24, weight: .heavy),
@@ -193,10 +193,10 @@ final class SettingsViewController: UIViewController {
 
     @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
         veganDeclarationButton.toggleUI()
-        manageExcludedCategoriesFrom(veganDeclarationButton)
+        manageVeganCategoriesFrom(veganDeclarationButton)
     }
 
-    private func manageExcludedCategoriesFrom(_ button: VeganDeclarationButton) {
+    private func manageVeganCategoriesFrom(_ button: PreferenceDeclarationButton) {
         if button.buttonDidToggle() {
             excludedCategories.append(.vegan)
         } else {

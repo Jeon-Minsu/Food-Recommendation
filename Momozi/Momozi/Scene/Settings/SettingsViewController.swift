@@ -418,12 +418,52 @@ final class SettingsViewController: UIViewController {
 
 extension SettingsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? SettingsCell else {
+        guard let selectedCell = collectionView.cellForItem(at: indexPath) as? SettingsCell else {
             return
         }
 
-        cell.toggleUI()
-        manageExcludedCategoriesFrom(cell)
+        selectedCell.toggleUI()
+
+        let selectedCategory = selectedCell.extractCategoryOfCell()
+
+        if selectedCategory == .all {
+            let isAllButtonSelected = selectedCell.settingsCellDidToggle()
+            toggleCategoriesBasedOnAllButtonState(isAllButtonSelected, in: collectionView)
+        } else {
+            manageCheckedCategoriesFrom(selectedCell)
+            updateAllButtonState(in: collectionView)
+        }
+    }
+
+    private func toggleCategoriesBasedOnAllButtonState(_ isAllButtonSelected: Bool, in collectionView: UICollectionView) {
+        for category in MenuCategory.korean.rawValue...MenuCategory.mexican.rawValue {
+            if let categoryCell = collectionView.cellForItem(at: IndexPath(row: category, section: 0)) as? SettingsCell {
+                if isAllButtonSelected != categoryCell.settingsCellDidToggle() {
+                    categoryCell.toggleUI()
+                    manageCheckedCategoriesFrom(categoryCell)
+                }
+            }
+        }
+    }
+
+    private func updateAllButtonState(in collectionView: UICollectionView) {
+        guard let allButtonCell = collectionView.cellForItem(at: IndexPath(row: MenuCategory.all.rawValue, section: 0)) as? SettingsCell else {
+            return
+        }
+
+        if isAllCategoriesSelected() != allButtonCell.settingsCellDidToggle() {
+            allButtonCell.toggleUI()
+        }
+    }
+
+    private func isAllCategoriesSelected() -> Bool {
+        for category in MenuCategory.korean.rawValue...MenuCategory.mexican.rawValue {
+            if let currentCategory = MenuCategory(rawValue: category),
+                !checkedCategories.contains(currentCategory) {
+                return false
+            }
+        }
+        return true
     }
 
     private func manageCheckedCategoriesFrom(_ cell: SettingsCell) {

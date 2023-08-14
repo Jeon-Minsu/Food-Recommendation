@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		031875DB4A4A0D835E6EA721 /* Pods_Momozi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA613B0243B716090E9BD24 /* Pods_Momozi.framework */; };
+		204343BC2A8A03E1008138F2 /* PreferenceDeclarationButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204343BB2A8A03E1008138F2 /* PreferenceDeclarationButton+Extension.swift */; };
+		204343C12A8A35F3008138F2 /* MenuData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 204343C02A8A35F3008138F2 /* MenuData.csv */; };
 		20558F532A77A52F00600FC5 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20558F522A77A52F00600FC5 /* Menu.swift */; };
 		20558F552A77A53B00600FC5 /* MenuDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20558F542A77A53B00600FC5 /* MenuDataManager.swift */; };
-		20558F572A77AA0500600FC5 /* MenuData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20558F562A77AA0500600FC5 /* MenuData.csv */; };
 		20558F592A77C49A00600FC5 /* MenuCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20558F582A77C49A00600FC5 /* MenuCategory.swift */; };
 		206889A32A6FB7AA001427B7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */; };
 		20760C412A6817570068766C /* SelectedMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20760C402A6817570068766C /* SelectedMenuViewController.swift */; };
@@ -33,7 +34,7 @@
 		2096853E2A5FDD1100AC1C68 /* SettingsCellButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096853D2A5FDD1100AC1C68 /* SettingsCellButton.swift */; };
 		209685402A5FE61C00AC1C68 /* ExceptionReasonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2096853F2A5FE61C00AC1C68 /* ExceptionReasonSection.swift */; };
 		209685472A5FE98E00AC1C68 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */; };
-		209685492A5FEE4300AC1C68 /* VeganDeclarationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */; };
+		209685492A5FEE4300AC1C68 /* PreferenceDeclarationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209685482A5FEE4300AC1C68 /* PreferenceDeclarationButton.swift */; };
 		20A339CC2A6E959E00D61924 /* Makgeolli.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20A339CB2A6E959E00D61924 /* Makgeolli.otf */; };
 		20C23A8F2A668A2C002E2EE9 /* MenuRecommendationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C23A8E2A668A2C002E2EE9 /* MenuRecommendationContentView.swift */; };
 		20F6080D2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20F6080B2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf */; };
@@ -42,9 +43,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		204343BB2A8A03E1008138F2 /* PreferenceDeclarationButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreferenceDeclarationButton+Extension.swift"; sourceTree = "<group>"; };
+		204343C02A8A35F3008138F2 /* MenuData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MenuData.csv; sourceTree = "<group>"; };
 		20558F522A77A52F00600FC5 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		20558F542A77A53B00600FC5 /* MenuDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDataManager.swift; sourceTree = "<group>"; };
-		20558F562A77AA0500600FC5 /* MenuData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MenuData.csv; sourceTree = "<group>"; };
 		20558F582A77C49A00600FC5 /* MenuCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategory.swift; sourceTree = "<group>"; };
 		206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		20760C402A6817570068766C /* SelectedMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMenuViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +71,7 @@
 		2096853D2A5FDD1100AC1C68 /* SettingsCellButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellButton.swift; sourceTree = "<group>"; };
 		2096853F2A5FE61C00AC1C68 /* ExceptionReasonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionReasonSection.swift; sourceTree = "<group>"; };
 		209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
-		209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeganDeclarationButton.swift; sourceTree = "<group>"; };
+		209685482A5FEE4300AC1C68 /* PreferenceDeclarationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceDeclarationButton.swift; sourceTree = "<group>"; };
 		20A339CB2A6E959E00D61924 /* Makgeolli.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Makgeolli.otf; sourceTree = "<group>"; };
 		20C23A8E2A668A2C002E2EE9 /* MenuRecommendationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationContentView.swift; sourceTree = "<group>"; };
 		20F6080B2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaplestoryOTFBold.otf; sourceTree = "<group>"; };
@@ -166,8 +168,8 @@
 			children = (
 				20A339CA2A6E956D00D61924 /* Fonts */,
 				209685272A5F85D800AC1C68 /* Assets.xcassets */,
-				20558F562A77AA0500600FC5 /* MenuData.csv */,
 				209685292A5F85D800AC1C68 /* LaunchScreen.storyboard */,
+				204343C02A8A35F3008138F2 /* MenuData.csv */,
 				2096852C2A5F85D800AC1C68 /* Info.plist */,
 			);
 			path = Resource;
@@ -202,6 +204,7 @@
 				208811152A61347A00ABD8C2 /* UIStackView+Extension.swift */,
 				208811172A61397B00ABD8C2 /* UIButton+Extension.swift */,
 				20F6080F2A7019860028F0DB /* KolodaView+Extension.swift */,
+				204343BB2A8A03E1008138F2 /* PreferenceDeclarationButton+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -232,7 +235,7 @@
 				209685462A5FE98E00AC1C68 /* SettingsHeaderView.swift */,
 				208026D92A71123400EB30B0 /* SectionBackgroundDecorationView.swift */,
 				208026DD2A715A1400EB30B0 /* SectionCharacterDecorationView.swift */,
-				209685482A5FEE4300AC1C68 /* VeganDeclarationButton.swift */,
+				209685482A5FEE4300AC1C68 /* PreferenceDeclarationButton.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -327,7 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2096852B2A5F85D800AC1C68 /* LaunchScreen.storyboard in Resources */,
-				20558F572A77AA0500600FC5 /* MenuData.csv in Resources */,
+				204343C12A8A35F3008138F2 /* MenuData.csv in Resources */,
 				209685282A5F85D800AC1C68 /* Assets.xcassets in Resources */,
 				20F6080D2A6FF4BF0028F0DB /* MaplestoryOTFBold.otf in Resources */,
 				20A339CC2A6E959E00D61924 /* Makgeolli.otf in Resources */,
@@ -387,7 +390,7 @@
 				2096853B2A5FA2C500AC1C68 /* UICollectionView+Extension.swift in Sources */,
 				2096853E2A5FDD1100AC1C68 /* SettingsCellButton.swift in Sources */,
 				208811122A612D6B00ABD8C2 /* UIImageView+Extension.swift in Sources */,
-				209685492A5FEE4300AC1C68 /* VeganDeclarationButton.swift in Sources */,
+				209685492A5FEE4300AC1C68 /* PreferenceDeclarationButton.swift in Sources */,
 				208026DE2A715A1400EB30B0 /* SectionCharacterDecorationView.swift in Sources */,
 				209685472A5FE98E00AC1C68 /* SettingsHeaderView.swift in Sources */,
 				208811182A61397B00ABD8C2 /* UIButton+Extension.swift in Sources */,
@@ -399,6 +402,7 @@
 				20558F592A77C49A00600FC5 /* MenuCategory.swift in Sources */,
 				208811162A61347A00ABD8C2 /* UIStackView+Extension.swift in Sources */,
 				209685402A5FE61C00AC1C68 /* ExceptionReasonSection.swift in Sources */,
+				204343BC2A8A03E1008138F2 /* PreferenceDeclarationButton+Extension.swift in Sources */,
 				209149D92A666D14006664F4 /* MenuRecommendationViewController.swift in Sources */,
 				20558F552A77A53B00600FC5 /* MenuDataManager.swift in Sources */,
 				208811102A612D0500ABD8C2 /* UILabel+Extension.swift in Sources */,

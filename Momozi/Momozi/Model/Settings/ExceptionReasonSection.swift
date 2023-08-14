@@ -6,28 +6,25 @@
 //
 
 enum ExceptionReasonSection: String {
-    case allergy = "알러지"
+    case includedRecommendations = "추천 받기"
     case dummy = "더미"
-    case unpreferredFood = "싫어해요"
+    case excludedRecommendations = "추천 안받기"
 
     func loadContents() -> [MenuCategory] {
         switch self {
-        case .allergy:
+        case .includedRecommendations:
             return [
-                .egg,
-                .milk,
-                .peanut,
-                .nuts,
-                .wheat,
-                .sesame,
-                .soybean,
-                .fruitsAndVegetables,
-                .seafood,
-                .shellfish
+                .korean,
+                .chinese,
+                .japanese,
+                .western,
+                .asian,
+                .mexican,
+                .all
             ]
         case .dummy:
             return [.dummy]
-        case .unpreferredFood:
+        case .excludedRecommendations:
             return [
                 .spicyTaste,
                 .sweetTaste,

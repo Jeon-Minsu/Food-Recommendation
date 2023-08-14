@@ -24,7 +24,7 @@ final class SettingsViewController: UIViewController {
     private let menuRecommendationButton = UIButton()
     private let copyrightLabel = UILabel()
     private var dataSource: DataSource?
-    private var excludedCategories: [MenuCategory] = []
+    private var checkedCategories: [MenuCategory] = []
 
     // MARK: - View Lifecycle
 
@@ -165,10 +165,10 @@ final class SettingsViewController: UIViewController {
     private func registerHeaderView() {
         let headerRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderView>(elementKind: SectionHeaderView.elementKind) { supplementaryView, _, indexPath in
             if indexPath.section == 0 {
-                supplementaryView.set(title: ExceptionReasonSection.allergy.rawValue)
-                supplementaryView.showCautionMessageIfNeeded(shouldShow: true)
+                supplementaryView.set(title: ExceptionReasonSection.includedRecommendations.rawValue)
+                supplementaryView.showCautionMessageIfNeeded(shouldShow: false)
             } else {
-                supplementaryView.set(title: ExceptionReasonSection.unpreferredFood.rawValue)
+                supplementaryView.set(title: ExceptionReasonSection.excludedRecommendations.rawValue)
                 supplementaryView.showCautionMessageIfNeeded(shouldShow: false)
             }
         }
@@ -184,12 +184,12 @@ final class SettingsViewController: UIViewController {
 
     private func applySnapshot() {
         var snapshot = Snapshot()
-        snapshot.appendSections([ExceptionReasonSection.allergy])
-        snapshot.appendItems(ExceptionReasonSection.allergy.loadContents())
+        snapshot.appendSections([ExceptionReasonSection.includedRecommendations])
+        snapshot.appendItems(ExceptionReasonSection.includedRecommendations.loadContents())
         snapshot.appendSections([ExceptionReasonSection.dummy])
         snapshot.appendItems(ExceptionReasonSection.dummy.loadContents())
-        snapshot.appendSections([ExceptionReasonSection.unpreferredFood])
-        snapshot.appendItems(ExceptionReasonSection.unpreferredFood.loadContents())
+        snapshot.appendSections([ExceptionReasonSection.excludedRecommendations])
+        snapshot.appendItems(ExceptionReasonSection.excludedRecommendations.loadContents())
         dataSource?.apply(snapshot)
     }
 
@@ -211,10 +211,14 @@ final class SettingsViewController: UIViewController {
 
     private func manageVeganCategoriesFrom(_ button: PreferenceDeclarationButton) {
         if button.buttonDidToggle() {
-            excludedCategories.append(.vegan)
+            checkedCategories.append(.vegan)
         } else {
-            if let index = excludedCategories.firstIndex(of: .vegan) {
-                excludedCategories.remove(at: index)
+            if let index = checkedCategories.firstIndex(of: .vegan) {
+                checkedCategories.remove(at: index)
+            }
+        }
+    }
+
     private func addActionForSoloDiningDeclaration() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapSoloDiningDeclarationButton))
         soloDiningDeclarationButton.addGestureRecognizer(gesture)
@@ -252,7 +256,7 @@ final class SettingsViewController: UIViewController {
     }
 
     private func pushMenuRecommendationViewController() {
-        let filteredMenu = MenuDataManager.shared.getFilteredMenus(excludedCategories: excludedCategories)
+        let filteredMenu = MenuDataManager.shared.getFilteredMenus(by: checkedCategories)
         let nextViewController = MenuRecommendationViewController()
         nextViewController.update(filteredMenu)
         navigationController?.pushViewController(nextViewController, animated: true)
@@ -422,14 +426,14 @@ extension SettingsViewController: UICollectionViewDelegate {
         manageExcludedCategoriesFrom(cell)
     }
 
-    private func manageExcludedCategoriesFrom(_ cell: SettingsCell) {
+    private func manageCheckedCategoriesFrom(_ cell: SettingsCell) {
         let categoryOfCurrentCell = cell.extractCategoryOfCell()
 
         if cell.settingsCellDidToggle() {
-            excludedCategories.append(categoryOfCurrentCell)
+            checkedCategories.append(categoryOfCurrentCell)
         } else {
-            if let index = excludedCategories.firstIndex(of: categoryOfCurrentCell) {
-                excludedCategories.remove(at: index)
+            if let index = checkedCategories.firstIndex(of: categoryOfCurrentCell) {
+                checkedCategories.remove(at: index)
             }
         }
     }

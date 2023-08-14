@@ -1,5 +1,5 @@
 //
-//  VeganDeclarationButton.swift
+//  PreferenceDeclarationButton.swift
 //  FoodRecommendation
 //
 //  Created by 전민수 on 2023/07/13.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-final class VeganDeclarationButton: UIView {
+final class PreferenceDeclarationButton: UIView {
 
     // MARK: Properties
 
     private let stackView = UIStackView()
     private let checkBoxImageView = UIImageView()
-    private let veganImageView = UIImageView()
-    private let descriptionLabel = UILabel()
+    private let imageView = UIImageView()
+    private let titleLabel = UILabel()
     private var isSelected: Bool = false
 
     // MARK: - Initializers
@@ -48,13 +48,13 @@ final class VeganDeclarationButton: UIView {
         stackView.configureUI(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 8)
         checkBoxImageView.configureUI(image: UIImage(systemName: "circle.fill"), isSizeNeedToFit: true)
         checkBoxImageView.tintColor = UIColor(named: "mainBorderColor")
-        veganImageView.configureUI(image: UIImage(named: "vegetableImage"), isSizeNeedToFit: true)
-        descriptionLabel.configureUI(text: "비건이에요!", textAlignment: .left, font: .systemFont(ofSize: 15))
+        imageView.configureUI(image: nil, isSizeNeedToFit: true)
+        titleLabel.configureUI(text: "", textAlignment: .left, font: .systemFont(ofSize: 15))
     }
 
     private func addDetailViews() {
         addSubview(stackView)
-        [checkBoxImageView, veganImageView, descriptionLabel].forEach {
+        [checkBoxImageView, imageView, titleLabel].forEach {
             stackView.addArrangedSubview($0)
         }
     }
@@ -69,13 +69,21 @@ final class VeganDeclarationButton: UIView {
             checkBoxImageView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.5),
             checkBoxImageView.widthAnchor.constraint(equalTo: checkBoxImageView.heightAnchor),
 
-            veganImageView.heightAnchor.constraint(equalTo: checkBoxImageView.heightAnchor),
-            veganImageView.widthAnchor.constraint(equalTo: checkBoxImageView.heightAnchor)
+            imageView.heightAnchor.constraint(equalTo: checkBoxImageView.heightAnchor),
+            imageView.widthAnchor.constraint(equalTo: checkBoxImageView.heightAnchor)
         ])
     }
 
     func setTitle(_ title: String?) {
-        descriptionLabel.text = title
+        titleLabel.text = title
+    }
+
+    func setImage(_ image: UIImage?) {
+        imageView.image = image
+    }
+
+    func showImageIfNeeded(shouldShow: Bool) {
+        imageView.isHidden = !shouldShow
     }
 
     func toggleUI() {

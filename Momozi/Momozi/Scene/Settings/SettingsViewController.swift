@@ -19,11 +19,12 @@ final class SettingsViewController: UIViewController {
     private let characterImageView = UIImageView()
     private let logoImageView = UIImageView()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
-    private let veganDeclarationButton = VeganDeclarationButton()
+    private let veganDeclarationButton = PreferenceDeclarationButton()
+    private let soloDiningDeclarationButton = PreferenceDeclarationButton()
     private let menuRecommendationButton = UIButton()
     private let copyrightLabel = UILabel()
     private var dataSource: DataSource?
-    private var excludedCategories: [MenuCategory] = []
+    private var checkedCategories: [MenuCategory] = []
 
     // MARK: - View Lifecycle
 
@@ -59,7 +60,8 @@ final class SettingsViewController: UIViewController {
         characterImageView.configureUI(image: UIImage(named: "momoziImage")?.resize(newWidth: view.frame.width * 0.08))
         logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.32))
         collectionView.configureUI(backgroundColor: .clear)
-        veganDeclarationButton.configureUI(cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
+        veganDeclarationButton.configureUI(text: "비건이에요!", image: UIImage(named: "vegetableImage"), cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
+        soloDiningDeclarationButton.configureUI(text: "혼밥이에요!", cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
         menuRecommendationButton.configureUI(
             title: "추천 받기!",
             font: .systemFont(ofSize: 24, weight: .heavy),
@@ -74,12 +76,13 @@ final class SettingsViewController: UIViewController {
             font: UIFont.systemFont(ofSize: 10)
         )
 
-        [characterImageView, logoImageView, collectionView, veganDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
+        [characterImageView, logoImageView, collectionView, veganDeclarationButton, soloDiningDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
 
         setupCharacterImageViewUI()
         setupLogoImageViewUI()
         setupCollectionViewUI()
         setupVeganDeclarationButtonUI()
+        setupSoloDiningDeclarationButtonUI()
         setupMenuRecommendastionButtonUI()
         setupCopyrightLabelUI()
     }
@@ -105,7 +108,7 @@ final class SettingsViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.665)
+            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.57)
         ])
     }
 
@@ -118,12 +121,21 @@ final class SettingsViewController: UIViewController {
         ])
     }
 
+    private func setupSoloDiningDeclarationButtonUI() {
+        NSLayoutConstraint.activate([
+            soloDiningDeclarationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 13),
+            soloDiningDeclarationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor),
+            soloDiningDeclarationButton.leadingAnchor.constraint(equalTo: veganDeclarationButton.leadingAnchor),
+            soloDiningDeclarationButton.trailingAnchor.constraint(equalTo: veganDeclarationButton.trailingAnchor)
+        ])
+    }
+
     private func setupMenuRecommendastionButtonUI() {
         NSLayoutConstraint.activate([
-            menuRecommendationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 13),
-            menuRecommendationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor),
-            menuRecommendationButton.leadingAnchor.constraint(equalTo: veganDeclarationButton.leadingAnchor),
-            menuRecommendationButton.trailingAnchor.constraint(equalTo: veganDeclarationButton.trailingAnchor)
+            menuRecommendationButton.topAnchor.constraint(equalTo: soloDiningDeclarationButton.bottomAnchor, constant: 13),
+            menuRecommendationButton.heightAnchor.constraint(equalTo: soloDiningDeclarationButton.heightAnchor),
+            menuRecommendationButton.leadingAnchor.constraint(equalTo: soloDiningDeclarationButton.leadingAnchor),
+            menuRecommendationButton.trailingAnchor.constraint(equalTo: soloDiningDeclarationButton.trailingAnchor)
         ])
     }
 
@@ -153,10 +165,10 @@ final class SettingsViewController: UIViewController {
     private func registerHeaderView() {
         let headerRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderView>(elementKind: SectionHeaderView.elementKind) { supplementaryView, _, indexPath in
             if indexPath.section == 0 {
-                supplementaryView.set(title: ExceptionReasonSection.allergy.rawValue)
-                supplementaryView.showCautionMessageIfNeeded(shouldShow: true)
+                supplementaryView.set(title: ExceptionReasonSection.includedRecommendations.rawValue)
+                supplementaryView.showCautionMessageIfNeeded(shouldShow: false)
             } else {
-                supplementaryView.set(title: ExceptionReasonSection.unpreferredFood.rawValue)
+                supplementaryView.set(title: ExceptionReasonSection.excludedRecommendations.rawValue)
                 supplementaryView.showCautionMessageIfNeeded(shouldShow: false)
             }
         }
@@ -172,17 +184,18 @@ final class SettingsViewController: UIViewController {
 
     private func applySnapshot() {
         var snapshot = Snapshot()
-        snapshot.appendSections([ExceptionReasonSection.allergy])
-        snapshot.appendItems(ExceptionReasonSection.allergy.loadContents())
+        snapshot.appendSections([ExceptionReasonSection.includedRecommendations])
+        snapshot.appendItems(ExceptionReasonSection.includedRecommendations.loadContents())
         snapshot.appendSections([ExceptionReasonSection.dummy])
         snapshot.appendItems(ExceptionReasonSection.dummy.loadContents())
-        snapshot.appendSections([ExceptionReasonSection.unpreferredFood])
-        snapshot.appendItems(ExceptionReasonSection.unpreferredFood.loadContents())
+        snapshot.appendSections([ExceptionReasonSection.excludedRecommendations])
+        snapshot.appendItems(ExceptionReasonSection.excludedRecommendations.loadContents())
         dataSource?.apply(snapshot)
     }
 
     private func addActionForButtonEvent() {
         addActionForVeganDeclaration()
+        addActionForSoloDiningDeclaration()
         addActionForMenuRecommendation()
     }
 
@@ -193,15 +206,35 @@ final class SettingsViewController: UIViewController {
 
     @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
         veganDeclarationButton.toggleUI()
-        manageExcludedCategoriesFrom(veganDeclarationButton)
+        manageVeganCategoriesFrom(veganDeclarationButton)
     }
 
-    private func manageExcludedCategoriesFrom(_ button: VeganDeclarationButton) {
+    private func manageVeganCategoriesFrom(_ button: PreferenceDeclarationButton) {
         if button.buttonDidToggle() {
-            excludedCategories.append(.vegan)
+            checkedCategories.append(.vegan)
         } else {
-            if let index = excludedCategories.firstIndex(of: .vegan) {
-                excludedCategories.remove(at: index)
+            if let index = checkedCategories.firstIndex(of: .vegan) {
+                checkedCategories.remove(at: index)
+            }
+        }
+    }
+
+    private func addActionForSoloDiningDeclaration() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapSoloDiningDeclarationButton))
+        soloDiningDeclarationButton.addGestureRecognizer(gesture)
+    }
+
+    @objc private func didTapSoloDiningDeclarationButton(_ gesture: UITapGestureRecognizer) {
+        soloDiningDeclarationButton.toggleUI()
+        manageSoloDiningCategoriesFrom(soloDiningDeclarationButton)
+    }
+
+    private func manageSoloDiningCategoriesFrom(_ button: PreferenceDeclarationButton) {
+        if button.buttonDidToggle() {
+            checkedCategories.append(.soloDining)
+        } else {
+            if let index = checkedCategories.firstIndex(of: .soloDining) {
+                checkedCategories.remove(at: index)
             }
         }
     }
@@ -223,7 +256,7 @@ final class SettingsViewController: UIViewController {
     }
 
     private func pushMenuRecommendationViewController() {
-        let filteredMenu = MenuDataManager.shared.getFilteredMenus(excludedCategories: excludedCategories)
+        let filteredMenu = MenuDataManager.shared.getFilteredMenus(by: checkedCategories)
         let nextViewController = MenuRecommendationViewController()
         nextViewController.update(filteredMenu)
         navigationController?.pushViewController(nextViewController, animated: true)
@@ -385,22 +418,62 @@ final class SettingsViewController: UIViewController {
 
 extension SettingsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? SettingsCell else {
+        guard let selectedCell = collectionView.cellForItem(at: indexPath) as? SettingsCell else {
             return
         }
 
-        cell.toggleUI()
-        manageExcludedCategoriesFrom(cell)
+        selectedCell.toggleUI()
+
+        let selectedCategory = selectedCell.extractCategoryOfCell()
+
+        if selectedCategory == .all {
+            let isAllButtonSelected = selectedCell.settingsCellDidToggle()
+            toggleCategoriesBasedOnAllButtonState(isAllButtonSelected, in: collectionView)
+        } else {
+            manageCheckedCategoriesFrom(selectedCell)
+            updateAllButtonState(in: collectionView)
+        }
     }
 
-    private func manageExcludedCategoriesFrom(_ cell: SettingsCell) {
+    private func toggleCategoriesBasedOnAllButtonState(_ isAllButtonSelected: Bool, in collectionView: UICollectionView) {
+        for category in MenuCategory.korean.rawValue...MenuCategory.mexican.rawValue {
+            if let categoryCell = collectionView.cellForItem(at: IndexPath(row: category, section: 0)) as? SettingsCell {
+                if isAllButtonSelected != categoryCell.settingsCellDidToggle() {
+                    categoryCell.toggleUI()
+                    manageCheckedCategoriesFrom(categoryCell)
+                }
+            }
+        }
+    }
+
+    private func updateAllButtonState(in collectionView: UICollectionView) {
+        guard let allButtonCell = collectionView.cellForItem(at: IndexPath(row: MenuCategory.all.rawValue, section: 0)) as? SettingsCell else {
+            return
+        }
+
+        if isAllCategoriesSelected() != allButtonCell.settingsCellDidToggle() {
+            allButtonCell.toggleUI()
+        }
+    }
+
+    private func isAllCategoriesSelected() -> Bool {
+        for category in MenuCategory.korean.rawValue...MenuCategory.mexican.rawValue {
+            if let currentCategory = MenuCategory(rawValue: category),
+                !checkedCategories.contains(currentCategory) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private func manageCheckedCategoriesFrom(_ cell: SettingsCell) {
         let categoryOfCurrentCell = cell.extractCategoryOfCell()
 
         if cell.settingsCellDidToggle() {
-            excludedCategories.append(categoryOfCurrentCell)
+            checkedCategories.append(categoryOfCurrentCell)
         } else {
-            if let index = excludedCategories.firstIndex(of: categoryOfCurrentCell) {
-                excludedCategories.remove(at: index)
+            if let index = checkedCategories.firstIndex(of: categoryOfCurrentCell) {
+                checkedCategories.remove(at: index)
             }
         }
     }

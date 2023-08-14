@@ -108,7 +108,7 @@ final class SettingsViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.665)
+            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.57)
         ])
     }
 

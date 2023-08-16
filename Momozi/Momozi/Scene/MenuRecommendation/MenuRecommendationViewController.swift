@@ -28,6 +28,7 @@ final class MenuRecommendationViewController: UIViewController {
 
         configureHierarchy()
         addActionForButtonEvent()
+        handleRunOutOfCardsIfNeeded()
     }
 
     override func viewDidLayoutSubviews() {
@@ -275,6 +276,12 @@ final class MenuRecommendationViewController: UIViewController {
             },
             for: [.touchUpOutside, .touchUpInside]
         )
+    }
+
+    private func handleRunOutOfCardsIfNeeded() {
+        if menuRecommendationView.isRunOutOfCards {
+            self.kolodaDidRunOutOfCards(menuRecommendationView)
+        }
     }
 
     private func setCardGradientBackground() {

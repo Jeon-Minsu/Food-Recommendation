@@ -86,6 +86,11 @@ final class MenuRecommendationViewController: UIViewController {
         menuRecommendationView.configureUI()
         menuRecommendationView.visibleCardsDirection = .top
         menuRecommendationView.backgroundCardsTopMargin = 5.5
+        menuRecommendationView.layer.shadowColor = UIColor.black.cgColor
+        menuRecommendationView.layer.shadowOpacity = 0.5
+        menuRecommendationView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        menuRecommendationView.layer.shadowRadius = 8
+        menuRecommendationView.layer.masksToBounds = false
     }
 
     private func createSoldOutPanelImageView() {

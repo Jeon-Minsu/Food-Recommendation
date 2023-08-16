@@ -30,15 +30,29 @@ final class MenuDataManager {
             loadMenuDataFromCSV()
         }
 
-        let excludedCategories = checkedCategories.filter { MenuCategory.spicyTaste.rawValue...MenuCategory.greasyTaste.rawValue ~= $0.rawValue }
+        var excludedCategories: [MenuCategory] = []
+        var includedCategories: [MenuCategory] = []
+        var mustIncludedCategories: [MenuCategory] = []
 
-        let includedCategories = excludedCategories.isEmpty
-            ? checkedCategories
-            : checkedCategories.filter { !excludedCategories.contains($0) }
+        checkedCategories.forEach { category in
+            switch category.rawValue {
+            case MenuCategory.korean.rawValue...MenuCategory.mexican.rawValue:
+                includedCategories.append(category)
+            case MenuCategory.spicyTaste.rawValue...MenuCategory.greasyTaste.rawValue:
+                excludedCategories.append(category)
+            case MenuCategory.vegan.rawValue...MenuCategory.soloDining.rawValue:
+                mustIncludedCategories.append(category)
+            default:
+                break
+            }
+        }
 
         let filteredMenus = menuData.filter { menu in
-            !excludedCategories.contains { menu.categories[$0] ?? false } &&
-            includedCategories.allSatisfy { menu.categories[$0] ?? false }
+            let shouldExclude = excludedCategories.contains { menu.categories[$0] ?? false }
+            let shouldInclude = includedCategories.contains { menu.categories[$0] ?? false }
+            let mustIncluded = mustIncludedCategories.allSatisfy { menu.categories[$0] ?? false }
+
+            return !shouldExclude && shouldInclude && mustIncluded
         }.compactMap { $0.name }.shuffled()
 
         return filteredMenus

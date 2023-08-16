@@ -74,11 +74,11 @@ final class SelectedMenuViewController: UIViewController {
     private func createDetailViews() {
         speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
         menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
-        firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left, font: UIFont(name: "Makgeolli", size: 20))
-        menuLabel.configureUI(text: menu, textColor: UIColor(named: "mainTangerineColor"), textAlignment: .center, font: .systemFont(ofSize: 25, weight: .bold))
-        secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right, font: UIFont(name: "Makgeolli", size: 20))
+        firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left, font: UIFont(name: "Makgeolli", size: 25))
+        menuLabel.configureUI(text: menu, textColor: UIColor(named: "mainTangerineColor"), textAlignment: .center, font: .systemFont(ofSize: 30, weight: .bold))
+        secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right, font: UIFont(name: "Makgeolli", size: 25))
         characterImageView.configureUI(image: UIImage(named: "wasabisanImage"), contentMode: .scaleAspectFill)
-        homeButton.configureUI(title: "처음으로", font: .systemFont(ofSize: 23, weight: .bold),  titleColor: .white, backgroundColor: UIColor(named: "mainGreenColor"), cornerRadius: 10)
+        homeButton.configureUI(title: "처음으로", font: .systemFont(ofSize: 25, weight: .bold),  titleColor: .white, backgroundColor: UIColor(named: "mainGreenColor"), cornerRadius: 20)
     }
 
     private func getEatingTimePhrase() -> String {
@@ -123,8 +123,8 @@ final class SelectedMenuViewController: UIViewController {
 
     private func setupMenuDescriptionStackViewUI() {
         NSLayoutConstraint.activate([
-            menuDescriptionStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height * 0.16),
-            menuDescriptionStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15),
+            menuDescriptionStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height * 0.145),
+            menuDescriptionStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
             menuDescriptionStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             menuDescriptionStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
@@ -140,8 +140,9 @@ final class SelectedMenuViewController: UIViewController {
     private func setupHomeButtonUI() {
         NSLayoutConstraint.activate([
             homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height * 0.075),
-            homeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            homeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4)
+            homeButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.06),
+            homeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
         ])
     }
 

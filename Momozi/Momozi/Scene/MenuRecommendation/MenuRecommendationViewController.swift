@@ -139,10 +139,10 @@ final class MenuRecommendationViewController: UIViewController {
     private func createHomeButton() {
         homeButton.configureUI(
             title: "처음으로",
-            font: .systemFont(ofSize: 23, weight: .bold),
+            font: .systemFont(ofSize: 25, weight: .bold),
             titleColor: .white,
             backgroundColor: UIColor(named: "mainGreenColor"),
-            cornerRadius: 10
+            cornerRadius: 20
         )
     }
 
@@ -224,8 +224,9 @@ final class MenuRecommendationViewController: UIViewController {
     private func setupHomeButtonUI() {
         NSLayoutConstraint.activate([
             homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height * 0.075),
-            homeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            homeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4)
+            homeButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.06),
+            homeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
         ])
     }
 

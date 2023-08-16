@@ -64,7 +64,7 @@ final class SettingsViewController: UIViewController {
         soloDiningDeclarationButton.configureUI(text: "혼밥이에요!", cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
         menuRecommendationButton.configureUI(
             title: "추천 받기!",
-            font: .systemFont(ofSize: 24, weight: .heavy),
+            font: .systemFont(ofSize: 25, weight: .heavy),
             titleColor: .white,
             backgroundColor: UIColor(named: "mainOrangeColor"),
             cornerRadius: 20

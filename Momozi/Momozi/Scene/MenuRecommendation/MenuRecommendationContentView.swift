@@ -62,11 +62,11 @@ final class MenuRecommendationContentView: UIView {
     }
 
     private func createDescriptionLabel() {
-        descriptionLabel.configureUI(text: "모모찌가 딱 정했어!", textAlignment: .center)
+        descriptionLabel.configureUI(text: "모모찌가 딱 정했어!", textAlignment: .center, font: .systemFont(ofSize: 20))
     }
 
     private func createMenuLabel() {
-        menuLabel.configureUI(text: "음식 이름", textAlignment: .center, font: UIFont(name: "MaplestoryOTFLight", size: 25))
+        menuLabel.configureUI(text: "음식 이름", textAlignment: .center, font: UIFont(name: "MaplestoryOTFLight", size: 32))
     }
 
     private func addDetailViews() {

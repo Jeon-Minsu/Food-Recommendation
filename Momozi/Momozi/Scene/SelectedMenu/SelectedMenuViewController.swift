@@ -73,13 +73,19 @@ final class SelectedMenuViewController: UIViewController {
 
     private func createDetailViews() {
         menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
-        firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left, font: UIFont(name: "Makgeolli", size: 25))
-        secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right, font: UIFont(name: "Makgeolli", size: 25))
     private func createSpeechBubbleImageView() {
         speechBubbleImageView.configureUI(
             image: UIImage.Custom.speechBubble,
             contentMode: .scaleAspectFill
         )
+    private func createFirstDescriptionLabel() {
+        firstDescriptionLabel.configureUI(
+            text: "오늘 \(getEatingTimePhrase()) 메뉴는",
+            textAlignment: .left,
+            font: UIFont.Custom.selectedMenuDescription(size: 25)
+        )
+    }
+
     private func createMenuLabel() {
         menuLabel.configureUI(
             text: menu,
@@ -88,12 +94,22 @@ final class SelectedMenuViewController: UIViewController {
             font: .systemFont(ofSize: 30, weight: .bold)
         )
     }
+
+    private func createSecondDescriptionLabel() {
+        secondDescriptionLabel.configureUI(
+            text: "이 좋겠군...",
+            textAlignment: .right,
+            font: UIFont.Custom.selectedMenuDescription(size: 25)
+        )
+    }
+
     private func createCharacterImageView() {
         characterImageView.configureUI(
             image: UIImage.Custom.wasabisanImage,
             contentMode: .scaleAspectFill
         )
     }
+
     private func createHomeButton() {
         homeButton.configureUI(
             title: "처음으로",

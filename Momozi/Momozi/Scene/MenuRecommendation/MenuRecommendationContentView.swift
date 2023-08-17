@@ -54,19 +54,33 @@ final class MenuRecommendationContentView: UIView {
     }
 
     private func createSpeechBubbleImageView() {
-        speechBubbleImageView.configureUI(image: UIImage(named: "momoziSpeechBubble"), contentMode: .scaleAspectFill)
+        speechBubbleImageView.configureUI(
+            image: UIImage.Custom.momoziSpeechBubble,
+            contentMode: .scaleAspectFill
+        )
     }
 
     private func createCharacterImageView() {
-        characterImageView.configureUI(image: UIImage(named: "momoziImage"), contentMode: .scaleAspectFill)
+        characterImageView.configureUI(
+            image: UIImage.Custom.momoziImage,
+            contentMode: .scaleAspectFill
+        )
     }
 
     private func createDescriptionLabel() {
-        descriptionLabel.configureUI(text: "모모찌가 딱 정했어!", textAlignment: .center, font: .systemFont(ofSize: 20))
+        descriptionLabel.configureUI(
+            text: "모모찌가 딱 정했어!",
+            textAlignment: .center,
+            font: .systemFont(ofSize: 20)
+        )
     }
 
     private func createMenuLabel() {
-        menuLabel.configureUI(text: "음식 이름", textAlignment: .center, font: UIFont(name: "MaplestoryOTFLight", size: 32))
+        menuLabel.configureUI(
+            text: "음식 이름",
+            textAlignment: .center,
+            font: UIFont.Custom.menuDescription(size: 32)
+        )
     }
 
     private func addDetailViews() {

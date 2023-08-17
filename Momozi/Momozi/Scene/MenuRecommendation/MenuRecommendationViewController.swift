@@ -52,7 +52,7 @@ final class MenuRecommendationViewController: UIViewController {
     }
 
     private func setupNavigationBarUI() {
-        let image = UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.3)
+        let image = UIImage.Custom.logoImage?.resize(newWidth: view.frame.width * 0.3)
         let logoImageView = UIImageView(image: image)
         navigationItem.titleView = logoImageView
         navigationItem.hidesBackButton = true
@@ -61,9 +61,9 @@ final class MenuRecommendationViewController: UIViewController {
     private func setupBackgroundUI() {
         let gradientStartColor = UIColor(named: "menuRecommendationGradientStartColor")
         let gradientEndColor = UIColor(named: "menuRecommendationGradientEndColor")
-        let backgroundPatternImage = UIImage(named: "backgroundPatternImage")
 
         view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
+            patternImage: UIImage.Custom.backgroundPatternImage
     }
 
     private func configureDetailUI() {
@@ -95,11 +95,19 @@ final class MenuRecommendationViewController: UIViewController {
     }
 
     private func createSoldOutPanelImageView() {
-        soldOutPanelImageView.configureUI(image: UIImage(named: "soldOutPanel"), alpha: 0, contentMode: .scaleAspectFit)
+        soldOutPanelImageView.configureUI(
+            image: UIImage.Custom.soldOutPanel,
+            alpha: 0,
+            contentMode: .scaleAspectFit
+        )
     }
 
     private func createSoldOutCharacterImageView() {
-        soldOutCharacterImageView.configureUI(image: UIImage(named: "sadMomoziImage"), alpha: 0, contentMode: .scaleAspectFill)
+        soldOutCharacterImageView.configureUI(
+            image: UIImage.Custom.sadMomoziImage,
+            alpha: 0,
+            contentMode: .scaleAspectFill
+        )
     }
 
     private func createSoldOutDescriptionLabel() {

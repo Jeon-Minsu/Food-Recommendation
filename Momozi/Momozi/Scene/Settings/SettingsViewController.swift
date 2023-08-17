@@ -57,11 +57,29 @@ final class SettingsViewController: UIViewController {
     }
 
     private func configureDetailUI() {
-        characterImageView.configureUI(image: UIImage(named: "momoziImage")?.resize(newWidth: view.frame.width * 0.08))
-        logoImageView.configureUI(image: UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.32))
+    private func createCharacterImageView() {
+        characterImageView.configureUI(
+            image: UIImage.Custom.momoziImage?.resize(newWidth: view.frame.width * 0.08)
+        )
+    }
+
+    private func createLogoImageView() {
+        logoImageView.configureUI(
+            image: UIImage.Custom.logoImage?.resize(newWidth: view.frame.width * 0.32)
+        )
+    }
         collectionView.configureUI(backgroundColor: .clear)
-        veganDeclarationButton.configureUI(text: "비건이에요!", image: UIImage(named: "vegetableImage"), cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
         soloDiningDeclarationButton.configureUI(text: "혼밥이에요!", cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
+    private func createVeganDeclarationButton() {
+        veganDeclarationButton.configureUI(
+            text: "비건이에요!",
+            image: UIImage.Custom.vegetableImage,
+            cornerRadius: 20,
+            borderWidth: 2,
+            borderColor: UIColor.Custom.mainBorderColor?.cgColor,
+            backgroundColor: .white
+        )
+    }
         menuRecommendationButton.configureUI(
             title: "추천 받기!",
             font: .systemFont(ofSize: 25, weight: .heavy),

@@ -60,9 +60,9 @@ final class SelectedMenuViewController: UIViewController {
     private func setupBackgroundUI() {
         let gradientStartColor = UIColor(named: "gradientStartColor")
         let gradientEndColor = UIColor(named: "gradientEndColor")
-        let backgroundPatternImage = UIImage(named: "backgroundPatternImage")
 
         view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
+            patternImage: UIImage.Custom.backgroundPatternImage
     }
 
     private func configureDetailUI() {
@@ -72,13 +72,22 @@ final class SelectedMenuViewController: UIViewController {
     }
 
     private func createDetailViews() {
-        speechBubbleImageView.configureUI(image: UIImage(named: "speechBubble"), contentMode: .scaleAspectFill)
         menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left, font: UIFont(name: "Makgeolli", size: 25))
         menuLabel.configureUI(text: menu, textColor: UIColor(named: "mainTangerineColor"), textAlignment: .center, font: .systemFont(ofSize: 30, weight: .bold))
         secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right, font: UIFont(name: "Makgeolli", size: 25))
-        characterImageView.configureUI(image: UIImage(named: "wasabisanImage"), contentMode: .scaleAspectFill)
         homeButton.configureUI(title: "처음으로", font: .systemFont(ofSize: 25, weight: .bold),  titleColor: .white, backgroundColor: UIColor(named: "mainGreenColor"), cornerRadius: 20)
+    private func createSpeechBubbleImageView() {
+        speechBubbleImageView.configureUI(
+            image: UIImage.Custom.speechBubble,
+            contentMode: .scaleAspectFill
+        )
+    private func createCharacterImageView() {
+        characterImageView.configureUI(
+            image: UIImage.Custom.wasabisanImage,
+            contentMode: .scaleAspectFill
+        )
+    }
     }
 
     private func getEatingTimePhrase() -> String {

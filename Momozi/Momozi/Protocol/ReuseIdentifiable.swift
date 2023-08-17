@@ -17,4 +17,4 @@ extension ReuseIdentifiable {
     }
 }
 
-extension UICollectionViewCell: ReuseIdentifiable { }
+extension UICollectionReusableView: ReuseIdentifiable {}

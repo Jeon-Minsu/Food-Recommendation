@@ -270,8 +270,8 @@ final class SettingsViewController: UIViewController {
             self?.setupLayoutForSectionIndex(section: section, sectionIndex: index)
         }
 
-        layout.register(SectionCharacterDecorationView.self, forDecorationViewOfKind: "SectionCharacterDecorationView")
-        layout.register(SectionBackgroundDecorationView.self, forDecorationViewOfKind: "SectionBackgroundDecorationView")
+        layout.register(viewType: SectionCharacterDecorationView.self)
+        layout.register(viewType: SectionBackgroundDecorationView.self)
 
         return layout
     }

@@ -33,6 +33,20 @@ final class SettingsCell: UICollectionViewCell {
     // MARK: - Methods
 
     private func configureHierarchy() {
+        configureDetailUI()
+    }
+
+    private func configureDetailUI() {
+        createDetailViews()
+        addDetailViews()
+        setupDetailViewsUI()
+    }
+
+    private func createDetailViews() {
+        createButton()
+    }
+
+    private func createButton() {
         button.configureUI(
             tintColor: .black,
             cornerRadius: 10,
@@ -42,8 +56,15 @@ final class SettingsCell: UICollectionViewCell {
         )
     }
 
+    private func addDetailViews() {
         contentView.addSubview(button)
+    }
 
+    private func setupDetailViewsUI() {
+        setupButtonUI()
+    }
+
+    private func setupButtonUI() {
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: contentView.topAnchor),
             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -60,17 +81,15 @@ final class SettingsCell: UICollectionViewCell {
 
     func toggleUI() {
         isTouchedUpInside.toggle()
+        UIView.animate(withDuration: 0.3) { [weak self] in self?.updateUI() }
+    }
 
-        switch isTouchedUpInside {
-        case true:
-            UIView.animate(withDuration: 0.3) { [weak self] in
-            }
-        case false:
-            UIView.animate(withDuration: 0.3) { [weak self] in
-            }
+    private func updateUI() {
+        if isTouchedUpInside {
             button.layer.borderColor = UIColor.Custom.mainGoldenrodColor?.cgColor
             button.backgroundColor = UIColor.Custom.mainOrangeColor
             button.changeLabelColor(.white)
+        } else {
             button.layer.borderColor = UIColor.Custom.mainBorderColor?.cgColor
             button.backgroundColor = UIColor.Custom.cellColor
             button.changeLabelColor(UIColor.Custom.soldOutTextColor)

@@ -20,7 +20,6 @@ final class SettingsCellButton: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        configureUI()
         configureHierarchy()
     }
 
@@ -28,36 +27,63 @@ final class SettingsCellButton: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
-        configureUI()
         configureHierarchy()
     }
 
     // MARK: - Methods
 
-    private func configureUI() {
-        stackView.configureUI(axis: .vertical, alignment: .center, distribution: .fillProportionally)
+    private func configureHierarchy() {
+        configureDetailUI()
+    }
+
+    private func configureDetailUI() {
+        createDetailViews()
+        addDetailViews()
+        setupDetailViewsUI()
+    }
+
+    private func createDetailViews() {
+        createStackView()
+        createImageView()
+        createLabel()
+    }
+
+    private func createStackView() {
+        stackView.configureUI(
+            axis: .vertical,
+            alignment: .center,
+            distribution: .fillProportionally
+        )
+    }
+
+    private func createImageView() {
         imageView.configureUI(contentMode: .scaleAspectFit)
+    }
+
+    private func createLabel() {
         label.configureUI(
             textColor: UIColor.Custom.soldOutTextColor,
             textAlignment: .center,
             font: .systemFont(ofSize: 13)
         )
+    }
 
+    private func addDetailViews() {
         addSubview(stackView)
-        [imageView, label].forEach {
-            stackView.addArrangedSubview($0)
-        }
+        [imageView, label].forEach { stackView.addArrangedSubview($0) }
+    }
 
+    private func setupDetailViewsUI() {
+        setupStackViewUI()
+    }
+
+    private func setupStackViewUI() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 3),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 3),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -3)
         ])
-    }
-
-    private func configureHierarchy() {
-        configureUI()
     }
 
     func setTitle(_ title: String?) {

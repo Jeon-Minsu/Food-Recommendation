@@ -14,8 +14,6 @@ extension UIImageView {
         self.image = image
         self.contentMode = contentMode
 
-        if isSizeNeedToFit {
-            self.sizeToFit()
-        }
+        if isSizeNeedToFit { self.sizeToFit() }
     }
 }

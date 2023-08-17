@@ -8,7 +8,7 @@
 import Koloda
 
 extension KolodaView {
-    func returnCardBackgroundColor(_ index: Int) -> UIColor? {
+    func getCardBackgroundColor(_ index: Int) -> UIColor? {
         switch index {
         case 0:
             return .white

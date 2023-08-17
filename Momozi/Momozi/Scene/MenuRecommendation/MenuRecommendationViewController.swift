@@ -69,7 +69,7 @@ final class MenuRecommendationViewController: UIViewController {
     private func configureDetailUI() {
         createDetailViews()
         addDetailViews()
-        setupDetailViews()
+        setupDetailViewsUI()
     }
 
     private func createDetailViews() {
@@ -143,7 +143,8 @@ final class MenuRecommendationViewController: UIViewController {
             font: .preferredFont(forTextStyle: .title3),
             tintColor: UIColor.Custom.mainTangerineColor,
             image: UIImage(
-                systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+                systemName: "chevron.right",
+                withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
             ),
             imageEdgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -10),
             semanticContentAttribute: .forceRightToLeft
@@ -161,10 +162,19 @@ final class MenuRecommendationViewController: UIViewController {
     }
 
     private func addDetailViews() {
-        [menuRecommendationView, soldOutPanelImageView, soldOutCharacterImageView, soldOutDescriptionLabel, hateMenuButton, descriptionLabel, likeMenuButton, homeButton].forEach { view.addSubview($0) }
+        [
+            menuRecommendationView,
+            soldOutPanelImageView,
+            soldOutCharacterImageView,
+            soldOutDescriptionLabel,
+            hateMenuButton,
+            descriptionLabel,
+            likeMenuButton,
+            homeButton
+        ].forEach { view.addSubview($0) }
     }
 
-    private func setupDetailViews() {
+    private func setupDetailViewsUI() {
         setupMenuRecommendationViewUI()
         setupSoldOutPanelImageViewUI()
         setupSoldOutCharacterImageViewUI()
@@ -177,67 +187,114 @@ final class MenuRecommendationViewController: UIViewController {
 
     private func setupMenuRecommendationViewUI() {
         NSLayoutConstraint.activate([
-            menuRecommendationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height * 0.0675),
-            menuRecommendationView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.575),
-            menuRecommendationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            menuRecommendationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            menuRecommendationView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: view.frame.height * 0.0675
+            ),
+            menuRecommendationView.heightAnchor.constraint(
+                equalTo: view.heightAnchor,
+                multiplier: 0.575
+            ),
+            menuRecommendationView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: 20
+            ),
+            menuRecommendationView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -20
+            )
         ])
     }
 
     private func setupSoldOutPanelImageViewUI() {
         NSLayoutConstraint.activate([
-            soldOutPanelImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.185),
-            soldOutPanelImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.27),
-            soldOutPanelImageView.widthAnchor.constraint(equalTo: soldOutPanelImageView.heightAnchor, multiplier: 1.05),
+            soldOutPanelImageView.topAnchor.constraint(
+                equalTo: view.topAnchor,
+                constant: view.frame.height * 0.185
+            ),
+            soldOutPanelImageView.heightAnchor.constraint(
+                equalTo: view.heightAnchor,
+                multiplier: 0.27
+            ),
+            soldOutPanelImageView.widthAnchor.constraint(
+                equalTo: soldOutPanelImageView.heightAnchor,
+                multiplier: 1.05
+            ),
             soldOutPanelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
     private func setupSoldOutCharacterImageViewUI() {
         NSLayoutConstraint.activate([
-            soldOutCharacterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.41),
-            soldOutCharacterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -40),
-            soldOutCharacterImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.625),
-            soldOutCharacterImageView.heightAnchor.constraint(equalTo: soldOutCharacterImageView.widthAnchor)
+            soldOutCharacterImageView.topAnchor.constraint(
+                equalTo: view.topAnchor,
+                constant: view.frame.height * 0.41
+            ),
+            soldOutCharacterImageView.centerXAnchor.constraint(
+                equalTo: view.centerXAnchor,
+                constant: -40
+            ),
+            soldOutCharacterImageView.widthAnchor.constraint(
+                equalTo: view.widthAnchor,
+                multiplier: 0.625
+            ),
+            soldOutCharacterImageView.heightAnchor.constraint(
+                equalTo: soldOutCharacterImageView.widthAnchor
+            )
         ])
     }
 
     private func setupSoldOutDescriptionLabelUI() {
         NSLayoutConstraint.activate([
-            soldOutDescriptionLabel.topAnchor.constraint(equalTo: soldOutCharacterImageView.bottomAnchor),
+            soldOutDescriptionLabel.topAnchor.constraint(
+                equalTo: soldOutCharacterImageView.bottomAnchor
+            ),
             soldOutDescriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
     private func setupHateMenuButtonUI() {
         NSLayoutConstraint.activate([
-            hateMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
-            hateMenuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            hateMenuButton.topAnchor.constraint(
+                equalTo: menuRecommendationView.bottomAnchor,
+                constant: 40
+            ),
+            hateMenuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
-
         hateMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 
     private func setupDescriptionLabelUI() {
         NSLayoutConstraint.activate([
             descriptionLabel.centerYAnchor.constraint(equalTo: hateMenuButton.centerYAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: hateMenuButton.trailingAnchor, constant: 20)
+            descriptionLabel.leadingAnchor.constraint(
+                equalTo: hateMenuButton.trailingAnchor,
+                constant: 20
+            )
         ])
     }
 
     private func setupLikeMenuButtonUI() {
         NSLayoutConstraint.activate([
-            likeMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
-            likeMenuButton.leadingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor, constant: 20),
+            likeMenuButton.topAnchor.constraint(
+                equalTo: menuRecommendationView.bottomAnchor,
+                constant: 40
+            ),
+            likeMenuButton.leadingAnchor.constraint(
+                equalTo: descriptionLabel.trailingAnchor,
+                constant: 20
+            ),
             likeMenuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
-
         likeMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 
     private func setupHomeButtonUI() {
         NSLayoutConstraint.activate([
-            homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height * 0.075),
+            homeButton.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -view.bounds.height * 0.075
+            ),
             homeButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.06),
             homeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
@@ -260,18 +317,14 @@ final class MenuRecommendationViewController: UIViewController {
 
     private func addActionForHateMenuButton() {
         hateMenuButton.addAction(
-            UIAction { [weak self] _ in
-                self?.menuRecommendationView.swipe(.left)
-            },
+            UIAction { [weak self] _ in self?.menuRecommendationView.swipe(.left) },
             for: .allEvents
         )
     }
 
     private func addActionForLikeMenuButton() {
         likeMenuButton.addAction(
-            UIAction { [weak self] _ in
-                self?.menuRecommendationView.swipe(.right)
-            },
+            UIAction { [weak self] _ in self?.menuRecommendationView.swipe(.right) },
             for: .allEvents
         )
     }
@@ -329,7 +382,7 @@ final class MenuRecommendationViewController: UIViewController {
 extension MenuRecommendationViewController: KolodaViewDataSource {
     func koloda(_ koloda: Koloda.KolodaView, viewForCardAt index: Int) -> UIView {
         let view = MenuRecommendationContentView()
-        view.backgroundColor = koloda.returnCardBackgroundColor(index)
+        view.backgroundColor = koloda.getCardBackgroundColor(index)
         view.layer.cornerRadius = 20
         view.performAnimation(upon: index)
         view.setMenuTitle(filteredMenu[index])

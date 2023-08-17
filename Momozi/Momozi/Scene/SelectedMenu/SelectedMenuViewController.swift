@@ -42,8 +42,16 @@ final class SelectedMenuViewController: UIViewController {
     }
 
     private func setupNavigationBackButtonUI() {
-        let backButtonImage = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold))
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+        let backButtonImage = UIImage(
+            systemName: "chevron.left",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+        )
+        let backButton = UIBarButtonItem(
+            image: backButtonImage,
+            style: .plain,
+            target: self,
+            action: #selector(backButtonTapped)
+        )
         backButton.tintColor = UIColor.Custom.mainGreenColor
         navigationItem.leftBarButtonItem = backButton
     }
@@ -68,16 +76,35 @@ final class SelectedMenuViewController: UIViewController {
     private func configureDetailUI() {
         createDetailViews()
         addDetailViews()
-        setupDetailViews()
+        setupDetailViewsUI()
     }
 
     private func createDetailViews() {
-        menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        createSpeechBubbleImageView()
+        createMenuDescriptionStackView()
+        createFirstDescriptionLabel()
+        createMenuLabel()
+        createSecondDescriptionLabel()
+        createCharacterImageView()
+        createHomeButton()
+    }
+
     private func createSpeechBubbleImageView() {
         speechBubbleImageView.configureUI(
             image: UIImage.Custom.speechBubble,
             contentMode: .scaleAspectFill
         )
+    }
+
+    private func createMenuDescriptionStackView() {
+        menuDescriptionStackView.configureUI(
+            axis: .vertical,
+            alignment: .fill,
+            distribution: .equalSpacing,
+            layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        )
+    }
+
     private func createFirstDescriptionLabel() {
         firstDescriptionLabel.configureUI(
             text: "오늘 \(getEatingTimePhrase()) 메뉴는",
@@ -140,11 +167,20 @@ final class SelectedMenuViewController: UIViewController {
     }
 
     private func addDetailViews() {
-        [speechBubbleImageView, menuDescriptionStackView, characterImageView, homeButton].forEach { view.addSubview($0) }
-        [firstDescriptionLabel, menuLabel, secondDescriptionLabel].forEach { menuDescriptionStackView.addArrangedSubview($0) }
+        [
+            speechBubbleImageView,
+            menuDescriptionStackView,
+            characterImageView,
+            homeButton
+        ].forEach { view.addSubview($0) }
+        [
+            firstDescriptionLabel,
+            menuLabel,
+            secondDescriptionLabel
+        ].forEach { menuDescriptionStackView.addArrangedSubview($0) }
     }
 
-    private func setupDetailViews() {
+    private func setupDetailViewsUI() {
         setupSpeechBubbleImageViewUI()
         setupMenuDescriptionStackViewUI()
         setupCharacterImageViewUI()
@@ -153,32 +189,65 @@ final class SelectedMenuViewController: UIViewController {
 
     private func setupSpeechBubbleImageViewUI() {
         NSLayoutConstraint.activate([
-            speechBubbleImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height * 0.125),
-            speechBubbleImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
-            speechBubbleImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            speechBubbleImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+            speechBubbleImageView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: view.bounds.height * 0.125
+            ),
+            speechBubbleImageView.heightAnchor.constraint(
+                equalTo: view.heightAnchor,
+                multiplier: 0.3
+            ),
+            speechBubbleImageView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: 10
+            ),
+            speechBubbleImageView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -10
+            )
         ])
     }
 
     private func setupMenuDescriptionStackViewUI() {
         NSLayoutConstraint.activate([
-            menuDescriptionStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height * 0.145),
-            menuDescriptionStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
-            menuDescriptionStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            menuDescriptionStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+            menuDescriptionStackView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: view.bounds.height * 0.145
+            ),
+            menuDescriptionStackView.heightAnchor.constraint(
+                equalTo: view.heightAnchor,
+                multiplier: 0.2
+            ),
+            menuDescriptionStackView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: 50
+            ),
+            menuDescriptionStackView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -50
+            )
         ])
     }
 
     private func setupCharacterImageViewUI() {
         NSLayoutConstraint.activate([
-            characterImageView.topAnchor.constraint(equalTo: speechBubbleImageView.bottomAnchor, constant: 15),
-            characterImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
+            characterImageView.topAnchor.constraint(
+                equalTo: speechBubbleImageView.bottomAnchor,
+                constant: 15
+            ),
+            characterImageView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -25
+            )
         ])
     }
 
     private func setupHomeButtonUI() {
         NSLayoutConstraint.activate([
-            homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height * 0.075),
+            homeButton.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -view.bounds.height * 0.075
+            ),
             homeButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.06),
             homeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)

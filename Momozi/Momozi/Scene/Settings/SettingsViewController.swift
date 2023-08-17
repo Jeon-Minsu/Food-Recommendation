@@ -18,7 +18,10 @@ final class SettingsViewController: UIViewController {
 
     private let characterImageView = UIImageView()
     private let logoImageView = UIImageView()
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
+    private lazy var collectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: configureLayout()
+    )
     private let veganDeclarationButton = PreferenceDeclarationButton()
     private let soloDiningDeclarationButton = PreferenceDeclarationButton()
     private let menuRecommendationButton = UIButton()
@@ -57,6 +60,21 @@ final class SettingsViewController: UIViewController {
     }
 
     private func configureDetailUI() {
+        createDetailViews()
+        addDetailViews()
+        setupDetailViewsUI()
+    }
+
+    private func createDetailViews() {
+        createCharacterImageView()
+        createLogoImageView()
+        createCollectionView()
+        createVeganDeclarationButton()
+        createSoloDiningDeclarationButton()
+        createMenuRecommendationButton()
+        createCopyrightlabel()
+    }
+
     private func createCharacterImageView() {
         characterImageView.configureUI(
             image: UIImage.Custom.momoziImage?.resize(newWidth: view.frame.width * 0.08)
@@ -72,6 +90,7 @@ final class SettingsViewController: UIViewController {
     private func createCollectionView() {
         collectionView.configureUI(backgroundColor: .clear)
     }
+
     private func createVeganDeclarationButton() {
         veganDeclarationButton.configureUI(
             text: "비건이에요!",
@@ -92,6 +111,8 @@ final class SettingsViewController: UIViewController {
             backgroundColor: .white
         )
     }
+
+    private func createMenuRecommendationButton() {
         menuRecommendationButton.configureUI(
             title: "추천 받기!",
             font: .systemFont(ofSize: 25, weight: .heavy),
@@ -99,15 +120,30 @@ final class SettingsViewController: UIViewController {
             backgroundColor: UIColor.Custom.mainOrangeColor,
             cornerRadius: 20
         )
+    }
+
+    private func createCopyrightlabel() {
         copyrightLabel.configureUI(
             text: "Icon made by Freepik from www.flaticon.com",
             textColor: .systemGray2,
             textAlignment: .center,
             font: UIFont.systemFont(ofSize: 10)
         )
+    }
 
-        [characterImageView, logoImageView, collectionView, veganDeclarationButton, soloDiningDeclarationButton, menuRecommendationButton, copyrightLabel].forEach { view.addSubview($0) }
+    private func addDetailViews() {
+        [
+            characterImageView,
+            logoImageView,
+            collectionView,
+            veganDeclarationButton,
+            soloDiningDeclarationButton,
+            menuRecommendationButton,
+            copyrightLabel
+        ].forEach { view.addSubview($0) }
+    }
 
+    private func setupDetailViewsUI() {
         setupCharacterImageViewUI()
         setupLogoImageViewUI()
         setupCollectionViewUI()
@@ -119,14 +155,23 @@ final class SettingsViewController: UIViewController {
 
     private func setupCharacterImageViewUI() {
         NSLayoutConstraint.activate([
-            characterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.0775),
-            characterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width * 0.05)
+            characterImageView.topAnchor.constraint(
+                equalTo: view.topAnchor,
+                constant: view.frame.height * 0.0775
+            ),
+            characterImageView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: view.frame.width * 0.05
+            )
         ])
     }
 
     private func setupLogoImageViewUI() {
         NSLayoutConstraint.activate([
-            logoImageView.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: -15),
+            logoImageView.leadingAnchor.constraint(
+                equalTo: characterImageView.trailingAnchor,
+                constant: -15
+            ),
             logoImageView.centerYAnchor.constraint(equalTo: characterImageView.centerYAnchor)
         ])
 
@@ -135,7 +180,10 @@ final class SettingsViewController: UIViewController {
 
     private func setupCollectionViewUI() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(
+                equalTo: characterImageView.bottomAnchor,
+                constant: 20
+            ),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.57)
@@ -146,14 +194,23 @@ final class SettingsViewController: UIViewController {
         NSLayoutConstraint.activate([
             veganDeclarationButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
             veganDeclarationButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.06),
-            veganDeclarationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            veganDeclarationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
+            veganDeclarationButton.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: 15
+            ),
+            veganDeclarationButton.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -15
+            )
         ])
     }
 
     private func setupSoloDiningDeclarationButtonUI() {
         NSLayoutConstraint.activate([
-            soloDiningDeclarationButton.topAnchor.constraint(equalTo: veganDeclarationButton.bottomAnchor, constant: 13),
+            soloDiningDeclarationButton.topAnchor.constraint(
+                equalTo: veganDeclarationButton.bottomAnchor,
+                constant: 13
+            ),
             soloDiningDeclarationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor),
             soloDiningDeclarationButton.leadingAnchor.constraint(equalTo: veganDeclarationButton.leadingAnchor),
             soloDiningDeclarationButton.trailingAnchor.constraint(equalTo: veganDeclarationButton.trailingAnchor)
@@ -162,7 +219,10 @@ final class SettingsViewController: UIViewController {
 
     private func setupMenuRecommendastionButtonUI() {
         NSLayoutConstraint.activate([
-            menuRecommendationButton.topAnchor.constraint(equalTo: soloDiningDeclarationButton.bottomAnchor, constant: 13),
+            menuRecommendationButton.topAnchor.constraint(
+                equalTo: soloDiningDeclarationButton.bottomAnchor,
+                constant: 13
+            ),
             menuRecommendationButton.heightAnchor.constraint(equalTo: soloDiningDeclarationButton.heightAnchor),
             menuRecommendationButton.leadingAnchor.constraint(equalTo: soloDiningDeclarationButton.leadingAnchor),
             menuRecommendationButton.trailingAnchor.constraint(equalTo: soloDiningDeclarationButton.trailingAnchor)
@@ -171,7 +231,10 @@ final class SettingsViewController: UIViewController {
 
     private func setupCopyrightLabelUI() {
         NSLayoutConstraint.activate([
-            copyrightLabel.topAnchor.constraint(equalTo: menuRecommendationButton.bottomAnchor, constant: 10),
+            copyrightLabel.topAnchor.constraint(
+                equalTo: menuRecommendationButton.bottomAnchor,
+                constant: 10
+            ),
             copyrightLabel.leadingAnchor.constraint(equalTo: menuRecommendationButton.leadingAnchor),
             copyrightLabel.trailingAnchor.constraint(equalTo: menuRecommendationButton.trailingAnchor)
         ])
@@ -187,24 +250,29 @@ final class SettingsViewController: UIViewController {
             cell.set(title: item.getTitle(), image: item.getImage(), category: item)
         }
 
-        dataSource = UICollectionViewDiffableDataSource<ExceptionReasonSection, MenuCategory>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-        })
+        dataSource = UICollectionViewDiffableDataSource<ExceptionReasonSection, MenuCategory>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+            return collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration,
+                for: indexPath,
+                item: itemIdentifier
+            )
+        }
     }
 
     private func registerHeaderView() {
         let headerRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderView>(elementKind: SectionHeaderView.elementKind) { supplementaryView, _, indexPath in
             if indexPath.section == 0 {
                 supplementaryView.set(title: ExceptionReasonSection.includedRecommendations.rawValue)
-                supplementaryView.showCautionMessageIfNeeded(shouldShow: false)
             } else {
                 supplementaryView.set(title: ExceptionReasonSection.excludedRecommendations.rawValue)
-                supplementaryView.showCautionMessageIfNeeded(shouldShow: false)
             }
         }
 
         dataSource?.supplementaryViewProvider = { _, _, index in
-            return self.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: index)
+            return self.collectionView.dequeueConfiguredReusableSupplementary(
+                using: headerRegistration,
+                for: index
+            )
         }
     }
 
@@ -230,43 +298,37 @@ final class SettingsViewController: UIViewController {
     }
 
     private func addActionForVeganDeclaration() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapVeganDeclarationButton))
+        let gesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(didTapVeganDeclarationButton)
+        )
         veganDeclarationButton.addGestureRecognizer(gesture)
     }
 
     @objc private func didTapVeganDeclarationButton(_ gesture: UITapGestureRecognizer) {
         veganDeclarationButton.toggleUI()
-        manageVeganCategoriesFrom(veganDeclarationButton)
+        manageCategoriesFrom(veganDeclarationButton, category: .vegan)
     }
 
-    private func manageVeganCategoriesFrom(_ button: PreferenceDeclarationButton) {
+    private func manageCategoriesFrom(_ button: PreferenceDeclarationButton, category: MenuCategory) {
         if button.buttonDidToggle() {
-            checkedCategories.append(.vegan)
+            checkedCategories.append(category)
         } else {
-            if let index = checkedCategories.firstIndex(of: .vegan) {
-                checkedCategories.remove(at: index)
-            }
+            checkedCategories.removeAll { $0 == category }
         }
     }
 
     private func addActionForSoloDiningDeclaration() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapSoloDiningDeclarationButton))
+        let gesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(didTapSoloDiningDeclarationButton)
+        )
         soloDiningDeclarationButton.addGestureRecognizer(gesture)
     }
 
     @objc private func didTapSoloDiningDeclarationButton(_ gesture: UITapGestureRecognizer) {
         soloDiningDeclarationButton.toggleUI()
-        manageSoloDiningCategoriesFrom(soloDiningDeclarationButton)
-    }
-
-    private func manageSoloDiningCategoriesFrom(_ button: PreferenceDeclarationButton) {
-        if button.buttonDidToggle() {
-            checkedCategories.append(.soloDining)
-        } else {
-            if let index = checkedCategories.firstIndex(of: .soloDining) {
-                checkedCategories.remove(at: index)
-            }
-        }
+        manageCategoriesFrom(soloDiningDeclarationButton, category: .soloDining)
     }
 
     private func addActionForMenuRecommendation() {
@@ -349,12 +411,19 @@ final class SettingsViewController: UIViewController {
         switch sectionIndex {
         case 0:
             setupSectionHeaderLayout(section)
-            setupSectionDecorationLayout(section: section, backgroundDecoration: setupSectionBackgroundDecorationLayout())
+            setupSectionDecorationLayout(
+                section: section,
+                backgroundDecoration: setupSectionBackgroundDecorationLayout()
+            )
 
             return section
         case 2:
             setupSectionHeaderLayout(section)
-            setupSectionDecorationLayout(section: section, backgroundDecoration: setupSectionBackgroundDecorationLayout(), characterDecoration: setupSectionCharacterDecorationLayout())
+            setupSectionDecorationLayout(
+                section: section,
+                backgroundDecoration: setupSectionBackgroundDecorationLayout(),
+                characterDecoration: setupSectionCharacterDecorationLayout()
+            )
 
             return section
         default:
@@ -376,15 +445,29 @@ final class SettingsViewController: UIViewController {
     }
 
     private func setupSectionBackgroundDecorationLayout() -> NSCollectionLayoutDecorationItem {
-        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SectionBackgroundDecorationView.elementKind)
-        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
+            elementKind: SectionBackgroundDecorationView.elementKind
+        )
+        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 15,
+            bottom: 0,
+            trailing: 15
+        )
 
         return sectionBackgroundDecoration
     }
 
     private func setupSectionCharacterDecorationLayout() -> NSCollectionLayoutDecorationItem {
-        let sectionCharacterDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SectionCharacterDecorationView.elementKind)
-        sectionCharacterDecoration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
+        let sectionCharacterDecoration = NSCollectionLayoutDecorationItem.background(
+            elementKind: SectionCharacterDecorationView.elementKind
+        )
+        sectionCharacterDecoration.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 15,
+            bottom: 0,
+            trailing: 15
+        )
 
         return sectionCharacterDecoration
     }
@@ -477,7 +560,10 @@ extension SettingsViewController: UICollectionViewDelegate {
     }
 
     private func updateAllButtonState(in collectionView: UICollectionView) {
-        guard let allButtonCell = collectionView.cellForItem(at: IndexPath(row: MenuCategory.all.rawValue, section: 0)) as? SettingsCell else {
+        guard let allButtonCell = collectionView.cellForItem(at: IndexPath(
+            row: MenuCategory.all.rawValue,
+            section: 0)
+        ) as? SettingsCell else {
             return
         }
 

@@ -22,21 +22,25 @@ final class MenuRecommendationContentView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        configureUI()
+        configureHierarchy()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
-        configureUI()
+        configureHierarchy()
     }
 
     // MARK: - Methods
 
-    private func configureUI() {
+    private func configureHierarchy() {
+        configureDetailUI()
+    }
+
+    private func configureDetailUI() {
         createDetailViews()
         addDetailViews()
-        setupDetailViews()
+        setupDetailViewsUI()
     }
 
     private func createDetailViews() {
@@ -85,10 +89,15 @@ final class MenuRecommendationContentView: UIView {
 
     private func addDetailViews() {
         addSubview(contentView)
-        [speechBubbleImageView, characterImageView, descriptionLabel, menuLabel].forEach { contentView.addSubview($0) }
+        [
+            speechBubbleImageView,
+            characterImageView,
+            descriptionLabel,
+            menuLabel
+        ].forEach { contentView.addSubview($0) }
     }
 
-    private func setupDetailViews() {
+    private func setupDetailViewsUI() {
         setupContentViewUI()
         setupSpeechBubbleImageViewUI()
         setupCharacterImageViewUI()
@@ -103,14 +112,19 @@ final class MenuRecommendationContentView: UIView {
             contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
-
         contentView.clipsToBounds = true
     }
 
     private func setupSpeechBubbleImageViewUI() {
         NSLayoutConstraint.activate([
-            speechBubbleImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -10),
-            speechBubbleImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.475),
+            speechBubbleImageView.topAnchor.constraint(
+                equalTo: contentView.topAnchor,
+                constant: -10
+            ),
+            speechBubbleImageView.heightAnchor.constraint(
+                equalTo: contentView.heightAnchor,
+                multiplier: 0.475
+            ),
             speechBubbleImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             speechBubbleImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
@@ -119,7 +133,10 @@ final class MenuRecommendationContentView: UIView {
     private func setupCharacterImageViewUI() {
         NSLayoutConstraint.activate([
             characterImageView.topAnchor.constraint(equalTo: speechBubbleImageView.bottomAnchor),
-            characterImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.85),
+            characterImageView.heightAnchor.constraint(
+                equalTo: contentView.heightAnchor,
+                multiplier: 0.85
+            ),
             characterImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
@@ -148,9 +165,7 @@ final class MenuRecommendationContentView: UIView {
     func performAnimation(upon index: Int) {
         if index != 0 {
             alpha = 0.0
-            UIView.animate(withDuration: 0.8) { [weak self] in
-                self?.alpha = 1.0
-            }
+            UIView.animate(withDuration: 0.8) { [weak self] in self?.alpha = 1.0 }
         }
     }
     

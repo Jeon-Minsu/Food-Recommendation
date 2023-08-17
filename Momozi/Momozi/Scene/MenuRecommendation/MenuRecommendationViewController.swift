@@ -59,11 +59,11 @@ final class MenuRecommendationViewController: UIViewController {
     }
 
     private func setupBackgroundUI() {
-        let gradientStartColor = UIColor(named: "menuRecommendationGradientStartColor")
-        let gradientEndColor = UIColor(named: "menuRecommendationGradientEndColor")
-
-        view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
+        view.setGradientBackground(
+            startColor: UIColor.Custom.mainGradientStartColor,
+            endColor: UIColor.Custom.mainGradientEndColor,
             patternImage: UIImage.Custom.backgroundPatternImage
+        )
     }
 
     private func configureDetailUI() {
@@ -111,14 +111,20 @@ final class MenuRecommendationViewController: UIViewController {
     }
 
     private func createSoldOutDescriptionLabel() {
-        soldOutDescriptionLabel.configureUI(text: "추천 메뉴가 다 떨어졌어요...", textColor: UIColor(named: "soldOutTextColor"), textAlignment: .center, font: UIFont(name: "MaplestoryOTFLight", size: 23), alpha: 0)
+        soldOutDescriptionLabel.configureUI(
+            text: "추천 메뉴가 다 떨어졌어요...",
+            textColor: UIColor.Custom.soldOutTextColor,
+            textAlignment: .center,
+            font: UIFont.Custom.menuDescription(size: 23),
+            alpha: 0
+        )
     }
 
     private func createHateMenuButton() {
         hateMenuButton.configureUI(
             title: "싫어..",
             font: .preferredFont(forTextStyle: .title3),
-            tintColor: UIColor(named: "mainGreenColor"),
+            tintColor: UIColor.Custom.mainGreenColor,
             image: UIImage(
                 systemName: "chevron.left",
                 withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
@@ -135,7 +141,7 @@ final class MenuRecommendationViewController: UIViewController {
         likeMenuButton.configureUI(
             title: "좋아!",
             font: .preferredFont(forTextStyle: .title3),
-            tintColor: UIColor(named: "mainTangerineColor"),
+            tintColor: UIColor.Custom.mainTangerineColor,
             image: UIImage(
                 systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
             ),
@@ -149,7 +155,7 @@ final class MenuRecommendationViewController: UIViewController {
             title: "처음으로",
             font: .systemFont(ofSize: 25, weight: .bold),
             titleColor: .white,
-            backgroundColor: UIColor(named: "mainGreenColor"),
+            backgroundColor: UIColor.Custom.mainGreenColor,
             cornerRadius: 20
         )
     }
@@ -273,13 +279,13 @@ final class MenuRecommendationViewController: UIViewController {
     private func addActionForHomeButton() {
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = UIColor(named: "darkGreenColor")
+                self?.homeButton.backgroundColor = UIColor.Custom.darkGreenColor
             },
             for: .touchDown
         )
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = UIColor(named: "mainGreenColor")
+                self?.homeButton.backgroundColor = UIColor.Custom.mainGreenColor
                 self?.view.subviews.forEach { $0.removeFromSuperview() }
                 self?.navigationController?.popViewController(animated: true)
             },
@@ -349,10 +355,10 @@ extension MenuRecommendationViewController: KolodaViewDataSource {
         }
 
         if koloda.currentCardIndex == index {
-            UIView.animate(withDuration: 0.25) {
+            UIView.animate(withDuration: 0.2) {
                 koloda.viewForCard(at: index)?.backgroundColor = .white
-                koloda.viewForCard(at: index + 1)?.backgroundColor = UIColor(named: "mainGoldenrodColor")
-                koloda.viewForCard(at: index + 2)?.backgroundColor = UIColor(named: "mainTangerineColor")
+                koloda.viewForCard(at: index + 1)?.backgroundColor = UIColor.Custom.mainGoldenrodColor
+                koloda.viewForCard(at: index + 2)?.backgroundColor = UIColor.Custom.mainTangerineColor
             }
         }
     }

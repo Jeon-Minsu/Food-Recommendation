@@ -38,7 +38,7 @@ final class SettingsCellButton: UIView {
         stackView.configureUI(axis: .vertical, alignment: .center, distribution: .fillProportionally)
         imageView.configureUI(contentMode: .scaleAspectFit)
         label.configureUI(
-            textColor: UIColor(named: "soldOutTextColor"),
+            textColor: UIColor.Custom.soldOutTextColor,
             textAlignment: .center,
             font: .systemFont(ofSize: 13)
         )

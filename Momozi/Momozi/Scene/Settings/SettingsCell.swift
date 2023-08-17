@@ -37,9 +37,10 @@ final class SettingsCell: UICollectionViewCell {
             tintColor: .black,
             cornerRadius: 10,
             borderWidth: 2,
-            borderColor: UIColor(named: "mainBorderColor")?.cgColor,
-            backgroundColor: UIColor(named: "cellColor")
+            borderColor: UIColor.Custom.mainBorderColor?.cgColor,
+            backgroundColor: UIColor.Custom.cellColor 
         )
+    }
 
         contentView.addSubview(button)
 
@@ -63,16 +64,16 @@ final class SettingsCell: UICollectionViewCell {
         switch isTouchedUpInside {
         case true:
             UIView.animate(withDuration: 0.3) { [weak self] in
-                self?.button.layer.borderColor = UIColor(named: "mainGoldenrodColor")?.cgColor
-                self?.button.backgroundColor = UIColor(named: "mainOrangeColor")
-                self?.button.changeLabelColor(.white)
             }
         case false:
             UIView.animate(withDuration: 0.3) { [weak self] in
-                self?.button.layer.borderColor = UIColor(named: "mainBorderColor")?.cgColor
-                self?.button.backgroundColor = UIColor(named: "cellColor")
-                self?.button.changeLabelColor(UIColor(named: "soldOutTextColor"))
             }
+            button.layer.borderColor = UIColor.Custom.mainGoldenrodColor?.cgColor
+            button.backgroundColor = UIColor.Custom.mainOrangeColor
+            button.changeLabelColor(.white)
+            button.layer.borderColor = UIColor.Custom.mainBorderColor?.cgColor
+            button.backgroundColor = UIColor.Custom.cellColor
+            button.changeLabelColor(UIColor.Custom.soldOutTextColor)
         }
     }
 

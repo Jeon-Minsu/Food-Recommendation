@@ -50,10 +50,10 @@ final class SettingsViewController: UIViewController {
     }
 
     private func setupBackgroundUI() {
-        let gradientStartColor = UIColor(named: "menuRecommendationGradientStartColor")
-        let gradientEndColor = UIColor(named: "menuRecommendationGradientEndColor")
-
-        view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor)
+        view.setGradientBackground(
+            startColor: UIColor.Custom.mainGradientStartColor,
+            endColor: UIColor.Custom.mainGradientEndColor
+        )
     }
 
     private func configureDetailUI() {
@@ -68,8 +68,10 @@ final class SettingsViewController: UIViewController {
             image: UIImage.Custom.logoImage?.resize(newWidth: view.frame.width * 0.32)
         )
     }
+
+    private func createCollectionView() {
         collectionView.configureUI(backgroundColor: .clear)
-        soloDiningDeclarationButton.configureUI(text: "혼밥이에요!", cornerRadius: 20, borderWidth: 2, borderColor: UIColor(named: "mainBorderColor")?.cgColor, backgroundColor: .white)
+    }
     private func createVeganDeclarationButton() {
         veganDeclarationButton.configureUI(
             text: "비건이에요!",
@@ -80,11 +82,21 @@ final class SettingsViewController: UIViewController {
             backgroundColor: .white
         )
     }
+
+    private func createSoloDiningDeclarationButton() {
+        soloDiningDeclarationButton.configureUI(
+            text: "혼밥이에요!",
+            cornerRadius: 20,
+            borderWidth: 2,
+            borderColor: UIColor.Custom.mainBorderColor?.cgColor,
+            backgroundColor: .white
+        )
+    }
         menuRecommendationButton.configureUI(
             title: "추천 받기!",
             font: .systemFont(ofSize: 25, weight: .heavy),
             titleColor: .white,
-            backgroundColor: UIColor(named: "mainOrangeColor"),
+            backgroundColor: UIColor.Custom.mainOrangeColor,
             cornerRadius: 20
         )
         copyrightLabel.configureUI(
@@ -260,13 +272,13 @@ final class SettingsViewController: UIViewController {
     private func addActionForMenuRecommendation() {
         menuRecommendationButton.addAction(
             UIAction { [weak self] _ in
-                self?.menuRecommendationButton.backgroundColor = UIColor(named: "mainTangerineColor")
+                self?.menuRecommendationButton.backgroundColor = UIColor.Custom.mainTangerineColor
             },
             for: .touchDown
         )
         menuRecommendationButton.addAction(
             UIAction { [weak self] _ in
-                self?.menuRecommendationButton.backgroundColor = UIColor(named: "mainOrangeColor")
+                self?.menuRecommendationButton.backgroundColor = UIColor.Custom.mainOrangeColor
                 self?.pushMenuRecommendationViewController()
             },
             for: [.touchUpOutside, .touchUpInside]

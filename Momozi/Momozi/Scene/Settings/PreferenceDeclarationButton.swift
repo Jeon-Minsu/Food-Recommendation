@@ -47,8 +47,8 @@ final class PreferenceDeclarationButton: UIView {
     private func createDetailViews() {
         stackView.configureUI(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 8)
         checkBoxImageView.configureUI(image: UIImage(systemName: "circle.fill"), isSizeNeedToFit: true)
-        checkBoxImageView.tintColor = UIColor(named: "mainBorderColor")
         imageView.configureUI(image: nil, isSizeNeedToFit: true)
+        checkBoxImageView.tintColor = UIColor.Custom.mainBorderColor
         titleLabel.configureUI(text: "", textAlignment: .left, font: .systemFont(ofSize: 15))
     }
 
@@ -91,15 +91,13 @@ final class PreferenceDeclarationButton: UIView {
 
         switch isSelected {
         case true:
-            UIView.animate(withDuration: 0.3) { [weak self] in
-                self?.backgroundColor = UIColor(named: "mainGoldenrodColor")
-                self?.setCheckBoxImage(UIImage(named: "checkedBox"))
-            }
         case false:
             UIView.animate(withDuration: 0.3) { [weak self] in
                 self?.backgroundColor = .white
                 self?.setCheckBoxImage(UIImage(systemName: "circle.fill"))
             }
+            backgroundColor = UIColor.Custom.mainGoldenrodColor
+            setCheckBoxImage(UIImage.Custom.checkedBox)
         }
     }
 

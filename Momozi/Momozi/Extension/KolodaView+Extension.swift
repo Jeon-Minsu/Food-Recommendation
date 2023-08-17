@@ -13,9 +13,9 @@ extension KolodaView {
         case 0:
             return .white
         case let index where index % 2 == 0:
-            return UIColor(named: "mainTangerineColor")
+            return UIColor.Custom.mainTangerineColor
         default:
-            return UIColor(named: "mainGoldenrodColor")
+            return UIColor.Custom.mainGoldenrodColor
         }
     }
 }

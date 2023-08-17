@@ -44,11 +44,20 @@ final class SectionCharacterDecorationView: UICollectionReusableView {
     }
 
     private func createDetailViews() {
-        descriptionLabel.configureUI(text: "모모찌는\n단 거 좋아해!", textColor: UIColor(named: "soldOutTextColor"), textAlignment: .center, font: .systemFont(ofSize: 9), numberOfLines: 2)
     private func createSpeechBubbleImageView() {
         speechBubbleImageView.configureUI(
             image: UIImage.Custom.decorationSpeechBubble,
             contentMode: .scaleAspectFit
+        )
+    }
+
+    private func createDescriptionLabel() {
+        descriptionLabel.configureUI(
+            text: "모모찌는\n단 거 좋아해!",
+            textColor: UIColor.Custom.soldOutTextColor,
+            textAlignment: .center,
+            font: .systemFont(ofSize: 9),
+            numberOfLines: 2
         )
     }
 

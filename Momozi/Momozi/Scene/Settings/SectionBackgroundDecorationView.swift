@@ -36,7 +36,7 @@ final class SectionBackgroundDecorationView: UICollectionReusableView {
 
     private func configureUI() {
         backgroundColor = .white
-        layer.borderColor = UIColor(named: "mainBorderColor")?.cgColor
+        layer.borderColor = UIColor.Custom.mainBorderColor?.cgColor
         layer.cornerRadius = 15
         layer.borderWidth = 2
     }

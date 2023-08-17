@@ -39,12 +39,19 @@ final class SectionHeaderView: UICollectionReusableView {
 
     private func configureUI() {
         titleLabel.configureUI(textColor: .black, font: .systemFont(ofSize: 24, weight: .bold))
-        cautionLabel.configureUI(text: "실제와 다를 수 있으니 알러지 음식 섭취는 주의해주세요!", textColor: UIColor(named: "cautionTextColor"), font: .systemFont(ofSize: 10))
 
     private func createCautionImageView() {
         cautionImageView.configureUI(
             image: UIImage.Custom.cautionImage?.resize(newWidth: 10),
             contentMode: .scaleAspectFill
+        )
+    }
+
+    private func createCautionLabel() {
+        cautionLabel.configureUI(
+            text: "실제와 다를 수 있으니 알러지 음식 섭취는 주의해주세요!",
+            textColor: UIColor.Custom.cautionTextColor,
+            font: .systemFont(ofSize: 10)
         )
     }
         [titleLabel, cautionImageView, cautionLabel].forEach { addSubview($0) }

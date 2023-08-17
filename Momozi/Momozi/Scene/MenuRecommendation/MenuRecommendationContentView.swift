@@ -49,7 +49,7 @@ final class MenuRecommendationContentView: UIView {
 
     private func createContentView() {
         contentView.configureUI()
-        contentView.layer.borderColor = UIColor(named: "mainTangerineColor")?.cgColor
+        contentView.layer.borderColor = UIColor.Custom.mainTangerineColor?.cgColor
         contentView.layer.borderWidth = 2
     }
 
@@ -139,9 +139,10 @@ final class MenuRecommendationContentView: UIView {
     }
 
     func setGradientBackground() {
-        let gradientStartColor = UIColor(named: "mainGoldenrodColor")
-        let gradientEndColor = UIColor(named: "menuRecommendationGradientStartColor")
-        contentView.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor)
+        contentView.setGradientBackground(
+            startColor: UIColor.Custom.mainGoldenrodColor,
+            endColor: UIColor.Custom.mainGradientStartColor
+        )
     }
 
     func performAnimation(upon index: Int) {

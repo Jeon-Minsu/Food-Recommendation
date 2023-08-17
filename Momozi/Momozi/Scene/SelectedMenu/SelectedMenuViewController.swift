@@ -44,7 +44,7 @@ final class SelectedMenuViewController: UIViewController {
     private func setupNavigationBackButtonUI() {
         let backButtonImage = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold))
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
-        backButton.tintColor = UIColor(named: "mainGreenColor")
+        backButton.tintColor = UIColor.Custom.mainGreenColor
         navigationItem.leftBarButtonItem = backButton
     }
 
@@ -58,11 +58,11 @@ final class SelectedMenuViewController: UIViewController {
     }
 
     private func setupBackgroundUI() {
-        let gradientStartColor = UIColor(named: "gradientStartColor")
-        let gradientEndColor = UIColor(named: "gradientEndColor")
-
-        view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
+        view.setGradientBackground(
+            startColor: UIColor.Custom.selectedMenuGradientStartColor,
+            endColor: UIColor.Custom.selectedMenuGradientEndColor,
             patternImage: UIImage.Custom.backgroundPatternImage
+        )
     }
 
     private func configureDetailUI() {
@@ -74,20 +74,34 @@ final class SelectedMenuViewController: UIViewController {
     private func createDetailViews() {
         menuDescriptionStackView.configureUI(axis: .vertical, alignment: .fill, distribution: .equalSpacing, layoutMargins: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         firstDescriptionLabel.configureUI(text: "오늘 \(getEatingTimePhrase()) 메뉴는", textAlignment: .left, font: UIFont(name: "Makgeolli", size: 25))
-        menuLabel.configureUI(text: menu, textColor: UIColor(named: "mainTangerineColor"), textAlignment: .center, font: .systemFont(ofSize: 30, weight: .bold))
         secondDescriptionLabel.configureUI(text: "이 좋겠군...", textAlignment: .right, font: UIFont(name: "Makgeolli", size: 25))
-        homeButton.configureUI(title: "처음으로", font: .systemFont(ofSize: 25, weight: .bold),  titleColor: .white, backgroundColor: UIColor(named: "mainGreenColor"), cornerRadius: 20)
     private func createSpeechBubbleImageView() {
         speechBubbleImageView.configureUI(
             image: UIImage.Custom.speechBubble,
             contentMode: .scaleAspectFill
         )
+    private func createMenuLabel() {
+        menuLabel.configureUI(
+            text: menu,
+            textColor: UIColor.Custom.mainTangerineColor,
+            textAlignment: .center,
+            font: .systemFont(ofSize: 30, weight: .bold)
+        )
+    }
     private func createCharacterImageView() {
         characterImageView.configureUI(
             image: UIImage.Custom.wasabisanImage,
             contentMode: .scaleAspectFill
         )
     }
+    private func createHomeButton() {
+        homeButton.configureUI(
+            title: "처음으로",
+            font: .systemFont(ofSize: 25, weight: .bold),
+            titleColor: .white,
+            backgroundColor: UIColor.Custom.mainGreenColor,
+            cornerRadius: 20
+        )
     }
 
     private func getEatingTimePhrase() -> String {
@@ -162,13 +176,13 @@ final class SelectedMenuViewController: UIViewController {
     private func addActionForHomeButton() {
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = UIColor(named: "darkGreenColor")
+                self?.homeButton.backgroundColor = UIColor.Custom.darkGreenColor
             },
             for: .touchDown
         )
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = UIColor(named: "mainGreenColor")
+                self?.homeButton.backgroundColor = UIColor.Custom.mainGreenColor
                 self?.popToFirstViewController()
             },
             for: [.touchUpOutside, .touchUpInside]

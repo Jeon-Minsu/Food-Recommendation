@@ -31,6 +31,12 @@ final class MenuRecommendationContentView: UIView {
         configureHierarchy()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        setupLabelsUI()
+    }
+
     // MARK: - Methods
 
     private func configureHierarchy() {
@@ -83,7 +89,7 @@ final class MenuRecommendationContentView: UIView {
         menuLabel.configureUI(
             text: "음식 이름",
             textAlignment: .center,
-            font: UIFont.Custom.menuDescription(size: 32)
+            font: UIFont.Custom.menuDescription(size: 35)
         )
     }
 
@@ -101,8 +107,6 @@ final class MenuRecommendationContentView: UIView {
         setupContentViewUI()
         setupSpeechBubbleImageViewUI()
         setupCharacterImageViewUI()
-        setupDescriptionLabelUI()
-        setupMenuLabelUI()
     }
 
     private func setupContentViewUI() {
@@ -141,16 +145,21 @@ final class MenuRecommendationContentView: UIView {
         ])
     }
 
+    private func setupLabelsUI() {
+        setupDescriptionLabelUI()
+        setupMenuLabelUI()
+    }
+
     private func setupDescriptionLabelUI() {
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.frame.height * 0.05),
             descriptionLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
 
     private func setupMenuLabelUI() {
         NSLayoutConstraint.activate([
-            menuLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30),
+            menuLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: contentView.frame.height * 0.07),
             menuLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }

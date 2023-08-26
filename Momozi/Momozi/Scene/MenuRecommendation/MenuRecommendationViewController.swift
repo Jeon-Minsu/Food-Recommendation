@@ -210,7 +210,7 @@ final class MenuRecommendationViewController: UIViewController {
         NSLayoutConstraint.activate([
             soldOutPanelImageView.topAnchor.constraint(
                 equalTo: view.topAnchor,
-                constant: view.frame.height * 0.185
+                constant: view.frame.height * 0.16
             ),
             soldOutPanelImageView.heightAnchor.constraint(
                 equalTo: view.heightAnchor,
@@ -228,7 +228,7 @@ final class MenuRecommendationViewController: UIViewController {
         NSLayoutConstraint.activate([
             soldOutCharacterImageView.topAnchor.constraint(
                 equalTo: view.topAnchor,
-                constant: view.frame.height * 0.41
+                constant: view.frame.height * 0.38
             ),
             soldOutCharacterImageView.centerXAnchor.constraint(
                 equalTo: view.centerXAnchor,

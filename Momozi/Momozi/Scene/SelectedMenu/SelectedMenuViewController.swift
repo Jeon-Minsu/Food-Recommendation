@@ -124,7 +124,7 @@ final class SelectedMenuViewController: UIViewController {
 
     private func createSecondDescriptionLabel() {
         secondDescriptionLabel.configureUI(
-            text: "이 좋겠군...",
+            text: "이/가 좋겠군...",
             textAlignment: .right,
             font: UIFont.Custom.selectedMenuDescription(size: 25)
         )

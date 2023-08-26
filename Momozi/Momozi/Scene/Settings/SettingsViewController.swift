@@ -39,6 +39,12 @@ final class SettingsViewController: UIViewController {
         addActionForButtonEvent()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        configureCollectionViewScrolling()
+    }
+
     // MARK: - Methods
 
     private func configureHierarchy() {
@@ -214,7 +220,7 @@ final class SettingsViewController: UIViewController {
         NSLayoutConstraint.activate([
             soloDiningDeclarationButton.topAnchor.constraint(
                 equalTo: veganDeclarationButton.bottomAnchor,
-                constant: 13
+                constant: view.frame.height / 65
             ),
             soloDiningDeclarationButton.heightAnchor.constraint(equalTo: veganDeclarationButton.heightAnchor),
             soloDiningDeclarationButton.leadingAnchor.constraint(equalTo: veganDeclarationButton.leadingAnchor),
@@ -226,7 +232,7 @@ final class SettingsViewController: UIViewController {
         NSLayoutConstraint.activate([
             menuRecommendationButton.topAnchor.constraint(
                 equalTo: soloDiningDeclarationButton.bottomAnchor,
-                constant: 13
+                constant: view.frame.height / 65
             ),
             menuRecommendationButton.heightAnchor.constraint(equalTo: soloDiningDeclarationButton.heightAnchor),
             menuRecommendationButton.leadingAnchor.constraint(equalTo: soloDiningDeclarationButton.leadingAnchor),
@@ -529,6 +535,16 @@ final class SettingsViewController: UIViewController {
             trailing: 0
         )
         return dummySection
+    }
+
+    private func configureCollectionViewScrolling() {
+        collectionView.isScrollEnabled = isViewTooSmallForContent()
+    }
+
+    private func isViewTooSmallForContent() -> Bool {
+        let requiredMinimumCollectionViewHeight = 450.0
+
+        return requiredMinimumCollectionViewHeight > collectionView.bounds.height
     }
 }
 

@@ -16,6 +16,7 @@
 		20558F592A77C49A00600FC5 /* MenuCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20558F582A77C49A00600FC5 /* MenuCategory.swift */; };
 		206889A32A6FB7AA001427B7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */; };
 		20760C412A6817570068766C /* SelectedMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20760C402A6817570068766C /* SelectedMenuViewController.swift */; };
+		207E653E2A9A1B5D00BE7407 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207E653D2A9A1B5D00BE7407 /* UINavigationBar+Extension.swift */; };
 		208026DA2A71123400EB30B0 /* SectionBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208026D92A71123400EB30B0 /* SectionBackgroundDecorationView.swift */; };
 		208026DE2A715A1400EB30B0 /* SectionCharacterDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208026DD2A715A1400EB30B0 /* SectionCharacterDecorationView.swift */; };
 		208811102A612D0500ABD8C2 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2088110F2A612D0500ABD8C2 /* UILabel+Extension.swift */; };
@@ -54,6 +55,7 @@
 		20558F582A77C49A00600FC5 /* MenuCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategory.swift; sourceTree = "<group>"; };
 		206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		20760C402A6817570068766C /* SelectedMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMenuViewController.swift; sourceTree = "<group>"; };
+		207E653D2A9A1B5D00BE7407 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		208026D92A71123400EB30B0 /* SectionBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		208026DD2A715A1400EB30B0 /* SectionCharacterDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCharacterDecorationView.swift; sourceTree = "<group>"; };
 		2088110F2A612D0500ABD8C2 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -208,12 +210,13 @@
 				2096853A2A5FA2C500AC1C68 /* UICollectionView+Extension.swift */,
 				208B6D702A8E0F5300EDF66C /* UICollectionViewCompositionalLayout+Extension.swift */,
 				208B6D6E2A8E0DE400EDF66C /* UIColor+Extension.swift */,
+				203C54492A8E353600356AB7 /* UIFont+Extension.swift */,
 				206889A22A6FB7AA001427B7 /* UIImage+Extension.swift */,
 				208811112A612D6B00ABD8C2 /* UIImageView+Extension.swift */,
 				2088110F2A612D0500ABD8C2 /* UILabel+Extension.swift */,
+				207E653D2A9A1B5D00BE7407 /* UINavigationBar+Extension.swift */,
 				208811152A61347A00ABD8C2 /* UIStackView+Extension.swift */,
 				208811132A612FB100ABD8C2 /* UIView+Extension.swift */,
-				203C54492A8E353600356AB7 /* UIFont+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				208811102A612D0500ABD8C2 /* UILabel+Extension.swift in Sources */,
 				203C544A2A8E353600356AB7 /* UIFont+Extension.swift in Sources */,
 				208026DA2A71123400EB30B0 /* SectionBackgroundDecorationView.swift in Sources */,
+				207E653E2A9A1B5D00BE7407 /* UINavigationBar+Extension.swift in Sources */,
 				20760C412A6817570068766C /* SelectedMenuViewController.swift in Sources */,
 				20558F532A77A52F00600FC5 /* Menu.swift in Sources */,
 				209685362A5F965800AC1C68 /* SettingsCell.swift in Sources */,

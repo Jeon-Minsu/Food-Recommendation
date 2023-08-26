@@ -9,12 +9,12 @@ import UIKit
 
 extension UIImage {
     enum Custom {
-        static let korean = UIImage(named: "EggImage")
-        static let chinese = UIImage(named: "MilkImage")
-        static let japanese = UIImage(named: "PeanutImage")
-        static let western = UIImage(named: "NutsImage")
-        static let asian = UIImage(named: "WheatImage")
-        static let mexican = UIImage(named: "SesameImage")
+        static let korean = UIImage(named: "KoreanFoodImage")
+        static let chinese = UIImage(named: "ChineseFoodImage")
+        static let japanese = UIImage(named: "JapaneseFoodImage")
+        static let western = UIImage(named: "WesternFoodImage")
+        static let asian = UIImage(named: "AsianFoodImage")
+        static let mexican = UIImage(named: "MexicanFoodImage")
         static let spicyTaste = UIImage(named: "SpicyTasteImage")
         static let sweetTaste = UIImage(named: "SweetTasteImage")
         static let sourTaste = UIImage(named: "SourTasteImage")

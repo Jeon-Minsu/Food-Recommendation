@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "greasyTasteImage.png",
+      "filename" : "GreasyTasteImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "greasyTasteImage@2x.png",
+      "filename" : "GreasyTasteImage@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "greasyTasteImage@3x.png",
+      "filename" : "GreasyTasteImage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

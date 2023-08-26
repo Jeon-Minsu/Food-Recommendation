@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "SourTasteImage.png",
+      "filename" : "WesternFoodImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "SourTasteImage@2x.png",
+      "filename" : "WesternFoodImage@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "SourTasteImage@3x.png",
+      "filename" : "WesternFoodImage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

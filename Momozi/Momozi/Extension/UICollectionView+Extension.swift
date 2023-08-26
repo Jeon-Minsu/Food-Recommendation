@@ -17,7 +17,9 @@ extension UICollectionView {
             withReuseIdentifier: T.identifier,
             for: indexPath
         ) as? T else {
-            fatalError("Failed to dequeue a cell with identifier \(T.identifier) matching Type \(T.self)")
+            fatalError(
+                "Failed to dequeue a cell with identifier \(T.identifier) matching Type \(T.self)"
+            )
         }
 
         return cell

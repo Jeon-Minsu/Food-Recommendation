@@ -52,24 +52,24 @@ final class MenuRecommendationViewController: UIViewController {
     }
 
     private func setupNavigationBarUI() {
-        let image = UIImage(named: "logo")?.resize(newWidth: view.frame.width * 0.3)
+        let image = UIImage.Custom.logoImage?.resize(newWidth: view.frame.width * 0.3)
         let logoImageView = UIImageView(image: image)
         navigationItem.titleView = logoImageView
         navigationItem.hidesBackButton = true
     }
 
     private func setupBackgroundUI() {
-        let gradientStartColor = UIColor(named: "menuRecommendationGradientStartColor")
-        let gradientEndColor = UIColor(named: "menuRecommendationGradientEndColor")
-        let backgroundPatternImage = UIImage(named: "backgroundPatternImage")
-
-        view.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor, patternImage: backgroundPatternImage)
+        view.setGradientBackground(
+            startColor: UIColor.Custom.mainGradientStartColor,
+            endColor: UIColor.Custom.mainGradientEndColor,
+            patternImage: UIImage.Custom.backgroundPatternImage
+        )
     }
 
     private func configureDetailUI() {
         createDetailViews()
         addDetailViews()
-        setupDetailViews()
+        setupDetailViewsUI()
     }
 
     private func createDetailViews() {
@@ -95,22 +95,36 @@ final class MenuRecommendationViewController: UIViewController {
     }
 
     private func createSoldOutPanelImageView() {
-        soldOutPanelImageView.configureUI(image: UIImage(named: "soldOutPanel"), alpha: 0, contentMode: .scaleAspectFit)
+        soldOutPanelImageView.configureUI(
+            image: UIImage.Custom.soldOutPanel,
+            alpha: 0,
+            contentMode: .scaleAspectFit
+        )
     }
 
     private func createSoldOutCharacterImageView() {
-        soldOutCharacterImageView.configureUI(image: UIImage(named: "sadMomoziImage"), alpha: 0, contentMode: .scaleAspectFill)
+        soldOutCharacterImageView.configureUI(
+            image: UIImage.Custom.sadMomoziImage,
+            alpha: 0,
+            contentMode: .scaleAspectFill
+        )
     }
 
     private func createSoldOutDescriptionLabel() {
-        soldOutDescriptionLabel.configureUI(text: "추천 메뉴가 다 떨어졌어요...", textColor: UIColor(named: "soldOutTextColor"), textAlignment: .center, font: UIFont(name: "MaplestoryOTFLight", size: 23), alpha: 0)
+        soldOutDescriptionLabel.configureUI(
+            text: "추천 메뉴가 다 떨어졌어요...",
+            textColor: UIColor.Custom.soldOutTextColor,
+            textAlignment: .center,
+            font: UIFont.Custom.menuDescription(size: 23),
+            alpha: 0
+        )
     }
 
     private func createHateMenuButton() {
         hateMenuButton.configureUI(
             title: "싫어..",
             font: .preferredFont(forTextStyle: .title3),
-            tintColor: UIColor(named: "mainGreenColor"),
+            tintColor: UIColor.Custom.mainGreenColor,
             image: UIImage(
                 systemName: "chevron.left",
                 withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
@@ -127,9 +141,10 @@ final class MenuRecommendationViewController: UIViewController {
         likeMenuButton.configureUI(
             title: "좋아!",
             font: .preferredFont(forTextStyle: .title3),
-            tintColor: UIColor(named: "mainTangerineColor"),
+            tintColor: UIColor.Custom.mainTangerineColor,
             image: UIImage(
-                systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+                systemName: "chevron.right",
+                withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
             ),
             imageEdgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -10),
             semanticContentAttribute: .forceRightToLeft
@@ -141,16 +156,25 @@ final class MenuRecommendationViewController: UIViewController {
             title: "처음으로",
             font: .systemFont(ofSize: 25, weight: .bold),
             titleColor: .white,
-            backgroundColor: UIColor(named: "mainGreenColor"),
+            backgroundColor: UIColor.Custom.mainGreenColor,
             cornerRadius: 20
         )
     }
 
     private func addDetailViews() {
-        [menuRecommendationView, soldOutPanelImageView, soldOutCharacterImageView, soldOutDescriptionLabel, hateMenuButton, descriptionLabel, likeMenuButton, homeButton].forEach { view.addSubview($0) }
+        [
+            menuRecommendationView,
+            soldOutPanelImageView,
+            soldOutCharacterImageView,
+            soldOutDescriptionLabel,
+            hateMenuButton,
+            descriptionLabel,
+            likeMenuButton,
+            homeButton
+        ].forEach { view.addSubview($0) }
     }
 
-    private func setupDetailViews() {
+    private func setupDetailViewsUI() {
         setupMenuRecommendationViewUI()
         setupSoldOutPanelImageViewUI()
         setupSoldOutCharacterImageViewUI()
@@ -163,67 +187,114 @@ final class MenuRecommendationViewController: UIViewController {
 
     private func setupMenuRecommendationViewUI() {
         NSLayoutConstraint.activate([
-            menuRecommendationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height * 0.0675),
-            menuRecommendationView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.575),
-            menuRecommendationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            menuRecommendationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            menuRecommendationView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: view.frame.height * 0.0675
+            ),
+            menuRecommendationView.heightAnchor.constraint(
+                equalTo: view.heightAnchor,
+                multiplier: 0.575
+            ),
+            menuRecommendationView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: 20
+            ),
+            menuRecommendationView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -20
+            )
         ])
     }
 
     private func setupSoldOutPanelImageViewUI() {
         NSLayoutConstraint.activate([
-            soldOutPanelImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.185),
-            soldOutPanelImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.27),
-            soldOutPanelImageView.widthAnchor.constraint(equalTo: soldOutPanelImageView.heightAnchor, multiplier: 1.05),
+            soldOutPanelImageView.topAnchor.constraint(
+                equalTo: view.topAnchor,
+                constant: view.frame.height * 0.16
+            ),
+            soldOutPanelImageView.heightAnchor.constraint(
+                equalTo: view.heightAnchor,
+                multiplier: 0.27
+            ),
+            soldOutPanelImageView.widthAnchor.constraint(
+                equalTo: soldOutPanelImageView.heightAnchor,
+                multiplier: 1.05
+            ),
             soldOutPanelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
     private func setupSoldOutCharacterImageViewUI() {
         NSLayoutConstraint.activate([
-            soldOutCharacterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.41),
-            soldOutCharacterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -40),
-            soldOutCharacterImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.625),
-            soldOutCharacterImageView.heightAnchor.constraint(equalTo: soldOutCharacterImageView.widthAnchor)
+            soldOutCharacterImageView.topAnchor.constraint(
+                equalTo: view.topAnchor,
+                constant: view.frame.height * 0.38
+            ),
+            soldOutCharacterImageView.centerXAnchor.constraint(
+                equalTo: view.centerXAnchor,
+                constant: -40
+            ),
+            soldOutCharacterImageView.widthAnchor.constraint(
+                equalTo: view.widthAnchor,
+                multiplier: 0.625
+            ),
+            soldOutCharacterImageView.heightAnchor.constraint(
+                equalTo: soldOutCharacterImageView.widthAnchor
+            )
         ])
     }
 
     private func setupSoldOutDescriptionLabelUI() {
         NSLayoutConstraint.activate([
-            soldOutDescriptionLabel.topAnchor.constraint(equalTo: soldOutCharacterImageView.bottomAnchor),
+            soldOutDescriptionLabel.topAnchor.constraint(
+                equalTo: soldOutCharacterImageView.bottomAnchor
+            ),
             soldOutDescriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
     private func setupHateMenuButtonUI() {
         NSLayoutConstraint.activate([
-            hateMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
-            hateMenuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            hateMenuButton.topAnchor.constraint(
+                equalTo: menuRecommendationView.bottomAnchor,
+                constant: 40
+            ),
+            hateMenuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
-
         hateMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 
     private func setupDescriptionLabelUI() {
         NSLayoutConstraint.activate([
             descriptionLabel.centerYAnchor.constraint(equalTo: hateMenuButton.centerYAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: hateMenuButton.trailingAnchor, constant: 20)
+            descriptionLabel.leadingAnchor.constraint(
+                equalTo: hateMenuButton.trailingAnchor,
+                constant: 20
+            )
         ])
     }
 
     private func setupLikeMenuButtonUI() {
         NSLayoutConstraint.activate([
-            likeMenuButton.topAnchor.constraint(equalTo: menuRecommendationView.bottomAnchor, constant: 40),
-            likeMenuButton.leadingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor, constant: 20),
+            likeMenuButton.topAnchor.constraint(
+                equalTo: menuRecommendationView.bottomAnchor,
+                constant: 40
+            ),
+            likeMenuButton.leadingAnchor.constraint(
+                equalTo: descriptionLabel.trailingAnchor,
+                constant: 20
+            ),
             likeMenuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
-
         likeMenuButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 
     private func setupHomeButtonUI() {
         NSLayoutConstraint.activate([
-            homeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height * 0.075),
+            homeButton.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -view.bounds.height * 0.075
+            ),
             homeButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.06),
             homeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
@@ -246,18 +317,14 @@ final class MenuRecommendationViewController: UIViewController {
 
     private func addActionForHateMenuButton() {
         hateMenuButton.addAction(
-            UIAction { [weak self] _ in
-                self?.menuRecommendationView.swipe(.left)
-            },
+            UIAction { [weak self] _ in self?.menuRecommendationView.swipe(.left) },
             for: .allEvents
         )
     }
 
     private func addActionForLikeMenuButton() {
         likeMenuButton.addAction(
-            UIAction { [weak self] _ in
-                self?.menuRecommendationView.swipe(.right)
-            },
+            UIAction { [weak self] _ in self?.menuRecommendationView.swipe(.right) },
             for: .allEvents
         )
     }
@@ -265,13 +332,13 @@ final class MenuRecommendationViewController: UIViewController {
     private func addActionForHomeButton() {
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = UIColor(named: "darkGreenColor")
+                self?.homeButton.backgroundColor = UIColor.Custom.darkGreenColor
             },
             for: .touchDown
         )
         homeButton.addAction(
             UIAction { [weak self] _ in
-                self?.homeButton.backgroundColor = UIColor(named: "mainGreenColor")
+                self?.homeButton.backgroundColor = UIColor.Custom.mainGreenColor
                 self?.view.subviews.forEach { $0.removeFromSuperview() }
                 self?.navigationController?.popViewController(animated: true)
             },
@@ -315,7 +382,7 @@ final class MenuRecommendationViewController: UIViewController {
 extension MenuRecommendationViewController: KolodaViewDataSource {
     func koloda(_ koloda: Koloda.KolodaView, viewForCardAt index: Int) -> UIView {
         let view = MenuRecommendationContentView()
-        view.backgroundColor = koloda.returnCardBackgroundColor(index)
+        view.backgroundColor = koloda.getCardBackgroundColor(index)
         view.layer.cornerRadius = 20
         view.performAnimation(upon: index)
         view.setMenuTitle(filteredMenu[index])
@@ -341,10 +408,10 @@ extension MenuRecommendationViewController: KolodaViewDataSource {
         }
 
         if koloda.currentCardIndex == index {
-            UIView.animate(withDuration: 0.25) {
+            UIView.animate(withDuration: 0.2) {
                 koloda.viewForCard(at: index)?.backgroundColor = .white
-                koloda.viewForCard(at: index + 1)?.backgroundColor = UIColor(named: "mainGoldenrodColor")
-                koloda.viewForCard(at: index + 2)?.backgroundColor = UIColor(named: "mainTangerineColor")
+                koloda.viewForCard(at: index + 1)?.backgroundColor = UIColor.Custom.mainGoldenrodColor
+                koloda.viewForCard(at: index + 2)?.backgroundColor = UIColor.Custom.mainTangerineColor
             }
         }
     }

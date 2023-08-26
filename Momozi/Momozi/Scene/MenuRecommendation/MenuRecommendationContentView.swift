@@ -22,21 +22,31 @@ final class MenuRecommendationContentView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        configureUI()
+        configureHierarchy()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
-        configureUI()
+        configureHierarchy()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        setupLabelsUI()
     }
 
     // MARK: - Methods
 
-    private func configureUI() {
+    private func configureHierarchy() {
+        configureDetailUI()
+    }
+
+    private func configureDetailUI() {
         createDetailViews()
         addDetailViews()
-        setupDetailViews()
+        setupDetailViewsUI()
     }
 
     private func createDetailViews() {
@@ -49,37 +59,54 @@ final class MenuRecommendationContentView: UIView {
 
     private func createContentView() {
         contentView.configureUI()
-        contentView.layer.borderColor = UIColor(named: "mainTangerineColor")?.cgColor
+        contentView.layer.borderColor = UIColor.Custom.mainTangerineColor?.cgColor
         contentView.layer.borderWidth = 2
     }
 
     private func createSpeechBubbleImageView() {
-        speechBubbleImageView.configureUI(image: UIImage(named: "momoziSpeechBubble"), contentMode: .scaleAspectFill)
+        speechBubbleImageView.configureUI(
+            image: UIImage.Custom.momoziSpeechBubble,
+            contentMode: .scaleAspectFill
+        )
     }
 
     private func createCharacterImageView() {
-        characterImageView.configureUI(image: UIImage(named: "momoziImage"), contentMode: .scaleAspectFill)
+        characterImageView.configureUI(
+            image: UIImage.Custom.momoziImage,
+            contentMode: .scaleAspectFill
+        )
     }
 
     private func createDescriptionLabel() {
-        descriptionLabel.configureUI(text: "모모찌가 딱 정했어!", textAlignment: .center, font: .systemFont(ofSize: 20))
+        descriptionLabel.configureUI(
+            text: "모모찌가 딱 정했어!",
+            textAlignment: .center,
+            font: .systemFont(ofSize: 20)
+        )
     }
 
     private func createMenuLabel() {
-        menuLabel.configureUI(text: "음식 이름", textAlignment: .center, font: UIFont(name: "MaplestoryOTFLight", size: 32))
+        menuLabel.configureUI(
+            text: "음식 이름",
+            textAlignment: .center,
+            font: UIFont.Custom.menuDescription(size: 35)
+        )
     }
 
     private func addDetailViews() {
         addSubview(contentView)
-        [speechBubbleImageView, characterImageView, descriptionLabel, menuLabel].forEach { contentView.addSubview($0) }
+        [
+            speechBubbleImageView,
+            characterImageView,
+            descriptionLabel,
+            menuLabel
+        ].forEach { contentView.addSubview($0) }
     }
 
-    private func setupDetailViews() {
+    private func setupDetailViewsUI() {
         setupContentViewUI()
         setupSpeechBubbleImageViewUI()
         setupCharacterImageViewUI()
-        setupDescriptionLabelUI()
-        setupMenuLabelUI()
     }
 
     private func setupContentViewUI() {
@@ -89,14 +116,19 @@ final class MenuRecommendationContentView: UIView {
             contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
-
         contentView.clipsToBounds = true
     }
 
     private func setupSpeechBubbleImageViewUI() {
         NSLayoutConstraint.activate([
-            speechBubbleImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -10),
-            speechBubbleImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.475),
+            speechBubbleImageView.topAnchor.constraint(
+                equalTo: contentView.topAnchor,
+                constant: -10
+            ),
+            speechBubbleImageView.heightAnchor.constraint(
+                equalTo: contentView.heightAnchor,
+                multiplier: 0.475
+            ),
             speechBubbleImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             speechBubbleImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
@@ -105,37 +137,44 @@ final class MenuRecommendationContentView: UIView {
     private func setupCharacterImageViewUI() {
         NSLayoutConstraint.activate([
             characterImageView.topAnchor.constraint(equalTo: speechBubbleImageView.bottomAnchor),
-            characterImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.85),
+            characterImageView.heightAnchor.constraint(
+                equalTo: contentView.heightAnchor,
+                multiplier: 0.85
+            ),
             characterImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
 
+    private func setupLabelsUI() {
+        setupDescriptionLabelUI()
+        setupMenuLabelUI()
+    }
+
     private func setupDescriptionLabelUI() {
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.frame.height * 0.05),
             descriptionLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
 
     private func setupMenuLabelUI() {
         NSLayoutConstraint.activate([
-            menuLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30),
+            menuLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: contentView.frame.height * 0.07),
             menuLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
 
     func setGradientBackground() {
-        let gradientStartColor = UIColor(named: "mainGoldenrodColor")
-        let gradientEndColor = UIColor(named: "menuRecommendationGradientStartColor")
-        contentView.setGradientBackground(startColor: gradientStartColor, endColor: gradientEndColor)
+        contentView.setGradientBackground(
+            startColor: UIColor.Custom.mainGoldenrodColor,
+            endColor: UIColor.Custom.mainGradientStartColor
+        )
     }
 
     func performAnimation(upon index: Int) {
         if index != 0 {
             alpha = 0.0
-            UIView.animate(withDuration: 0.8) { [weak self] in
-                self?.alpha = 1.0
-            }
+            UIView.animate(withDuration: 0.8) { [weak self] in self?.alpha = 1.0 }
         }
     }
     

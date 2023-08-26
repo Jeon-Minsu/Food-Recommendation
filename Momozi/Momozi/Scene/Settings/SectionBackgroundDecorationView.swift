@@ -31,12 +31,16 @@ final class SectionBackgroundDecorationView: UICollectionReusableView {
     // MARK: - Methods
 
     private func configureHierarchy() {
-        configureUI()
+        configureOverallUI()
     }
 
-    private func configureUI() {
+    private func configureOverallUI() {
+        setupBackgroundUI()
+    }
+
+    private func setupBackgroundUI() {
         backgroundColor = .white
-        layer.borderColor = UIColor(named: "mainBorderColor")?.cgColor
+        layer.borderColor = UIColor.Custom.mainBorderColor?.cgColor
         layer.cornerRadius = 15
         layer.borderWidth = 2
     }

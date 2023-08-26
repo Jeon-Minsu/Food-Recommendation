@@ -33,16 +33,38 @@ final class SettingsCell: UICollectionViewCell {
     // MARK: - Methods
 
     private func configureHierarchy() {
+        configureDetailUI()
+    }
+
+    private func configureDetailUI() {
+        createDetailViews()
+        addDetailViews()
+        setupDetailViewsUI()
+    }
+
+    private func createDetailViews() {
+        createButton()
+    }
+
+    private func createButton() {
         button.configureUI(
             tintColor: .black,
             cornerRadius: 10,
             borderWidth: 2,
-            borderColor: UIColor(named: "mainBorderColor")?.cgColor,
-            backgroundColor: UIColor(named: "cellColor")
+            borderColor: UIColor.Custom.mainBorderColor?.cgColor,
+            backgroundColor: UIColor.Custom.cellColor 
         )
+    }
 
+    private func addDetailViews() {
         contentView.addSubview(button)
+    }
 
+    private func setupDetailViewsUI() {
+        setupButtonUI()
+    }
+
+    private func setupButtonUI() {
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: contentView.topAnchor),
             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -53,26 +75,24 @@ final class SettingsCell: UICollectionViewCell {
 
     func set(title: String, image: UIImage?, category: MenuCategory) {
         button.setTitle(title)
-        button.setImage(image?.resize(newWidth: frame.width * 0.5))
+        button.setImage(image?.resize(newHeight: frame.height * 0.5))
         menuCategory = category
     }
 
     func toggleUI() {
         isTouchedUpInside.toggle()
+        UIView.animate(withDuration: 0.3) { [weak self] in self?.updateUI() }
+    }
 
-        switch isTouchedUpInside {
-        case true:
-            UIView.animate(withDuration: 0.3) { [weak self] in
-                self?.button.layer.borderColor = UIColor(named: "mainGoldenrodColor")?.cgColor
-                self?.button.backgroundColor = UIColor(named: "mainOrangeColor")
-                self?.button.changeLabelColor(.white)
-            }
-        case false:
-            UIView.animate(withDuration: 0.3) { [weak self] in
-                self?.button.layer.borderColor = UIColor(named: "mainBorderColor")?.cgColor
-                self?.button.backgroundColor = UIColor(named: "cellColor")
-                self?.button.changeLabelColor(UIColor(named: "soldOutTextColor"))
-            }
+    private func updateUI() {
+        if isTouchedUpInside {
+            button.layer.borderColor = UIColor.Custom.mainGoldenrodColor?.cgColor
+            button.backgroundColor = UIColor.Custom.mainOrangeColor
+            button.changeLabelColor(.white)
+        } else {
+            button.layer.borderColor = UIColor.Custom.mainBorderColor?.cgColor
+            button.backgroundColor = UIColor.Custom.cellColor
+            button.changeLabelColor(UIColor.Custom.soldOutTextColor)
         }
     }
 

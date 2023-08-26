@@ -34,38 +34,91 @@ final class SectionCharacterDecorationView: UICollectionReusableView {
     // MARK: - Methods
 
     private func configureHierarchy() {
-        configureUI()
+        configureDetailUI()
     }
 
-    private func configureUI() {
+    private func configureDetailUI() {
         createDetailViews()
         addDetailViews()
-        setupDetailViews()
+        setupDetailViewsUI()
     }
 
     private func createDetailViews() {
-        speechBubbleImageView.configureUI(image: UIImage(named: "decorationSpeechBubble"), contentMode: .scaleAspectFit)
-        descriptionLabel.configureUI(text: "모모찌는\n단 거 좋아해!", textColor: UIColor(named: "soldOutTextColor"), textAlignment: .center, font: .systemFont(ofSize: 9), numberOfLines: 2)
-        characterImageView.configureUI(image: UIImage(named: "decorationMomoziImage"), contentMode: .scaleAspectFit)
+        createSpeechBubbleImageView()
+        createDescriptionLabel()
+        createCharacterImageView()
+    }
+
+    private func createSpeechBubbleImageView() {
+        speechBubbleImageView.configureUI(
+            image: UIImage.Custom.decorationSpeechBubble,
+            contentMode: .scaleAspectFit
+        )
+    }
+
+    private func createDescriptionLabel() {
+        descriptionLabel.configureUI(
+            text: "모모찌는\n단 거 좋아해!",
+            textColor: UIColor.Custom.soldOutTextColor,
+            textAlignment: .center,
+            font: .systemFont(ofSize: 9),
+            numberOfLines: 2
+        )
+    }
+
+    private func createCharacterImageView() {
+        characterImageView.configureUI(
+            image: UIImage.Custom.decorationMomoziImage,
+            contentMode: .scaleAspectFit
+        )
     }
 
     private func addDetailViews() {
         [speechBubbleImageView, descriptionLabel, characterImageView].forEach { addSubview($0) }
     }
 
-    private func setupDetailViews() {
+    private func setupDetailViewsUI() {
+        setupSpeechBubbleImageViewUI()
+        setupDescriptionLabelUI()
+        setupCharacterImageViewUI()
+    }
+
+    private func setupSpeechBubbleImageViewUI() {
         NSLayoutConstraint.activate([
             speechBubbleImageView.trailingAnchor.constraint(equalTo: characterImageView.leadingAnchor),
-            speechBubbleImageView.widthAnchor.constraint(equalTo: descriptionLabel.widthAnchor, multiplier: 1.5),
-            speechBubbleImageView.heightAnchor.constraint(equalTo: speechBubbleImageView.widthAnchor, multiplier: 0.6),
-            speechBubbleImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            speechBubbleImageView.widthAnchor.constraint(
+                equalTo: descriptionLabel.widthAnchor,
+                multiplier: 1.5
+            ),
+            speechBubbleImageView.heightAnchor.constraint(
+                equalTo: speechBubbleImageView.widthAnchor,
+                multiplier: 0.6
+            ),
+            speechBubbleImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
+        ])
+    }
 
+    private func setupDescriptionLabelUI() {
+        NSLayoutConstraint.activate([
             descriptionLabel.centerXAnchor.constraint(equalTo: speechBubbleImageView.centerXAnchor),
-            descriptionLabel.centerYAnchor.constraint(equalTo: speechBubbleImageView.centerYAnchor),
+            descriptionLabel.centerYAnchor.constraint(equalTo: speechBubbleImageView.centerYAnchor)
+        ])
+    }
 
-            characterImageView.widthAnchor.constraint(equalTo: speechBubbleImageView.widthAnchor, multiplier: 1.07),
-            characterImageView.heightAnchor.constraint(equalTo: characterImageView.widthAnchor, multiplier: 0.65),
-            characterImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -frame.width * 0.08),
+    private func setupCharacterImageViewUI() {
+        NSLayoutConstraint.activate([
+            characterImageView.widthAnchor.constraint(
+                equalTo: speechBubbleImageView.widthAnchor,
+                multiplier: 1.07
+            ),
+            characterImageView.heightAnchor.constraint(
+                equalTo: characterImageView.widthAnchor,
+                multiplier: 0.65
+            ),
+            characterImageView.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -frame.width * 0.08
+            ),
             characterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 1.5)
         ])
     }

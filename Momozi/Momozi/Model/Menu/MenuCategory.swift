@@ -62,34 +62,30 @@ enum MenuCategory: Int, CaseIterable {
     func getImage() -> UIImage? {
         switch self {
         case .korean:
-            return UIImage(named: "eggImage")
+            return UIImage.Custom.korean
         case .chinese:
-            return UIImage(named: "milkImage")
+            return UIImage.Custom.chinese
         case .japanese:
-            return UIImage(named: "peanutImage")
+            return UIImage.Custom.japanese
         case .western:
-            return UIImage(named: "nutsImage")
+            return UIImage.Custom.western
         case .asian:
-            return UIImage(named: "wheatImage")
+            return UIImage.Custom.asian
         case .mexican:
-            return UIImage(named: "sesameImage")
+            return UIImage.Custom.mexican
         case .all:
-            return UIImage(named: "soybeanImage")
+            return UIImage.Custom.momoziImage
         case .spicyTaste:
-            return UIImage(named: "spicyTasteImage")
+            return UIImage.Custom.spicyTaste
         case .sweetTaste:
-            return UIImage(named: "sweetTasteImage")
+            return UIImage.Custom.sweetTaste
         case .sourTaste:
-            return UIImage(named: "sourTasteImage")
+            return UIImage.Custom.sourTaste
         case .saltyTaste:
-            return UIImage(named: "saltyTasteImage")
+            return UIImage.Custom.saltyTaste
         case .greasyTaste:
-            return UIImage(named: "greasyTasteImage")
-        case .vegan:
-            return nil
-        case .soloDining:
-            return nil
-        case .dummy:
+            return UIImage.Custom.greasyTaste
+        default:
             return nil
         }
     }

@@ -46,4 +46,16 @@ extension UIImage {
 
         return renderImage
     }
+
+    func resize(newHeight: CGFloat) -> UIImage {
+        let scale = newHeight / size.height
+        let newWidth = size.width * scale
+        let newSize = CGSize(width: newWidth, height: newHeight)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        let resizedImage = renderer.image { context in
+            draw(in: CGRect(origin: .zero, size: newSize))
+        }
+
+        return resizedImage
+    }
 }

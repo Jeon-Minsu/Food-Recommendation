@@ -50,6 +50,7 @@ final class SettingsViewController: UIViewController {
 
     private func configureOverallUI() {
         setupBackgroundUI()
+        setupNavigationBarUI()
     }
 
     private func setupBackgroundUI() {
@@ -57,6 +58,10 @@ final class SettingsViewController: UIViewController {
             startColor: UIColor.Custom.mainGradientStartColor,
             endColor: UIColor.Custom.mainGradientEndColor
         )
+    }
+
+    private func setupNavigationBarUI() {
+        navigationController?.navigationBar.makeTransparent()
     }
 
     private func configureDetailUI() {

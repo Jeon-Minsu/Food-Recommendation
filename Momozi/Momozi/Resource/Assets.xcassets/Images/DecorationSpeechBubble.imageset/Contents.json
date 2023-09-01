@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "decorationSpeechBubble.png",
+      "filename" : "DecorationSpeechBubble@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "decorationSpeechBubble@2x.png",
+      "filename" : "DecorationSpeechBubble@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "decorationSpeechBubble@3x.png",
+      "filename" : "DecorationSpeechBubble@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "checkedBox.png",
+      "filename" : "CheckedBox.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "checkedBox@2x.png",
+      "filename" : "CheckedBox@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "checkedBox@3x.png",
+      "filename" : "CheckedBox@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

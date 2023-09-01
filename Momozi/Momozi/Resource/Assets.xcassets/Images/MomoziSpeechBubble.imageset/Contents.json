@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "momoziSpeechBubble.png",
+      "filename" : "MomoziSpeechBubble@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "momoziSpeechBubble@2x.png",
+      "filename" : "MomoziSpeechBubble@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "momoziSpeechBubble@3x.png",
+      "filename" : "MomoziSpeechBubble@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

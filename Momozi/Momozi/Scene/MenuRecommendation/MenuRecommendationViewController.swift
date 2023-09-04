@@ -386,6 +386,7 @@ extension MenuRecommendationViewController: KolodaViewDataSource {
         view.layer.cornerRadius = 20
         view.performAnimation(upon: index)
         view.setMenuTitle(filteredMenu[index])
+        view.setContentHidden(index > 1)
 
         return view
     }
@@ -403,15 +404,30 @@ extension MenuRecommendationViewController: KolodaViewDataSource {
     }
 
     func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
-        if let nextCard = koloda.viewForCard(at: index + 1) as? MenuRecommendationContentView {
-            nextCard.setGradientBackground()
-        }
+        let numberOfCards = min(3, koloda.countOfCards)
 
-        if koloda.currentCardIndex == index {
-            UIView.animate(withDuration: 0.2) {
-                koloda.viewForCard(at: index)?.backgroundColor = .white
-                koloda.viewForCard(at: index + 1)?.backgroundColor = UIColor.Custom.mainGoldenrodColor
-                koloda.viewForCard(at: index + 2)?.backgroundColor = UIColor.Custom.mainTangerineColor
+        for cardIndex in 0..<numberOfCards {
+            if let card = koloda.viewForCard(at: index + cardIndex) as? MenuRecommendationContentView {
+                updateCardUI(card, at: cardIndex)
+            }
+        }
+    }
+
+    private func updateCardUI(_ card: MenuRecommendationContentView, at index: Int) {
+        let animationDuration: TimeInterval = 0.2
+
+        UIView.animate(withDuration: animationDuration) {
+            switch index {
+            case 0:
+                card.backgroundColor = .white
+            case 1:
+                card.backgroundColor = UIColor.Custom.mainGoldenrodColor
+                card.setGradientBackground()
+                card.setContentHidden(false)
+            case 2:
+                card.backgroundColor = UIColor.Custom.mainTangerineColor
+            default:
+                break
             }
         }
     }

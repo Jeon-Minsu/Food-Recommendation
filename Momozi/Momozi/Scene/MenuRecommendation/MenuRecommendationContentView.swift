@@ -181,4 +181,8 @@ final class MenuRecommendationContentView: UIView {
     func setMenuTitle(_ title: String) {
         menuLabel.text = title
     }
+
+    func setContentHidden(_ isHidden: Bool) {
+        contentView.isHidden = isHidden
+    }
 }

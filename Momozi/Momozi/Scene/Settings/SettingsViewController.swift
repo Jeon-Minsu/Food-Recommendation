@@ -352,10 +352,25 @@ final class SettingsViewController: UIViewController {
         menuRecommendationButton.addAction(
             UIAction { [weak self] _ in
                 self?.menuRecommendationButton.backgroundColor = UIColor.Custom.mainOrangeColor
-                self?.pushMenuRecommendationViewController()
+
+                if let self = self, self.isAtLeastOneRecommendationCategorySelected() {
+                    self.pushMenuRecommendationViewController()
+                } else {
+                    self?.showInsufficientCategorySelectionError()
+                }
             },
             for: [.touchUpOutside, .touchUpInside]
         )
+    }
+
+    private func isAtLeastOneRecommendationCategorySelected() -> Bool {
+        for category in MenuCategory.korean.rawValue...MenuCategory.all.rawValue {
+            if let currentCategory = MenuCategory(rawValue: category),
+               checkedCategories.contains(currentCategory) {
+                return true
+            }
+        }
+        return false
     }
 
     private func pushMenuRecommendationViewController() {
@@ -363,6 +378,16 @@ final class SettingsViewController: UIViewController {
         let nextViewController = MenuRecommendationViewController()
         nextViewController.update(filteredMenu)
         navigationController?.pushViewController(nextViewController, animated: true)
+    }
+
+    private func showInsufficientCategorySelectionError() {
+        let alertController = UIAlertController(
+            title: "카테고리 부족 오류",
+            message: "추천 받기 항목에서 최소 하나 이상의 카테고리를 선택해야 합니다.",
+            preferredStyle: .alert
+        )
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 
     private func configureLayout() -> UICollectionViewCompositionalLayout {
